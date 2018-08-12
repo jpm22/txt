@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<!-- "Online Tally Counter" is Copyright 2016 Textmekanik.com -->
+<title>Online Tally/Click Counter</title>
+<link rel="canonical" href="Online-Tally-Counter.html" />
+<style type="text/css">html {height:100%;}
+body {height:100%; margin:0px; padding:0px; font-family:arial; font-size:16px; line-height:1.7; background-color:#E1E1D2;}
+h1 {display:block; font-size:18px; font-weight:bold; margin:0px; padding:0px;}
+textarea {display:block; margin:0px; padding:8px 10px 8px 10px; overflow:scroll; font-family:arial; font-size:16px; line-height:1.4; color:#000000; background-color:#FFFFFF; border:1px solid #000000; outline:none; resize:none; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; border-radius:12px 4px 4px 4px; box-shadow:inset 0 0 6px #FFFF00;}
+input {display:inline-block; height:33px; line-height:1; vertical-align:middle; font-size:16px; outline:none; resize:none; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
+input::-moz-focus-inner {border:0; padding:0}
+input[type='radio'] {width:20px; height:20px; vertical-align:middle; margin:0px; padding:0px; font-size:16px;}
+input[type='checkbox'] {width:20px; height:20px; vertical-align:middle; margin:0px; padding:0px; font-size:16px;}
+input[type='text'] {width:auto; margin:3px 0px 3px 0px; padding:0px 10px 0px 10px; font-family:arial; color:#000000; background-color:#FFFFFF; border:1px solid #000000; border-radius:12px; box-shadow:inset 0 0 6px #FFFF00;}
+input[type='button'] {width:auto; margin:3px 0px 3px 0px; padding:0px 10px 0px 10px; font-family:arial; font-weight:bold; color:#000000; border:1px solid #000000; background-color:#FFFFFF; cursor:pointer; border-radius:12px; box-shadow:inset 0 0 6px #0000FF;}
+input[type='button']:hover {box-shadow:inset 0 0 6px #00CC00;}
+input[type='file'] {width:92px; border-radius:12px; overflow:hidden; padding:0px; margin:0px 0px 0px -92px; -moz-opacity:0; opacity:0; cursor:pointer;}
+input[type='file']::-webkit-file-upload-button {cursor:pointer;}
+div {-moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
+table {border-collapse:collapse;}
+table,td {padding:0px;}
+#menu {position:absolute; z-index:-1; left:0px; top:0px; width:0px; height:0%; margin:0px; overflow:auto; background-color:#E1E1D2; border-right:1px solid #000000;}
+div.navcat {padding:10px 0px 5px 12px; font-size:18px; font-weight:bold; font-style:italic;}
+div.navdiv {height:2px; padding:0px; margin:18px 10px 13px 10px; background-color:#000000;}
+a.nav {display:inline-block; padding:0px; margin:10px 0px 10px 10px; text-decoration:underline; color:#000000;}
+#bodypadding {padding:10px 10px 0px 10px;}
+#footer {padding:0px 0px 4px 0px;}
+</style>
+<style type="text/css">span.name {display:inline-block; height:auto; line-height:44px; font-size:24px; padding:0px 10px 0px 10px; text-align:center; background-color:#FFFF99; border:1px solid #FFFF99; border-radius:12px; vertical-align:middle; -moz-user-select:none; -webkit-user-select:none; -ms-user-select:none; user-select:none;}
+span.nameclick {display:inline-block; height:auto; line-height:44px; font-size:24px; padding:0px 10px 0px 10px; text-align:center; background-color:#FFFF99; border:1px solid #FFFF99; border-radius:12px; vertical-align:middle; cursor:pointer; cursor:hand; -moz-user-select:none; -webkit-user-select:none; -ms-user-select:none; user-select:none;}
+span.nameclick:hover {background-color:#CCFF99; border:1px solid #000000;}
+input[type='button'].cbtnp {height:auto; line-height:44px; font-size:24px; padding:0px 10px 0px 10px; cursor:hand; cursor:pointer;}
+input[type='button']:hover.cbtnp {background-color:#00FF00;}
+input[type='button'].cbtnm {height:auto; line-height:44px; font-size:24px; padding:0px 10px 0px 10px; cursor:hand; cursor:pointer;}
+input[type='button']:hover.cbtnm {background-color:#FF0000;}
+input[type='text'].tally {height:auto; line-height:44px; font-size:24px; letter-spacing:1px; padding:0px 10px 0px 10px; text-align:right; border:1px solid #000000;}
+input[type='text'].tallyclick {height:auto; line-height:44px; font-size:24px; letter-spacing:1px; padding:0px 10px 0px 10px; text-align:right; border:1px solid #000000; cursor:pointer; cursor:hand; -moz-user-select:none; -webkit-user-select:none; -ms-user-select:none; user-select:none;}
+input[type='text'].tallyclick:hover {box-shadow:inset 0 0 6px #00FF00;}
+#counters {padding-top:4px; text-align:left;}
+div.controls {display:block; padding-bottom:4px;}
+</style>
+<script type="text/javascript">
+var firstload = 'yes';
+var windo = '<a target="_self" class="nav" href="';
+var windochk = '';
+
+function windotargt(){
+if(document.getElementById('newwin').checked == true){
+windo = '<a target="_blank" class="nav" href="';
+windochk = 'CHECKED';
+} else {
+windo = '<a target="_self" class="nav" href="';
+windochk = '';}}
+
+function loadmenu(menuf){
+var tlespn = '">';
+var endspn = '</a>';
+if(firstload == 'no'){
+if(menuf == 'open'){
+document.getElementById('menu').style.zIndex = '2';
+document.getElementById('menu').style.width = '280px';
+document.getElementById('menu').style.height = '100%';
+document.getElementById('menu').innerHTML =
+'<div style="padding:10px 0px 11px 10px;"><input type="button" style="margin-top:0px;" value="Close Tool Index" onClick="loadmenu(\'close\');" /></div>'+
+'<div class="navdiv"></div>'+
+'<div style="padding:15px 0px 12px 12px;"><input type="checkbox" id="newwin" onClick="windotargt(); setTimeout(\'loadmenu(&#092;&#039;open&#092;&#039;)\',100);" ' + windochk + ' /> Open tools in new window.</div>'+
+'<div class="navdiv"></div>'+
+windo + '/' + tlespn + 'Homepage | Descriptive Index' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Basic Text Tools:</div>'+
+windo + 'Add-Prefix-Suffix-to-Text.html' + tlespn + 'Add Prefix/Suffix into Line' + endspn +
+windo + 'Add-Remove-Line-Breaks.html' + tlespn + 'Add/Remove Line Breaks' + endspn +
+windo + 'Count-Text.html' + tlespn + 'Count Characters, Words...Lines' + endspn +
+windo + 'Delimited-Column-Extractor.html' + tlespn + 'Delimited Column Extractor' + endspn +
+windo + 'Find-and-Replace-Text.html' + tlespn + 'Find and Replace Text' + endspn +
+windo + 'Letter-Case-Converter.html' + tlespn + 'Letter Case Converter' + endspn +
+windo + 'Merge-Text-Line-by-Line.html' + tlespn + 'Merge Text (Line by Line)' + endspn +
+windo + 'Remove-Duplicate-Lines.html' + tlespn + 'Remove Duplicate Lines' + endspn +
+windo + 'Remove-Empty-Lines.html' + tlespn + 'Remove Empty Lines' + endspn +
+windo + 'Remove-Extra-Spaces.html' + tlespn + 'Remove Extra Spaces' + endspn +
+windo + 'Remove-Letter-Accents.html' + tlespn + 'Remove Letter Accents' + endspn +
+windo + 'Remove-Lines-Containing.html' + tlespn + 'Remove Lines Containing...' + endspn +
+windo + 'Sort-Text-Lines.html' + tlespn + 'Sort Text Lines' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Format Tools:</div>'+
+windo + 'ASCII-to-Unicode-Converter.html' + tlespn + 'ASCII to Unicode Converter' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Obfuscation Tools:</div>'+
+windo + 'Binary-Code-Translator.html' + tlespn + 'Binary Code Translator' + endspn +
+windo + 'Disemvowel-Tool.html' + tlespn + 'Disemvowel Tool' + endspn +
+windo + 'Encryption-Generator.html' + tlespn + 'Encryption Generator' + endspn +
+windo + 'Reverse-Text-Generator.html' + tlespn + 'Reverse Text Generator' + endspn +
+windo + 'ROT13-Caesar-Cipher.html' + tlespn + 'ROT13 Caesar Cipher' + endspn +
+windo + 'Word-Scrambler.html' + tlespn + 'Word Scrambler/Descrambler' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Randomization Tools:</div>'+
+windo + 'Random-Line-Picker.html' + tlespn + 'Random Line Picker' + endspn +
+windo + 'Random-Number-Generator.html' + tlespn + 'Random Number Generator' + endspn +
+windo + 'Random-String-Generator.html' + tlespn + 'Random String Generator' + endspn +
+windo + 'String-Randomizer.html' + tlespn + 'String Randomizer' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Combination / Permutation:</div>'+
+windo + 'Combination-Generator.html' + tlespn + 'Combination Generator' + endspn +
+windo + 'Line-Combination-Generator.html' + tlespn + 'Line Combination Generator' + endspn +
+windo + 'Permutation-Generator.html' + tlespn + 'Permutation Generator' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Numeration Tools:</div>'+
+windo + 'Generate-List-of-Numbers.html' + tlespn + 'Generate List of Numbers' + endspn +
+windo + 'Number-Each-Line.html' + tlespn + 'Number Each Line' + endspn +
+windo + 'Online-Tally-Counter.html' + tlespn + 'Online Tally Counter' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">All-in-One Tool:</div>'+
+windo + 'Text-Manipulation-Notepad.html' + tlespn + 'Text Manipulation Notepad' + endspn +
+'<div class="navdiv"></div>'+
+'<div style="padding:19px 0px 7px 10px;"><input type="button" style="margin-top:0px;" value="Close Tool Index" onClick="loadmenu(\'close\');" /></div>';
+} else {
+document.getElementById('menu').style.zIndex = '-1';
+document.getElementById('menu').style.width = '0px';
+document.getElementById('menu').style.height = '0%';
+document.getElementById('menu').innerHTML = '';}}
+if(firstload == 'yes'){
+firstload = 'no';}}
+
+var sc_project = 10533904;
+var sc_invisible = 1;
+var sc_security = "1bf36e4a";
+var iamcounted = 'no';
+
+
+function privacy_policy(){
+var text =
+'~ Textmekanik.com Privacy Policy ~\n\n'+
+'Log Files: The Textmekanik.com webserver records log files as required by United States law. The information inside the log files includes: ip address, date/time stamp, referring page and user agent.\n\n'+
+'Cookies: Textmekanik.com use cookies to store information about visitors preferences, record user-specific information on which pages the user access or visit, customize Web page content based on visitors browser type or other information that the visitor sends via their browser.\n\n'+
+'Tools: All tool are built-with and functions-in Client Side JavaScripting, so only your computer will see or process your data input/output. Input/processing/output data is never transmitted over the internet and always resides within your computer. However, cloud operating systems could transmit your data into the cloud\'s system for processing but this has nothing to do with the Textmekanik.com webserver.\n\n'+
+'Sensitive Data Disclaimer: Don\'t trust any website with sensitive data, not even Textmekanik.com. Keep your sensitive data secure by keeping it to yourself.\n\n';
+alert(text);}
+</script>
+<script type="text/javascript">
+function readCookie(name){
+var nameEQ = name + "=";
+var ca = document.cookie.split(';');
+for(var i=0;i < ca.length;i++){
+var c = ca[i];
+while(c.charAt(0)==' ') c = c.substring(1,c.length);
+if(c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);}
+return 0;}
+
+function createCookie(name,value,days){
+if(days){
+var date = new Date();
+date.setTime(date.getTime()+(days*24*60*60*1000));
+var expires = ';expires=' + date.toGMTString();}
+else var expires = '';
+document.cookie = name + '=' + value + expires + ';path=/';}
+
+var cntrnum = 1;
+var countersloaded = 1;
+var countersizecache = '24px';
+var sorhplscache = 'inline-block';
+var sorhmincache = 'inline-block';
+var didncache = 'inline';
+var hcdt_cache = '';
+var poin_cache = '';
+var btnord_cache = '';
+var clkble_cache = '';
+var keyarr = new Array();
+var inuse = '';
+
+function tallyrecorder(){
+var tallies = new Array;
+for(var x=0;x<cntrnum;x++){
+tallies[x] = document.getElementById('gcntrname' + (x+1)).value + ' : ' + document.getElementById('tally' + (x+1)).value;}
+tallies = tallies.join('\n');
+document.getElementById('tallies').value = tallies;}
+
+function evennames(){
+var largest = 0;
+var scntr_width = 0;
+for(var x=1;x<=cntrnum;x++){
+document.getElementById('scntrname' + x).style.display = 'inline';
+scntr_width = document.getElementById('scntrname' + x).offsetWidth - 22;
+if(scntr_width > largest) largest = scntr_width;
+document.getElementById('scntrname' + x).style.display = 'inline-block';}
+for(var x=1;x<=cntrnum;x++){
+document.getElementById('scntrname' + x).style.width = largest + 'px';}}
+
+function setname(instnum){
+document.getElementById('scntrname' + instnum).innerHTML = document.getElementById('gcntrname' + instnum).value.replace(/ /g,'&nbsp;');
+tallyrecorder();
+ksblock = 'false';
+if(didncache == 'inline') evennames();}
+
+function setscount(instnum){
+var scount = document.getElementById('srtcount' + instnum).value;
+scount_cache = scount;
+if(scount != '-' && scount != '.' && scount != '-.'){
+scount = scount*1;
+if(isNaN(scount) == false && scount.toString().indexOf('.-') == -1){
+document.getElementById('tally' + instnum).value = scount;
+tallyrecorder();
+} else {
+document.getElementById('srtcount' + instnum).value = 0;
+document.getElementById('tally' + instnum).value = 0;
+tallyrecorder();
+alert('ERROR: Only enter numbers 0-9 with/without + OR - OR . OR -. into start count field.');}}
+if((scount.toString()).indexOf('.') != -1){
+if((((scount.toString()).split('.'))[1]).length > 3){
+alert('Decimal value is limited to thousandths.');
+document.getElementById('srtcount' + instnum).value = (((scount.toString()).split('.'))[0]) + '.' + (((scount.toString()).split('.'))[1]).substr(0,3);
+document.getElementById('tally' + instnum).value = (((scount.toString()).split('.'))[0]) + '.' + (((scount.toString()).split('.'))[1]).substr(0,3);}}
+ksblock = 'false';}
+
+function setincr(instnum){
+var icount = document.getElementById('inccount' + instnum).value;
+if(icount != '-' && icount != '.' && icount != '-.'){
+icount = icount*1;
+if(isNaN(icount) == true && icount.toString().indexOf('.-') == -1){
+document.getElementById('inccount' + instnum).value = 1;
+alert('ERROR: Only enter numbers 0-9 with/without + OR - OR . OR -. into increment field.');}}
+if((icount.toString()).indexOf('.') != -1){
+if((((icount.toString()).split('.'))[1]).length > 3){
+alert('Decimal value is limited to thousandths.');
+document.getElementById('inccount' + instnum).value = (((icount.toString()).split('.'))[0]) + '.' + (((icount.toString()).split('.'))[1]).substr(0,3);}}
+ksblock = 'false';}
+
+function tally(grkgzrpu,instnum){
+var tcnt = document.getElementById('tally' + instnum).value*1;
+var incr = document.getElementById('inccount' + instnum).value*1;
+if(grkgzrpu == '+'){
+tcnt = parseFloat((tcnt + incr).toFixed(3));
+document.getElementById('tally' + instnum).style.backgroundColor = '#00FF00';
+setTimeout('document.getElementById(\'tally'+ instnum + '\').style.backgroundColor = \'#FFFFFF\'',100);
+} else {
+tcnt = parseFloat((tcnt - incr).toFixed(3));
+document.getElementById('tally' + instnum).style.backgroundColor = '#FF0000';
+setTimeout('document.getElementById(\'tally'+ instnum + '\').style.backgroundColor = \'#FFFFFF\'',100);}
+document.getElementById('tally' + instnum).value = tcnt;
+if(document.getElementById('snapsnd_yes').checked == true){
+document.getElementById('click').play();}
+tallyrecorder();
+count_me();}
+
+function reset(instnum){
+document.getElementById('tally' + instnum).value = document.getElementById('srtcount' + instnum).value;
+tallyrecorder();}
+
+function setcont(){
+if(document.getElementById('hidectrls_none').checked == true){
+hidecotrls(hcdt_cache);}
+tallyorder(cntrnum);
+if(document.getElementById('nameclk_yes').checked == true){
+document.getElementById('scntrname' + cntrnum).setAttribute('onclick','tally(\'+\',\'' + cntrnum + '\')');
+document.getElementById('scntrname' + cntrnum).className = 'nameclick';}
+if(document.getElementById('tallyclk_yes').checked == true){
+document.getElementById('tally' + cntrnum).setAttribute('onfocus','this.blur()');
+document.getElementById('tally' + cntrnum).setAttribute('onclick','tally(\'+\',\'' + cntrnum + '\')');
+document.getElementById('tally' + cntrnum).className = 'tallyclick';}}
+
+function addcntr(){
+cntrnum++;
+countersloaded = cntrnum;
+var anothercntr =
+'<div style="padding:7px 0px 7px 0px;"><div style="width:100%; height:2px; background-color:#000000;"></div></div>\n'+
+'<div id="controls' + cntrnum + '" class="controls">\n'+
+'Name: <input type="text" id="gcntrname' + cntrnum + '" value="#' + cntrnum + '" maxlength="20" style="width:100px;" onKeyup="ksblock = \'true\'; setTimeout(\'setname(&#092;&#039;' + cntrnum + '&#092;&#039;)\',100);" />\n'+
+'Start count: <input type="text" id="srtcount' + cntrnum + '" value="0" maxlength="10" style="width:60px;" onKeyup="ksblock = \'true\'; setTimeout(\'setscount(&#092;&#039;' + cntrnum + '&#092;&#039;)\',100);" />\n'+
+'Increment: <input type="text" id="inccount' + cntrnum + '" value="1" maxlength="7" style="width:60px;" onKeyup="ksblock = \'true\'; setTimeout(\'setincr(&#092;&#039;' + cntrnum + '&#092;&#039;)\',100);" />\n'+
+'Shortcut: <input type="text" id="countkey' + cntrnum + '" value="" maxlength="1" style="width:37px;" onKeyup="ksblock = \'true\'; setTimeout(\'setkey(&#092;&#039;' + cntrnum + '&#092;&#039;,&#092;&#039;&#039; + this.value.toLowerCase() + &#039;&#092;&#039;,&#092;&#039;&#039; + this.id + &#039;&#092;&#039;)\',100);" />\n'+
+'<input type="button" id="resetbttn' + cntrnum + '" value="R" onClick="reset(\'' + cntrnum + '\');" /></div>\n'+
+'<div id="tallybox' + cntrnum + '"><span id="scntrname' + cntrnum + '" class="name">#' + cntrnum + '</span>\n'+
+'<input type="text" id="tally' + cntrnum + '" class="tally" value="0" size="10" READONLY />\n'+
+'<input type="button" id="plusbttn' + cntrnum + '" class="cbtnp" value="&nbsp; + &nbsp;" onClick="tally(\'+\',\'' + cntrnum + '\');" />\n'+
+'<input type="button" id="minusbttn' + cntrnum + '" class="cbtnm" value="&nbsp; &minus; &nbsp;" onClick="tally(\'-\',\'' + cntrnum + '\');" /></div>\n';
+var newdiv = document.createElement('div');
+newdiv.innerHTML = anothercntr;
+document.getElementById('counters').appendChild(newdiv);
+countersize(countersizecache);
+displsbtn(sorhplscache);
+disminbtn(sorhmincache);
+disname(didncache);
+if(didncache == 'inline') evennames();
+tallyrecorder();
+document.getElementById('tallies').rows = cntrnum + 1;
+document.getElementById('addcntrbtn').scrollIntoView(false);
+setTimeout('setcont()',25);}
+
+function countersize(size){
+countersizecache = size;
+for(var x=1;x<=countersloaded;x++){
+document.getElementById('scntrname' + x).style.fontSize = size + 'px';
+document.getElementById('scntrname' + x).style.lineHeight = (size + 20) + 'px';
+document.getElementById('tally' + x).style.fontSize = size + 'px';
+document.getElementById('tally' + x).style.lineHeight = (size + 20) + 'px';
+document.getElementById('plusbttn' + x).style.fontSize = size + 'px';
+document.getElementById('plusbttn' + x).style.lineHeight = (size + 20) + 'px';
+document.getElementById('minusbttn' + x).style.fontSize = size + 'px';
+document.getElementById('minusbttn' + x).style.lineHeight = (size + 20) + 'px';}
+if(didncache == 'inline') evennames();}
+
+function disname(didn){
+didncache = didn;
+for(var x=1;x<=countersloaded;x++){
+document.getElementById('scntrname' + x).style.display = didn;}
+if(didn == 'inline') evennames();}
+
+function displsbtn(sorh){
+sorhplscache = sorh;
+for(var x=1;x<=countersloaded;x++){
+document.getElementById('plusbttn' + x).style.display = sorh;}}
+
+function disminbtn(sorh){
+sorhmincache = sorh;
+for(var x=1;x<=countersloaded;x++){
+document.getElementById('minusbttn' + x).style.display = sorh;}}
+
+function hidecotrls(hcdt){
+for(var x=1;x<=countersloaded;x++){
+document.getElementById('controls' + x).style.display = hcdt;}
+hcdt_cache = hcdt;}
+
+function aligncntr(pos){
+document.getElementById('counters').style.textAlign = pos;}
+
+function nameclick(clkble){
+if(clkble == 'yes'){
+for(var x=1;x<=countersloaded;x++){
+document.getElementById('scntrname' + x).setAttribute('onclick','tally(\'+\',\'' + x + '\')');
+document.getElementById('scntrname' + x).className = 'nameclick';}}
+if(clkble == 'no'){
+for(var x=1;x<=countersloaded;x++){
+document.getElementById('scntrname' + x).removeAttribute('onclick');
+document.getElementById('scntrname' + x).className = 'name';}}}
+
+function tallyclick(clkble){
+if(clkble == 'yes'){
+for(var x=1;x<=countersloaded;x++){
+document.getElementById('tally' + x).setAttribute('onfocus','this.blur()');
+document.getElementById('tally' + x).setAttribute('onclick','tally(\'+\',\'' + x + '\')');
+document.getElementById('tally' + x).className = 'tallyclick';}}
+if(clkble == 'no'){
+for(var x=1;x<=countersloaded;x++){
+document.getElementById('tally' + x).removeAttribute('onfocus');
+document.getElementById('tally' + x).removeAttribute('onclick');
+document.getElementById('tally' + x).className = 'tally';}}}
+
+function printarea(pid){
+var pcontent = document.getElementById(pid);
+var pframe = window.open('', '_blank','width=650,height=500,top=10,left=10,toolbars=no,scrollbars=yes,status=no,resizable=yes');
+pframe.document.writeln('<html><head><title>Tally</title></head><body style="font-family:arial; font-size:14px;">' + pcontent.value.replace(/\n/gi,'<br />') + '<script type="text/javascript"><script type="text/javascript"><!-- GoStats JavaScript Based Code -->
+<script type="text/javascript" src="http://gostats.com/js/counter.js"></script>
+<script type="text/javascript">_gos='c4.gostats.com';_goa=411053;
+_got=6;_goi=1;_gol='Get a free invisible counter from GoStats';_GoStatsRun();</script>
+<noscript><a target="_blank" title="Get a free invisible counter from GoStats" 
+href="http://gostats.com"><img alt="Get a free invisible counter from GoStats" 
+src="http://c4.gostats.com/bin/count/a_411053/t_6/i_1/counter.png" 
+style="border-width:0" /></a></noscript>
+<!-- End GoStats JavaScript Based Code -->
+</body></html>');
+pframe.document.close();
+pframe.focus();
+pframe.print();
+pframe.close();}
+
+function clearall(){
+cntrnum = 1
+document.getElementById('counters').innerHTML =
+'<div id="controls1" class="controls">\n'+
+'Name: <input type="text" id="gcntrname' + cntrnum + '" value="#' + cntrnum + '" maxlength="20" style="width:100px;" onKeyup="ksblock = \'true\'; setTimeout(\'setname(&#092;&#039;' + cntrnum + '&#092;&#039;)\',100);" />\n'+
+'Start count: <input type="text" id="srtcount' + cntrnum + '" value="0" maxlength="10" style="width:60px;" onKeyup="ksblock = \'true\'; setTimeout(\'setscount(&#092;&#039;' + cntrnum + '&#092;&#039;)\',100);" />\n'+
+'Increment: <input type="text" id="inccount' + cntrnum + '" value="1" maxlength="7" style="width:60px;" onKeyup="ksblock = \'true\'; setTimeout(\'setincr(&#092;&#039;' + cntrnum + '&#092;&#039;)\',100);" />\n'+
+'Shortcut: <input type="text" id="countkey' + cntrnum + '" value="" maxlength="1" style="width:37px;" onKeyup="ksblock = \'true\'; setTimeout(\'setkey(&#092;&#039;' + cntrnum + '&#092;&#039;,&#092;&#039;&#039; + this.value.toLowerCase() + &#039;&#092;&#039;,&#092;&#039;&#039; + this.id + &#039;&#092;&#039;)\',100);" />\n'+
+'<input type="button" id="resetbttn' + cntrnum + '" value="R" onClick="reset(\'' + cntrnum + '\');" /></div>\n'+
+'<div id="tallybox' + cntrnum + '"><span id="scntrname' + cntrnum + '" class="name">#' + cntrnum + '</span>\n'+
+'<input type="text" id="tally' + cntrnum + '" class="tally" value="0" size="10" READONLY />\n'+
+'<input type="button" id="plusbttn' + cntrnum + '" class="cbtnp" value="&nbsp; + &nbsp;" onClick="tally(\'+\',\'' + cntrnum + '\');" />\n'+
+'<input type="button" id="minusbttn' + cntrnum + '" class="cbtnm" value="&nbsp; &minus; &nbsp;" onClick="tally(\'-\',\'' + cntrnum + '\');" /></div>\n';
+countersloaded = 1;
+keyarr = new Array();
+inuse = '';
+tallyrecorder();
+displsbtn(sorhplscache);
+disminbtn(sorhmincache);
+disname(didncache);
+countersize(countersizecache);
+document.getElementById('tallies').rows = 2;
+setTimeout('setcont()',25);}
+
+function SelectAll(id){
+document.getElementById(id).focus();
+document.getElementById(id).select();}
+
+function keyevent(e){
+var code;
+if(!e) var e = window.event;
+if(e.keyCode) code = e.keyCode;
+else if(e.which) code = e.which;
+var character = String.fromCharCode(code).toLowerCase();
+for(var x=0;x<cntrnum;x++){
+if(keyarr[x] != null){
+if(character == (keyarr[x].split(';'))[0]) tally('+',(keyarr[x].split(';'))[1]);}}}
+
+function setkey(instnum,instlet,eleid){
+if(keyarr[instnum - 1] != null){
+inuse = inuse.replace((keyarr[instnum - 1].split(';'))[0],'');
+keyarr[instnum - 1] = null;}
+for(var x=0;x<cntrnum;x++){
+if(inuse.indexOf(instlet) == -1 && instlet != ''){
+if(instnum == (x + 1)) keyarr[x] = instlet + ';' + (x + 1);
+if(x == (cntrnum - 1)) inuse = inuse + instlet;
+} else {
+if(instlet != ''){
+document.getElementById(eleid).value = '';
+alert('Letter "' + instlet + '" is already in use.');}
+x = cntrnum;}}
+ksblock = 'false';}
+
+function setprefs(){
+var countersize_val = readCookie('countersize');
+if(countersize_val != 0){
+document.getElementById('counter_size').value = countersize_val;
+countersize(countersize_val * 1);}
+var tallyorder_val = readCookie('tallyorder');
+if(tallyorder_val != 0){
+document.getElementById('tally_order').value = tallyorder_val;
+tallyorder('1');}
+var disname_val = readCookie('disname');
+if(disname_val != 0){
+document.getElementById('showname_' + disname_val).checked = true;
+if(disname_val == 'none') disname(disname_val);}
+var displsbtn_val = readCookie('displsbtn');
+if(displsbtn_val != 0){
+document.getElementById('dispsbtn_' + displsbtn_val).checked = true;
+if(displsbtn_val == 'none') displsbtn(displsbtn_val);}
+var disminbtn_val = readCookie('disminbtn');
+if(disminbtn_val != 0){
+document.getElementById('dismnbtn_' + disminbtn_val).checked = true;
+if(disminbtn_val == 'none') disminbtn(disminbtn_val);}
+var hidecotrls_val = readCookie('hidecotrls');
+if(hidecotrls_val != 0){
+document.getElementById('hidectrls_' + hidecotrls_val).checked = true;
+if(hidecotrls_val == 'none') hidecotrls(hidecotrls_val);}
+var aligncntr_val = readCookie('aligncntr');
+if(aligncntr_val != 0){
+document.getElementById('alincntr_' + aligncntr_val).checked = true;
+if(aligncntr_val == 'right' || aligncntr_val == 'center') aligncntr(aligncntr_val);}
+var nameclick_val = readCookie('nameclick');
+if(nameclick_val != 0){
+document.getElementById('nameclk_' + nameclick_val).checked = true;
+if(nameclick_val == 'yes') nameclick(nameclick_val);}
+var tallyclick_val = readCookie('tallyclick');
+if(tallyclick_val != 0){
+document.getElementById('tallyclk_' + tallyclick_val).checked = true;
+if(tallyclick_val == 'yes') tallyclick(tallyclick_val);}
+var snapsound_val = readCookie('snapsound');
+if(snapsound_val != 0){
+document.getElementById('snapsnd_' + snapsound_val).checked = true;}}
+
+function resetdisplay(){
+clearall();
+document.getElementById('counter_size').value = '24';
+countersize(24);
+createCookie('countersize',24,364);
+document.getElementById('tally_order').value = '1234';
+tallyorder('');
+createCookie('tallyorder','1234',364);
+document.getElementById('showname_inline').checked = true;
+disname('inline');
+createCookie('disname','inline',364);
+document.getElementById('dispsbtn_inline-block').checked = true;
+displsbtn('inline-block');
+createCookie('displsbtn','inline-block',364);
+document.getElementById('dismnbtn_inline-block').checked = true;
+disminbtn('inline-block');
+createCookie('disminbtn','inline-block',364);
+document.getElementById('hidectrls_block').checked = true;
+hidecotrls('block');
+createCookie('hidecotrls','block',364);
+document.getElementById('alincntr_left').checked = true;
+aligncntr('left');
+createCookie('aligncntr','left',364);
+document.getElementById('nameclk_no').checked = true;
+nameclick('no');
+createCookie('nameclick','no',364);
+document.getElementById('tallyclk_no').checked = true;
+tallyclick('no');
+createCookie('tallyclick','no',364);
+document.getElementById('snapsnd_no').checked = true;
+createCookie('snapsound','no',364);}
+
+function tallyorder(overide){
+var tally = '';
+var tallyarr = '';
+var tallyarr2 = new Array();
+var thetallyorder = document.getElementById('tally_order').value;
+var isok = 'yes';
+var isin = '';
+for(var x=0;x<=3;x++){
+if(thetallyorder[x] == 1 || thetallyorder[x] == 2 || thetallyorder[x] == 3 || thetallyorder[x] == 4){
+if(isin.indexOf(thetallyorder[x]) == -1){
+isin = isin + thetallyorder[x];
+} else {
+alert('Order error: Duplicate numbers entered.');
+isok = 'no';
+x=3;}
+} else {
+alert('Order error: Enter only numbers 1,2,3,4.');
+isok = 'no';
+x=3;}}
+if(isok == 'no'){
+thetallyorder = '1234';
+document.getElementById('tally_order').value = '1234';}
+var sortarr = new Array('id="scntrname','id="tally','id="plusbttn','id="minusbttn');
+var sortedarr = new Array();
+if(overide == ''){
+for(var w=0;w<countersloaded;w++){
+tallyarr2 = new Array();
+tally = document.getElementById('tallybox' + (w+1)).innerHTML;
+tallyarr = tally.split('\n');
+sortedarr = new Array();
+for(var x=0;x<=3;x++){
+for(var y=0;y<=3;y++){
+if(tallyarr[y].toLowerCase().indexOf(sortarr[x].toLowerCase()) != -1) sortedarr[x] = tallyarr[y];}}
+for(var z=0;z<=3;z++){
+tallyarr2[z] = sortedarr[thetallyorder[z]-1];}
+document.getElementById('tallybox' + (w+1)).innerHTML = tallyarr2.join('\n');}
+} else {
+tallyarr2 = new Array();
+tally = document.getElementById('tallybox' + overide).innerHTML;
+tallyarr = tally.split('\n');
+sortedarr = new Array();
+for(var x=0;x<=3;x++){
+for(var y=0;y<=3;y++){
+if(tallyarr[y].toLowerCase().indexOf(sortarr[x].toLowerCase()) != -1) sortedarr[x] = tallyarr[y];}}
+for(var z=0;z<=3;z++){
+tallyarr2[z] = sortedarr[thetallyorder[z]-1];}
+document.getElementById('tallybox' + overide).innerHTML = tallyarr2.join('\n');}
+createCookie('tallyorder',thetallyorder,364);}
+
+var ksblock = 'false';
+</script>
+</head>
+<body spellcheck="false" onkeyup="if(document.getElementById('kbsis_on').checked == true && ksblock == 'false') keyevent(event);">
+<div id="menu"></div>
+<div id="bodypadding">
+<h1><input type="button" style="margin-top:0px;" value="Open Tool Index" onClick="loadmenu('open');" /> Tool: Online Tally Counter</h1>
+<div style="padding:1px 0px 1px 0px;">
+<input type="radio" name="hidectrls" id="hidectrls_block" onclick="hidecotrls('block'); createCookie('hidecotrls','block',364);" CHECKED />Show
+<input type="radio" name="hidectrls" id="hidectrls_none" onclick="hidecotrls('none'); createCookie('hidecotrls','none',364);" />hide name, start count, increment, shortcut, input fields.
+</div>
+<div id="counters" style="padding:4px 0px 4px 0px;">
+<div id="controls1" class="controls">
+Name: <input type="text" id="gcntrname1" value="#1" maxlength="20" style="width:100px;" onKeyup="ksblock = 'true'; setTimeout('setname(\'1\')',100);" />
+Start count: <input type="text" id="srtcount1" value="0" maxlength="10" style="width:60px;" onKeyup="ksblock = 'true'; setTimeout('setscount(\'1\')',100);" />
+Increment: <input type="text" id="inccount1" value="1" maxlength="7" style="width:60px;" onKeyup="ksblock = 'true'; setTimeout('setincr(\'1\')',100);" />
+Shortcut: <input type="text" id="countkey1" value="" maxlength="1" style="width:37px;" onKeyup="ksblock = 'true'; setTimeout('setkey(\'1\',\'' + this.value.toLowerCase() + '\',\'' + this.id + '\')',100);" />
+<input type="button" id="resetbttn1" value="R" onClick="reset('1');" />
+</div>
+<div id="tallybox1"><span id="scntrname1" class="name">#1</span>
+<input type="text" id="tally1" class="tally" value="0" size="10" READONLY />
+<input type="button" id="plusbttn1" class="cbtnp" value="&nbsp; + &nbsp;" onClick="tally('+','1');" />
+<input type="button" id="minusbttn1" class="cbtnm" value="&nbsp; &minus; &nbsp;" onClick="tally('-','1');" /></div>
+</div>
+<div>
+<input type="button" id="addcntrbtn" value="Create another counter." onClick="addcntr();" />
+<span class="opt">Keyboard shrotcut <input type="radio" name="kbsis" id="kbsis_on" />on
+<input type="radio" name="kbsis" id="kbsis_off" CHECKED />off.</span>
+</div>
+<div style="padding:1px 0px 0px 0px;">
+<b>Preferences:</b>
+<span class="opt"><input type="radio" name="showname" id="showname_inline" onclick="disname('inline'); createCookie('disname','inline',364);" CHECKED />Show <input type="radio" name="showname" id="showname_none" onclick="disname('none'); createCookie('disname','none',364);" />hide name.</span> |
+<span class="opt"><input type="radio" name="dispsbtn" id="dispsbtn_inline-block" onclick="displsbtn('inline-block'); createCookie('displsbtn','inline-block',364);" CHECKED />Show <input type="radio" name="dispsbtn" id="dispsbtn_none" onclick="displsbtn('none'); createCookie('displsbtn','none',364);" />hide plus button.</span> |
+<span class="opt"><input type="radio" name="dismnbtn" id="dismnbtn_inline-block" onclick="disminbtn('inline-block'); createCookie('disminbtn','inline-block',364);" CHECKED />Show <input type="radio" name="dismnbtn" id="dismnbtn_none" onclick="disminbtn('none'); createCookie('disminbtn','none',364);" />hide minus button.</span> |
+<span class="opt">Align counter: <input type="radio" name="alincntr" id="alincntr_left" onclick="aligncntr('left'); createCookie('aligncntr','left',364);" CHECKED />left <input type="radio" name="alincntr" id="alincntr_center" onclick="aligncntr('center'); createCookie('aligncntr','center',364);" />center <input type="radio" name="alincntr" id="alincntr_right" onclick="aligncntr('right'); createCookie('aligncntr','right',364);" />right.</span> |
+<span class="opt">Make name + clickable: <input type="radio" name="nameclk" id="nameclk_yes" onclick="nameclick('yes'); createCookie('nameclick','yes',364);" />yes <input type="radio" name="nameclk" id="nameclk_no" onclick="nameclick('no'); createCookie('nameclick','no',364);" CHECKED />no.</span> |
+<span class="opt">Make counter display + clickable: <input type="radio" name="tallyclk" id="tallyclk_yes" onclick="tallyclick('yes'); createCookie('tallyclick','yes',364);" />yes <input type="radio" name="tallyclk" id="tallyclk_no" onclick="tallyclick('no'); createCookie('tallyclick','no',364);" CHECKED />no.</span> |
+<span class="opt">Click sound on count: <input type="radio" name="snapsnd" id="snapsnd_yes" onclick="tallyclick('yes'); createCookie('snapsound','yes',364);" />yes <input type="radio" name="snapsnd" id="snapsnd_no" onclick="tallyclick('no'); createCookie('snapsound','no',364);" CHECKED />no.</span>
+</div>
+<div style="padding:4px 0px 7px 0px;">
+Counter size <input type="text" id="counter_size" maxlength="2" value="24" style="width:42px;" onfocus="ksblock = 'true';" onblur="ksblock = 'false';" onkeyup="if(this.value.length>1) {countersize(this.value*1); createCookie('countersize',this.value,364);}" /> px.
+Counter display order <input type="text" id="tally_order" maxlength="4" value="1234" style="width:62px;" />
+<input type="button" value="Set" onClick="tallyorder('');" />
+1=Name 2=Count 3=Plus 4=Minus
+<input type="button" value="Reset preferences." onClick="resetdisplay();" />
+</div>
+<textarea id="tallies" rows="8" style="width:100%;" wrap="soft">
+Tallies will record into this box.
+To increment click "+" button, decrement click "-" button. Click "R" button to reset counter back to start count.
+Click "Create another counter" button to add another independently operated tally counter.
+Enter letter a-z or number 0-9 into "Shortcut" field to count+ by pressing corresponding shortcut keyboard key.
+You must enable "Keyboard Shortcut" feature by checking it's "on" radio button above. Check "off" to disable.
+"Preferences" will customize display/functions. Check "Make name + clickable: yes" to make yellow tally name a handy increment button!
+Custom arrange counter button/field order via the "Counter display order" field, e.g. "4321" will reverse counter order.
+Privacy of Data: This tool is built-with and functions-in Client Side JavaScripting, so only your computer will see or process your data input/output.</textarea>
+<div style="padding:7px 0px 0px 0px;">
+<input type="button" value="Print Tallies" onClick="printarea('tallies');" />
+<input type="button" value="Select Tallies" onClick="SelectAll('tallies')" />
+<input type="button" value="Clear All" onClick="clearall();" />
+</div>
+<div id="footer">
+Tools provided as-is, without warranty of any kind and used at your own risk. &copy;2016 <a href="index.html" style="color:#0000FF;">Textmekanik.com</a> |
+<span style="color:#0000FF; text-decoration:underline; cursor:pointer;" onclick="privacy_policy();">Privacy</span>
+</div>
+<div id="audio" style="display:none">
+<audio id="click">
+<source type="audio/mpeg" src="data:audio/mp3;base64,SUQzAwAAAAAANlRMRU4AAAADAAAAMTgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/7kMQAABW2LwoZSgADKUHqJxlAAdlgaBSB8dfgFZwvX4GRPgBM/JwWv8OXA0RAG5n+JwAxQoDGCAsx/40w4sLKwMiBEi//DGBPEQJ8XAPv//FxhaYcIIAwAD2w6f//8EQ8AgAJIBqDADQgqg2MDmil////AzgwMCgMByKkSGYG+To4ws+DY/////+Xg9cc8rhj4GJDhzwDQoGNBjfACKCCAuAGxYz3////2////xoAbQ8DgguMiDJpIMmX3LhcQMy+mAhBBAhhBhBBARMFhgBiG2qC2uncXrzEkppl0vkWHVM3K45ghQXMK6LpkDA0FKAEgwMSFDpxZoCwcDBLAM2AdBA4gJzMjAzJsmh/FanzSmm6DFcnEDxumfOlw+dNa1pst0DVbmCDE7UTRiiipNbL0GNy+fIoYE4LnELjJuYqMTJZGkQCxJ2oIakFpJl90EXQZrC5TUol5bIooqMWTT0Jm6bemaPqYvm6ZcMC4Rcc86palonklmiKkzEq1////5Jk4tND///4xw5I4SYAAQJeAosvJqevRuglYWGv9xWRUf/7ksQKABg9oyo5qgAAAAA0g4AAAL6/4a0P8ZGWJ7IKF+SaSO8GhoAQSByagA08jhPIAgMDDC/AapAJFBfkXGAIBGNFKmVXwyyK1HaTwrouVaTmKv4ywzwY2IUgos8SjWpJIxLv8tkyREdYnUgQXiHoh7C0UVokydIqa/8AkQGNw5gXRFtELHCyLwR0J2qSSSWkklMf/ikxGZdHSXCdG4LNEiLRFg5IWcKIJyIDR9E1MkWJoyL3//DCIXyG2SBMu/9LVUxBTUUzLjkyVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy45MlVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5LEb4PAAAGkAAAAAAAANIAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQVBFVEFHRVjQBwAAIAAAAAMAAAAAAACgAAABAAAAAAAHAAAAAAAAAE1QM0dBSU5fTUlOTUFYADEzMywyMTAMAAAAAAAAAFJFUExBWUdBSU5fVFJBQ0tfR0FJTgArNi45MTAwMDAgZEIIAAAAAAAAAFJFUExBWUdBSU5fVFJBQ0tfUEVBSwAwLjE2Mzc2MUFQRVRBR0VY0AcAAI4AAAADAAAAAAAAgAAALgBtAHAAVEFHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8=" />
+<source type="audio/ogg" src="data:audio/ogg;base64,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" />
+</audio>
+</div>
+</div>
+<script type="text/javascript">loadmenu('close'); setTimeout('setprefs()',100);</script>
+<script type="text/javascript" id="count_me"></script>
+<!-- GoStats JavaScript Based Code -->
+<script type="text/javascript" src="http://gostats.com/js/counter.js"></script>
+<script type="text/javascript">_gos='c4.gostats.com';_goa=411053;
+_got=6;_goi=1;_gol='Get a free invisible counter from GoStats';_GoStatsRun();</script>
+<noscript><a target="_blank" title="Get a free invisible counter from GoStats" 
+href="http://gostats.com"><img alt="Get a free invisible counter from GoStats" 
+src="http://c4.gostats.com/bin/count/a_411053/t_6/i_1/counter.png" 
+style="border-width:0" /></a></noscript>
+<!-- End GoStats JavaScript Based Code -->
+</body>
+</html>

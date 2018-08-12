@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<!-- "Permutation Generator" is Copyright 2016 Textmekanik.com -->
+<title>Permutation Generator</title>
+<link rel="canonical" href="Permutation-Generator.html" />
+<style type="text/css">html {height:100%;}
+body {height:100%; margin:0px; padding:0px; font-family:arial; font-size:16px; line-height:1.7; background-color:#E1E1D2;}
+h1 {display:block; font-size:18px; font-weight:bold; margin:0px; padding:0px;}
+textarea {display:block; margin:0px; padding:8px 10px 8px 10px; overflow:scroll; font-family:arial; font-size:16px; line-height:1.4; color:#000000; background-color:#FFFFFF; border:1px solid #000000; outline:none; resize:none; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; border-radius:12px 4px 4px 4px; box-shadow:inset 0 0 6px #FFFF00;}
+input {display:inline-block; height:33px; line-height:1; vertical-align:middle; font-size:16px; outline:none; resize:none; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
+input::-moz-focus-inner {border:0; padding:0}
+input[type='radio'] {width:20px; height:20px; vertical-align:middle; margin:0px; padding:0px; font-size:16px;}
+input[type='checkbox'] {width:20px; height:20px; vertical-align:middle; margin:0px; padding:0px; font-size:16px;}
+input[type='text'] {width:auto; margin:3px 0px 3px 0px; padding:0px 10px 0px 10px; font-family:arial; color:#000000; background-color:#FFFFFF; border:1px solid #000000; border-radius:12px; box-shadow:inset 0 0 6px #FFFF00;}
+input[type='button'] {width:auto; margin:3px 0px 3px 0px; padding:0px 10px 0px 10px; font-family:arial; font-weight:bold; color:#000000; border:1px solid #000000; background-color:#FFFFFF; cursor:pointer; border-radius:12px; box-shadow:inset 0 0 6px #0000FF;}
+input[type='button']:hover {box-shadow:inset 0 0 6px #00CC00;}
+input[type='file'] {width:92px; border-radius:12px; overflow:hidden; padding:0px; margin:0px 0px 0px -92px; -moz-opacity:0; opacity:0; cursor:pointer;}
+input[type='file']::-webkit-file-upload-button {cursor:pointer;}
+div {-moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
+table {border-collapse:collapse;}
+table,td {padding:0px;}
+#menu {position:absolute; z-index:-1; left:0px; top:0px; width:0px; height:0%; margin:0px; overflow:auto; background-color:#E1E1D2; border-right:1px solid #000000;}
+div.navcat {padding:10px 0px 5px 12px; font-size:18px; font-weight:bold; font-style:italic;}
+div.navdiv {height:2px; padding:0px; margin:18px 10px 13px 10px; background-color:#000000;}
+a.nav {display:inline-block; padding:0px; margin:10px 0px 10px 10px; text-decoration:underline; color:#000000;}
+#bodypadding {padding:10px 10px 0px 10px;}
+#footer {padding:0px 0px 4px 0px;}
+</style>
+<script type="text/javascript">
+var firstload = 'yes';
+var windo = '<a target="_self" class="nav" href="';
+var windochk = '';
+
+function windotargt(){
+if(document.getElementById('newwin').checked == true){
+windo = '<a target="_blank" class="nav" href="';
+windochk = 'CHECKED';
+} else {
+windo = '<a target="_self" class="nav" href="';
+windochk = '';}}
+
+function loadmenu(menuf){
+var tlespn = '">';
+var endspn = '</a>';
+if(firstload == 'no'){
+if(menuf == 'open'){
+document.getElementById('menu').style.zIndex = '2';
+document.getElementById('menu').style.width = '280px';
+document.getElementById('menu').style.height = '100%';
+document.getElementById('menu').innerHTML =
+'<div style="padding:10px 0px 11px 10px;"><input type="button" style="margin-top:0px;" value="Close Tool Index" onClick="loadmenu(\'close\');" /></div>'+
+'<div class="navdiv"></div>'+
+'<div style="padding:15px 0px 12px 12px;"><input type="checkbox" id="newwin" onClick="windotargt(); setTimeout(\'loadmenu(&#092;&#039;open&#092;&#039;)\',100);" ' + windochk + ' /> Open tools in new window.</div>'+
+'<div class="navdiv"></div>'+
+windo + '/' + tlespn + 'Homepage | Descriptive Index' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Basic Text Tools:</div>'+
+windo + 'Add-Prefix-Suffix-to-Text.html' + tlespn + 'Add Prefix/Suffix into Line' + endspn +
+windo + 'Add-Remove-Line-Breaks.html' + tlespn + 'Add/Remove Line Breaks' + endspn +
+windo + 'Count-Text.html' + tlespn + 'Count Characters, Words...Lines' + endspn +
+windo + 'Delimited-Column-Extractor.html' + tlespn + 'Delimited Column Extractor' + endspn +
+windo + 'Find-and-Replace-Text.html' + tlespn + 'Find and Replace Text' + endspn +
+windo + 'Letter-Case-Converter.html' + tlespn + 'Letter Case Converter' + endspn +
+windo + 'Merge-Text-Line-by-Line.html' + tlespn + 'Merge Text (Line by Line)' + endspn +
+windo + 'Remove-Duplicate-Lines.html' + tlespn + 'Remove Duplicate Lines' + endspn +
+windo + 'Remove-Empty-Lines.html' + tlespn + 'Remove Empty Lines' + endspn +
+windo + 'Remove-Extra-Spaces.html' + tlespn + 'Remove Extra Spaces' + endspn +
+windo + 'Remove-Letter-Accents.html' + tlespn + 'Remove Letter Accents' + endspn +
+windo + 'Remove-Lines-Containing.html' + tlespn + 'Remove Lines Containing...' + endspn +
+windo + 'Sort-Text-Lines.html' + tlespn + 'Sort Text Lines' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Format Tools:</div>'+
+windo + 'ASCII-to-Unicode-Converter.html' + tlespn + 'ASCII to Unicode Converter' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Obfuscation Tools:</div>'+
+windo + 'Binary-Code-Translator.html' + tlespn + 'Binary Code Translator' + endspn +
+windo + 'Disemvowel-Tool.html' + tlespn + 'Disemvowel Tool' + endspn +
+windo + 'Encryption-Generator.html' + tlespn + 'Encryption Generator' + endspn +
+windo + 'Reverse-Text-Generator.html' + tlespn + 'Reverse Text Generator' + endspn +
+windo + 'ROT13-Caesar-Cipher.html' + tlespn + 'ROT13 Caesar Cipher' + endspn +
+windo + 'Word-Scrambler.html' + tlespn + 'Word Scrambler/Descrambler' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Randomization Tools:</div>'+
+windo + 'Random-Line-Picker.html' + tlespn + 'Random Line Picker' + endspn +
+windo + 'Random-Number-Generator.html' + tlespn + 'Random Number Generator' + endspn +
+windo + 'Random-String-Generator.html' + tlespn + 'Random String Generator' + endspn +
+windo + 'String-Randomizer.html' + tlespn + 'String Randomizer' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Combination / Permutation:</div>'+
+windo + 'Combination-Generator.html' + tlespn + 'Combination Generator' + endspn +
+windo + 'Line-Combination-Generator.html' + tlespn + 'Line Combination Generator' + endspn +
+windo + 'Permutation-Generator.html' + tlespn + 'Permutation Generator' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Numeration Tools:</div>'+
+windo + 'Generate-List-of-Numbers.html' + tlespn + 'Generate List of Numbers' + endspn +
+windo + 'Number-Each-Line.html' + tlespn + 'Number Each Line' + endspn +
+windo + 'Online-Tally-Counter.html' + tlespn + 'Online Tally Counter' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">All-in-One Tool:</div>'+
+windo + 'Text-Manipulation-Notepad.html' + tlespn + 'Text Manipulation Notepad' + endspn +
+'<div class="navdiv"></div>'+
+'<div style="padding:19px 0px 7px 10px;"><input type="button" style="margin-top:0px;" value="Close Tool Index" onClick="loadmenu(\'close\');" /></div>';
+resizepage();
+} else {
+document.getElementById('menu').style.zIndex = '-1';
+document.getElementById('menu').style.width = '0px';
+document.getElementById('menu').style.height = '0%';
+document.getElementById('menu').innerHTML = '';}}
+if(firstload == 'yes'){
+firstload = 'no';
+resizepage();}}
+
+window.onresize = resizepage;
+
+var adjeleheight_cache = 0;
+
+function resizepage(){
+var adj_ele = 'output';
+var client_width = document.body.parentNode.clientWidth;
+var client_height = document.body.parentNode.clientHeight;
+var footer_bottom = document.getElementById('footer').getBoundingClientRect().bottom;
+var adjele_height = document.getElementById(adj_ele).offsetHeight;
+if(adjeleheight_cache == 0) adjeleheight_cache = adjele_height;
+var adj_height = (client_height - footer_bottom) + adjele_height;
+if(adj_height >= adjeleheight_cache){
+document.getElementById(adj_ele).style.height = adj_height + 'px';
+} else {
+document.getElementById(adj_ele).style.height = adjeleheight_cache + 'px;';}}
+
+var sc_project = 10533904;
+var sc_invisible = 1;
+var sc_security = "1bf36e4a";
+var iamcounted = 'no';
+
+
+function privacy_policy(){
+var text =
+'~ Textmekanik.com Privacy Policy ~\n\n'+
+'Log Files: The Textmekanik.com webserver records log files as required by United States law. The information inside the log files includes: ip address, date/time stamp, referring page and user agent.\n\n'+
+'Cookies: Textmekanik.com use cookies to store information about visitors preferences, record user-specific information on which pages the user access or visit, customize Web page content based on visitors browser type or other information that the visitor sends via their browser.\n\n'+
+'Tools: All tool are built-with and functions-in Client Side JavaScripting, so only your computer will see or process your data input/output. Input/processing/output data is never transmitted over the internet and always resides within your computer. However, cloud operating systems could transmit your data into the cloud\'s system for processing but this has nothing to do with the Textmekanik.com webserver.\n\n'+
+'Sensitive Data Disclaimer: Don\'t trust any website with sensitive data, not even Textmekanik.com. Keep your sensitive data secure by keeping it to yourself.\n\n';
+alert(text);}
+</script>
+<script type="text/javascript">
+function savefile(direct_save,saveasid,saveid){
+if(!window.Blob){alert('Your browser does not support HTML5 "Blob" function required to save a file.');
+} else {
+var txtwrt = '';
+if(direct_save == 'yes'){
+txtwrt = saveid;
+} else {
+txtwrt = document.getElementById(saveid).value;}
+if(document.getElementById('dos').checked == true) txtwrt = txtwrt.replace(/\n/g,'\r\n');
+var textblob = new Blob([txtwrt],{type:'text/plain'});
+var saveas =  document.getElementById(saveasid).value;
+var dwnlnk = document.createElement('a');
+dwnlnk.download = saveas;
+dwnlnk.innerHTML = "Download File";
+if (window.webkitURL != null){
+dwnlnk.href = window.webkitURL.createObjectURL(textblob);
+} else {
+dwnlnk.href = window.URL.createObjectURL(textblob);
+dwnlnk.onclick = destce;
+dwnlnk.style.display = 'none';
+document.body.appendChild(dwnlnk);}
+dwnlnk.click();}}
+function destce(event){document.body.removeChild(event.target);}
+
+function cleartext(){
+document.getElementById('output').value = '';}
+
+function SelectAll(id){
+document.getElementById(id).focus();
+document.getElementById(id).select();}
+
+function wrapis(boxid,wrapis){
+var area = document.getElementById(boxid);
+area.setAttribute('wrap',wrapis);
+var newarea = area.cloneNode(true);
+newarea.value = area.value;
+area.parentNode.replaceChild(newarea,area);}
+
+Array.prototype.map = function(fn){
+var r = [];
+var l = this.length;
+for(i=0;i<l;i++){
+r.push(fn(this[i]));}
+return r;}
+
+function permute(){
+//+ Jonas Raoni Soares Silva @ http://jsfromhell.com/array/permute
+var permute = function(v, m){
+for(var p = -1, j, k, f, r, l = v.length, q = 1, i = l + 1; --i; q *= i);
+for(x = [new Array(l), new Array(l), new Array(l), new Array(l)], j = q, k = l + 1, i = -1; ++i < l; x[2][i] = i, x[1][i] = x[0][i] = j /= --k);
+for(r = new Array(q); ++p < q;)
+for(r[p] = new Array(l), i = -1; ++i < l; !--x[1][i] && (x[1][i] = x[0][i], x[2][i] = (x[2][i] + 1) % l), r[p][i] = m ? x[3][i] : v[x[3][i]])
+for(x[3][i] = x[2][i], f = 0; !f; f = !f)
+for(j = i; j; x[3][--j] == x[2][i] && (x[3][i] = x[2][i] = (x[2][i] + 1) % l, f = 1));
+return r;};
+//end
+var perobjs = new Array();
+perobjscnt = 0;
+var permobj = '';
+for(var x=0;x<10;x++){
+permobj = document.getElementById('permobj' + (x + 1)).value.replace(/\\x/g,'\n');
+if(permobj != ''){
+perobjs[perobjscnt] = permobj;
+perobjscnt++;}}
+var pre = document.getElementById('setprefix').value.replace(/\\x/g,'\n');
+var suf = document.getElementById('setsuffix').value.replace(/\\x/g,'\n');
+var joinobjs = document.getElementById('objdelimiter').value.replace(/\\x/g,'\n');
+var joinperms = document.getElementById('objjoin').value.replace(/\\x/g,'\n');
+var out = permute(perobjs).map(function(objs) {return pre + objs.join(joinobjs) + suf});
+out = out.join(joinperms);
+if(document.getElementById('direct_save').checked == true){
+savefile('yes','saveas',out)
+} else {
+document.getElementById('output').value = out;}
+count_me();}
+
+var lastdivnum = 1;
+
+function cnthlite(divnum){
+var objcnt = 0;
+for(var x=1;x<11;x++){
+if(document.getElementById('permobj' + x).value != '') objcnt++;}
+if(objcnt != 0){
+document.getElementById('cnthlite' + objcnt).style.backgroundColor = '#CC0000';
+document.getElementById('cnthlite' + objcnt).style.color = '#FFFFFF';
+document.getElementById('cnthlite' + objcnt).style.fontWeight = 'bold';}
+if(objcnt != lastdivnum || objcnt == 0){
+document.getElementById('cnthlite' + lastdivnum).style.backgroundColor = '#E3E2DF';
+document.getElementById('cnthlite' + lastdivnum).style.color = '#000000';
+document.getElementById('cnthlite' + lastdivnum).style.fontWeight = 'normal';}
+if(objcnt == 0) lastdivnum = 1; else lastdivnum = objcnt;}
+</script>
+</head>
+<body spellcheck="false">
+<div id="menu"></div>
+<div id="bodypadding">
+<h1><input type="button" style="margin-top:0px;" value="Open Tool Index" onClick="loadmenu('open');" /> Tool: Permutation Generator</h1>
+<div style="width:100%; height:205px; overflow-y:scroll; margin:7px 0px 0px 0px;">
+<table style="width:100%;">
+<tr><td style="width:75px; margin-top:0px;">Object 01</td><td><input type="text" id="permobj1" value="" style="width:99%; margin-top:0px;" onkeyup="cnthlite('1');" onpaste="setTimeout('cnthlite(\'1\')',100);" /></td><td style="width:80px; margin-top:0px;"><span id="cnthlite1">&nbsp;1&nbsp;</span></td></tr>
+<tr><td style="width:75px; margin-top:7px;">Object 02</td><td><input type="text" id="permobj2" value="" style="width:99%; margin-top:7px;" onkeyup="cnthlite('2');" onpaste="setTimeout('cnthlite(\'2\')',100);" /></td><td style="width:80px; margin-top:7px;"><span id="cnthlite2">&nbsp;2&nbsp;</span></td></tr>
+<tr><td style="width:75px; margin-top:7px;">Object 03</td><td><input type="text" id="permobj3" value="" style="width:99%; margin-top:7px;" onkeyup="cnthlite('3');" onpaste="setTimeout('cnthlite(\'3\')',100);" /></td><td style="width:80px; margin-top:7px;"><span id="cnthlite3">&nbsp;6&nbsp;</span></td></tr>
+<tr><td style="width:75px; margin-top:7px;">Object 04</td><td><input type="text" id="permobj4" value="" style="width:99%; margin-top:7px;" onkeyup="cnthlite('4');" onpaste="setTimeout('cnthlite(\'4\')',100);" /></td><td style="width:80px; margin-top:7px;"><span id="cnthlite4">&nbsp;24&nbsp;</span></td></tr>
+<tr><td style="width:75px; margin-top:7px;">Object 05</td><td><input type="text" id="permobj5" value="" style="width:99%; margin-top:7px;" onkeyup="cnthlite('5');" onpaste="setTimeout('cnthlite(\'5\')',100);" /></td><td style="width:80px; margin-top:7px;"><span id="cnthlite5">&nbsp;120&nbsp;</span></td></tr>
+<tr><td style="width:75px; margin-top:7px;">Object 06</td><td><input type="text" id="permobj6" value="" style="width:99%; margin-top:7px;" onkeyup="cnthlite('6');" onpaste="setTimeout('cnthlite(\'6\')',100);" /></td><td style="width:80px; margin-top:7px;"><span id="cnthlite6">&nbsp;720&nbsp;</span></td></tr>
+<tr><td style="width:75px; margin-top:7px;">Object 07</td><td><input type="text" id="permobj7" value="" style="width:99%; margin-top:7px;" onkeyup="cnthlite('7');" onpaste="setTimeout('cnthlite(\'7\')',100);" /></td><td style="width:80px; margin-top:7px;"><span id="cnthlite7">&nbsp;5040&nbsp;</span></td></tr>
+<tr><td style="width:75px; margin-top:7px;">Object 08</td><td><input type="text" id="permobj8" value="" style="width:99%; margin-top:7px;" onkeyup="cnthlite('8');" onpaste="setTimeout('cnthlite(\'8\')',100);" /></td><td style="width:80px; margin-top:7px;"><span id="cnthlite8">&nbsp;40320&nbsp;</span></td></tr>
+<tr><td style="width:75px; margin-top:7px;">Object 09</td><td><input type="text" id="permobj9" value="" style="width:99%; margin-top:7px;" onkeyup="cnthlite('9');" onpaste="setTimeout('cnthlite(\'9\')',100);" /></td><td style="width:80px; margin-top:7px;"><span id="cnthlite9">&nbsp;362880&nbsp;</span></td></tr>
+<tr><td style="width:75px; margin:7px 0px 0px 0px;">Object 10</td><td><input type="text" id="permobj10" value="" style="width:99%; margin:7px 0px 0px 0px;" onkeyup="cnthlite('10');" onpaste="setTimeout('cnthlite(\'10\')',100);" /></td><td style="width:80px; margin:7px 0px 0px 0px;"><span id="cnthlite10">&nbsp;3628800&nbsp;</span></td></tr>
+</table>
+</div>
+<div style="padding:7px 0px 0px 0px;">
+Prefix sets with:
+<input type="text" id="setprefix" value="" size="4" />
+Suffix sets with:
+<input type="text" id="setsuffix" value="" size="4" />
+Delimit objects with:
+<input type="text" id="objdelimiter" value="" size="4" />
+Join sets with:
+<input type="text" id="objjoin" value="\x" size="4" />
+</div>
+<div style="padding:4px 0px 7px 0px;">
+<input type="button" value="Generate Permutations" onClick="permute();" />&nbsp;
+<input type="checkbox" id="direct_save" />Direct save.
+Output wrap is <input type="radio" name="radbtn" onClick="wrapis('output','soft');" />on
+<input type="radio" name="radbtn" onClick="wrapis('output','off');" CHECKED />off.
+<input type="button" title="Select All Text" value="S" onClick="SelectAll('output')" />
+<input type="button" title="Clear All Text" value="C" onClick="cleartext();" />
+</div>
+<textarea id="output" style="width:100%;" rows="4" wrap="off">
+Output Box - Permutations will display here.
+Enter up to 10 objects to permute into the object input fields above.
+Objects can be any text from a single letter to whole sentence.
+Permuted sets can have a prefix and/or suffix added via the prefix/suffix fields.
+Join objects within each set via the delimit field. Join sets via join field.
+Entering \x into any field will produce a line break.
+WARNING: 10 objects will produce 3628800 permutations! Many browsers will display a stop script messages and results will be slow to load.
+When generating large amounts of permutations check "Direct save." to directly save results as a output file.
+This will prevent browser lock-up from trying to load large amounts of results into this browser field.
+Privacy of Data: This tool is built-with and functions-in Client Side JavaScripting, so only your computer will see or process your data input/output.</textarea>
+<div style="padding:7px 0px 0px 0px; line-height:1.7;">
+<input type="button" value="Save As" onClick="savefile('no','saveas','output');" />
+<input type="text" id="saveas" value="output.txt" style="width:90px;" />&nbsp;
+<input type="radio" name="sfrmt" id="unix" CHECKED />Unix
+<input type="radio" name="sfrmt" id="dos" />Dos.
+To generate combinations use the <a target="_blank" href="Combination-Generator.html" style="color:#0000FF;">Combination Generator</a>.
+</div>
+<div id="footer">
+Tools provided as-is, without warranty of any kind and used at your own risk. &copy;2016 <a href="index.html" style="color:#0000FF;">Textmekanik.com</a> |
+<span style="color:#0000FF; text-decoration:underline; cursor:pointer;" onclick="privacy_policy();">Privacy</span>
+</div>
+</div>
+<script type="text/javascript">loadmenu('close');</script>
+<script type="text/javascript" id="count_me"></script>
+<!-- GoStats JavaScript Based Code -->
+<script type="text/javascript" src="http://gostats.com/js/counter.js"></script>
+<script type="text/javascript">_gos='c4.gostats.com';_goa=411053;
+_got=6;_goi=1;_gol='Get a free invisible counter from GoStats';_GoStatsRun();</script>
+<noscript><a target="_blank" title="Get a free invisible counter from GoStats" 
+href="http://gostats.com"><img alt="Get a free invisible counter from GoStats" 
+src="http://c4.gostats.com/bin/count/a_411053/t_6/i_1/counter.png" 
+style="border-width:0" /></a></noscript>
+<!-- End GoStats JavaScript Based Code -->
+</body>
+</html>

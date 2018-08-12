@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<!-- Copyright 2016 Textmekanik.com -->
+<title>Text Mekanik&trade; - Text Manipulation Tools</title>
+<link rel="canonical" href="index.html" />
+<style type="text/css">html {height:100%;}
+body {height:100%; margin:0px; padding:0px; font-family:arial; font-size:16px; line-height:1.7; background-color:#E1E1D2;}
+h1 {display:block; font-size:18px; font-weight:bold; margin:0px; padding:0px;}
+textarea {display:block; margin:0px; padding:8px 10px 8px 10px; overflow:scroll; font-family:arial; font-size:16px; line-height:1.4; color:#000000; background-color:#FFFFFF; border:1px solid #000000; outline:none; resize:none; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; border-radius:12px 4px 4px 4px; box-shadow:inset 0 0 6px #FFFF00;}
+input {display:inline-block; height:33px; line-height:1; vertical-align:middle; font-size:16px; outline:none; resize:none; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
+input::-moz-focus-inner {border:0; padding:0}
+input[type='radio'] {width:20px; height:20px; vertical-align:middle; margin:0px; padding:0px; font-size:16px;}
+input[type='checkbox'] {width:20px; height:20px; vertical-align:middle; margin:0px; padding:0px; font-size:16px;}
+input[type='text'] {width:auto; margin:3px 0px 3px 0px; padding:0px 10px 0px 10px; font-family:arial; color:#000000; background-color:#FFFFFF; border:1px solid #000000; border-radius:12px; box-shadow:inset 0 0 6px #FFFF00;}
+input[type='button'] {width:auto; margin:3px 0px 3px 0px; padding:0px 10px 0px 10px; font-family:arial; font-weight:bold; color:#000000; border:1px solid #000000; background-color:#FFFFFF; cursor:pointer; border-radius:12px; box-shadow:inset 0 0 6px #0000FF;}
+input[type='button']:hover {box-shadow:inset 0 0 6px #00CC00;}
+input[type='file'] {width:92px; border-radius:12px; overflow:hidden; padding:0px; margin:0px 0px 0px -92px; -moz-opacity:0; opacity:0; cursor:pointer;}
+input[type='file']::-webkit-file-upload-button {cursor:pointer;}
+div {-moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
+table {border-collapse:collapse;}
+table,td {padding:0px;}
+#menu {position:absolute; z-index:-1; left:0px; top:0px; width:0px; height:0%; margin:0px; overflow:auto; background-color:#E1E1D2; border-right:1px solid #000000;}
+div.navcat {padding:10px 0px 5px 12px; font-size:18px; font-weight:bold; font-style:italic;}
+div.navdiv {height:2px; padding:0px; margin:18px 10px 13px 10px; background-color:#000000;}
+a.nav {display:inline-block; padding:0px; margin:10px 0px 10px 10px; text-decoration:underline; color:#000000;}
+#bodypadding {padding:10px 10px 0px 10px;}
+#footer {padding:0px 0px 4px 0px;}
+</style>
+<style type="text/css">#indextext {height:150px; padding:10px; overflow-y:scroll; line-height:1.7; background-color:#FFFFFF; border:1px solid #000000; border-radius:12px 4px 4px 12px;}
+.mline {padding:1px 0px 1px 0px;}
+</style>
+<script type="text/javascript">
+var firstload = 'yes';
+
+function loadmenu(menuf){
+if(firstload == 'yes'){
+firstload = 'no';
+resizepage();}}
+
+window.onresize = resizepage;
+
+var adjeleheight_cache = 0;
+
+function resizepage(){
+var adj_ele = 'indextext';
+var client_width = document.body.parentNode.clientWidth;
+var client_height = document.body.parentNode.clientHeight;
+var footer_bottom = document.getElementById('footer').getBoundingClientRect().bottom;
+var adjele_height = document.getElementById(adj_ele).offsetHeight;
+if(adjeleheight_cache == 0) adjeleheight_cache = adjele_height;
+var adj_height = (client_height - footer_bottom) + adjele_height;
+if(adj_height >= adjeleheight_cache){
+document.getElementById(adj_ele).style.height = adj_height + 'px';
+} else {
+document.getElementById(adj_ele).style.height = adjeleheight_cache + 'px;';}}
+
+var sc_project = 10533904;
+var sc_invisible = 1;
+var sc_security = "1bf36e4a";
+var iamcounted = 'no';
+
+
+function privacy_policy(){
+var text =
+'~ Textmekanik.com Privacy Policy ~\n\n'+
+'Log Files: The Textmekanik.com webserver records log files as required by United States law. The information inside the log files includes: ip address, date/time stamp, referring page and user agent.\n\n'+
+'Cookies: Textmekanik.com use cookies to store information about visitors preferences, record user-specific information on which pages the user access or visit, customize Web page content based on visitors browser type or other information that the visitor sends via their browser.\n\n'+
+'Tools: All tool are built-with and functions-in Client Side JavaScripting, so only your computer will see or process your data input/output. Input/processing/output data is never transmitted over the internet and always resides within your computer. However, cloud operating systems could transmit your data into the cloud\'s system for processing but this has nothing to do with the Textmekanik.com webserver.\n\n'+
+'Sensitive Data Disclaimer: Don\'t trust any website with sensitive data, not even Textmekanik.com. Keep your sensitive data secure by keeping it to yourself.\n\n';
+alert(text);}
+</script>
+</head>
+<body spellcheck="false" onclick="count_me();">
+<div id="menu"></div>
+<div id="bodypadding">
+<h1>Text Mekanik&trade; - Text Manipulation Tools</h1>
+<div style="padding:0px 0px 6px 0px;">
+Welcome to Textmekanik.com! Simple, single task, browser based, text manipulation tools.
+</div>
+<div id="indextext">
+<div style="padding-bottom:3px; font-size:18px; font-weight:bold; font-style:italic;">Basic Text Tools:</div>
+<div class="mline"><a href="Add-Prefix-Suffix-to-Text.html" style="color:#0000FF;">Add Prefix/Suffix into Line</a> - Insert a prefix and/or suffix into the content of each line.</div>
+<div class="mline"><a href="Add-Remove-Line-Breaks.html" style="color:#0000FF;">Add/Remove Line Breaks</a> - Add new line breaks and/or remove exisiting line breaks within your text's formatting.</div>
+<div class="mline"><a href="Count-Text.html" style="color:#0000FF;">Count Characters, Words, Lines</a> - Count your text's characters, words, sentences, lines and word frequency.</div>
+<div class="mline"><a href="Delimited-Column-Extractor.html" style="color:#0000FF;">Delimited Column Extractor</a> - Extract a specific column of delimited text from each line of your input text.</div>
+<div class="mline"><a href="Find-and-Replace-Text.html" style="color:#0000FF;">Find and Replace Text</a> - Find and replace text matching your search criteria.</div>
+<div class="mline"><a href="Letter-Case-Converter.html" style="color:#0000FF;">Letter Case Converter</a> - Convert your text's letter case to UPPER, lower, RaNdOM and more.</div>
+<div class="mline"><a href="Merge-Text-Line-by-Line.html" style="color:#0000FF;">Merge Text (Line by Line)</a> - Merge two sets of text <span style="text-decoration:underline;">line</span> by <span style="text-decoration:underline;">line</span> with the option of writing a prefix, divider or suffix into each merged line.</div>
+<div class="mline"><a href="Remove-Duplicate-Lines.html" style="color:#0000FF;">Remove Duplicate Lines</a> - Remove/delete all duplicate lines within your text/list.</div>
+<div class="mline"><a href="Remove-Empty-Lines.html" style="color:#0000FF;">Remove Empty Lines</a> - Remove/delete all empty lines within your text/list.</div>
+<div class="mline"><a href="Remove-Extra-Spaces.html" style="color:#0000FF;">Remove Extra Spaces</a> - Remove leading/trailing/extra/all whitespaces from your text.</div>
+<div class="mline"><a href="Remove-Letter-Accents.html" style="color:#0000FF;">Remove Letter Accents</a> - Remove common letter accents from your text. (e.g. &#224; will convert into a)</div>
+<div class="mline"><a href="Remove-Lines-Containing.html" style="color:#0000FF;">Remove Lines Containing...</a> - Remove lines containing or not containing your specified search text.</div>
+<div class="mline"><a href="Sort-Text-Lines.html" style="color:#0000FF;">Sort Text Lines</a> - Sort your text's lines in alphabetical, length, random or reverse order.</div>
+<div>&nbsp;</div>
+<div style="padding-bottom:3px; font-size:18px; font-weight:bold; font-style:italic;">Format Tools:</div>
+<div class="mline"><a onclick="count_me();" href="ASCII-to-Unicode-Converter.html" style="color:#0000FF;">ASCII to Unicode Converter</a> - Convert plain text into decimal/hex unicode formats.</div>
+<div>&nbsp;</div>
+<div style="padding-bottom:3px; font-size:18px; font-weight:bold; font-style:italic;">Obfuscation Tools:</div>
+<div class="mline"><a href="Binary-Code-Translator.html" style="color:#0000FF;">Binary Code Translator</a> - Obfuscate text by encoding it into the 0s and 1s of binary code. Very geeky!</div>
+<div class="mline"><a href="Disemvowel-Tool.html" style="color:#0000FF;">Disemvowel Tool</a> - Remove vowels "aeiou" or any other set of letters from text.</div>
+<div class="mline"><a href="Encryption-Generator.html" style="color:#0000FF;">Encryption Generator</a> - Encrypt/decrypt text via password using Tiny Encryption Algorithm (TEA) and base64.</div>
+<div class="mline"><a href="Reverse-Text-Generator.html" style="color:#0000FF;">Reverse Text Generator</a> - Reverse text, flip text, reverse wording, flip wording, reverse each word's lettering, flip letters upside down.</div>
+<div class="mline"><a href="ROT13-Caesar-Cipher.html" style="color:#0000FF;">ROT13 Caesar Cipher</a> - Encrypt plaintext into ROT13 ciphertext or decrypt ROT13 ciphertext into plaintext.</div>
+<div class="mline"><a href="Word-Scrambler.html" style="color:#0000FF;">Word Scrambler/Unscrambler</a> - Scramble/unscramble each word's lettering within a body of text.</div>
+<div>&nbsp;</div>
+<div style="padding-bottom:3px; font-size:18px; font-weight:bold; font-style:italic;">Randomization Tools:</div>
+<div class="mline"><a href="Random-Line-Picker.html" style="color:#0000FF;">Random Line Picker</a> - Pick random lines from your input text/list. Lines can contain names, numbers, etc.</div>
+<div class="mline"><a href="Random-Number-Generator.html" style="color:#0000FF;">Random Number Generator</a> - Generate random numbers from your entered low/high range with prefix, suffix and delimiter options.</div>
+<div class="mline"><a href="Random-String-Generator.html" style="color:#0000FF;">Random String Generator</a> - Generate random text string(s) from your entered input elements such as characters, words, sentences, etc.</div>
+<div class="mline"><a href="String-Randomizer.html" style="color:#0000FF;">String Randomizer</a> - Randomize strings within line breaks or specified delimiter.</div>
+<div>&nbsp;</div>
+<div style="padding-bottom:3px; font-size:18px; font-weight:bold; font-style:italic;">Combination / Permutation Tools:</div>
+<div class="mline"><a href="Combination-Generator.html" style="color:#0000FF;">Combination Generator</a> - Make all combinations of text.</div>
+<div class="mline"><a href="Line-Combination-Generator.html" style="color:#0000FF;">Line Combination Generator</a> - Combine text lines from left to right.</div>
+<div class="mline"><a href="Permutation-Generator.html" style="color:#0000FF;">Permutation Generator</a> - Make permutations from text. (Letters, numbers, symbols, words, sentences, etc.)</div>
+<div>&nbsp;</div>
+<div style="padding-bottom:3px; font-size:18px; font-weight:bold; font-style:italic;">Numeration Tools:</div>
+<div class="mline"><a href="Generate-List-of-Numbers.html" style="color:#0000FF;">Generate List of Numbers</a> - Generate a list of sequential numbers from your selected low/high number range.</div>
+<div class="mline"><a href="Number-Each-Line.html" style="color:#0000FF;">Number Each Line</a> - Add a sequential number to each line of text. Enumerate items within a list.</div>
+<div class="mline"><a href="Online-Tally-Counter.html" style="color:#0000FF;">Online Tally Counter</a> - Count using multiple, indepently named tallies.</div>
+<div>&nbsp;</div>
+<div style="padding-bottom:3px; font-size:18px; font-weight:bold; font-style:italic;">All-in-One Tool:</div>
+<div class="mline"><a href="Text-Manipulation-Notepad.html" style="color:#0000FF;">Text Manipulation Notepad</a> - Manipulate plain text without cutting-n-pasting between multiple tools.</div>
+<div>&nbsp;</div>
+</div>
+<div style="padding:7px 0px 0px 0px;">
+<div id="footer">
+Tools provided as-is, without warranty of any kind and used at your own risk. &copy;2016 <a href="index.html" style="color:#0000FF;">Textmekanik.com</a> |
+<span style="color:#0000FF; text-decoration:underline; cursor:pointer;" onclick="privacy_policy();">Privacy</span>
+</div>
+</div>
+</div>
+<script type="text/javascript">loadmenu('close');</script>
+<script type="text/javascript" id="count_me"></script>
+<!-- GoStats JavaScript Based Code -->
+<script type="text/javascript" src="http://gostats.com/js/counter.js"></script>
+<script type="text/javascript">_gos='c4.gostats.com';_goa=411053;
+_got=6;_goi=1;_gol='Get a free invisible counter from GoStats';_GoStatsRun();</script>
+<noscript><a target="_blank" title="Get a free invisible counter from GoStats" 
+href="http://gostats.com"><img alt="Get a free invisible counter from GoStats" 
+src="http://c4.gostats.com/bin/count/a_411053/t_6/i_1/counter.png" 
+style="border-width:0" /></a></noscript>
+<!-- End GoStats JavaScript Based Code -->
+</body>
+</html>

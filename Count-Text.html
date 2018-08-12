@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<!-- "Count Characters, Words, Sentences, Lines" is Copyright 2016 Textmekanik.com -->
+<title>Count Characters, Words, Sentences, Lines, Word Frequency</title>
+<link rel="canonical" href="Count-Text.html" />
+<style type="text/css">html {height:100%;}
+body {height:100%; margin:0px; padding:0px; font-family:arial; font-size:16px; line-height:1.7; background-color:#E1E1D2;}
+h1 {display:block; font-size:18px; font-weight:bold; margin:0px; padding:0px;}
+textarea {display:block; margin:0px; padding:8px 10px 8px 10px; overflow:scroll; font-family:arial; font-size:16px; line-height:1.4; color:#000000; background-color:#FFFFFF; border:1px solid #000000; outline:none; resize:none; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; border-radius:12px 4px 4px 4px; box-shadow:inset 0 0 6px #FFFF00;}
+input {display:inline-block; height:33px; line-height:1; vertical-align:middle; font-size:16px; outline:none; resize:none; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
+input::-moz-focus-inner {border:0; padding:0}
+input[type='radio'] {width:20px; height:20px; vertical-align:middle; margin:0px; padding:0px; font-size:16px;}
+input[type='checkbox'] {width:20px; height:20px; vertical-align:middle; margin:0px; padding:0px; font-size:16px;}
+input[type='text'] {width:auto; margin:3px 0px 3px 0px; padding:0px 10px 0px 10px; font-family:arial; color:#000000; background-color:#FFFFFF; border:1px solid #000000; border-radius:12px; box-shadow:inset 0 0 6px #FFFF00;}
+input[type='button'] {width:auto; margin:3px 0px 3px 0px; padding:0px 10px 0px 10px; font-family:arial; font-weight:bold; color:#000000; border:1px solid #000000; background-color:#FFFFFF; cursor:pointer; border-radius:12px; box-shadow:inset 0 0 6px #0000FF;}
+input[type='button']:hover {box-shadow:inset 0 0 6px #00CC00;}
+input[type='file'] {width:92px; border-radius:12px; overflow:hidden; padding:0px; margin:0px 0px 0px -92px; -moz-opacity:0; opacity:0; cursor:pointer;}
+input[type='file']::-webkit-file-upload-button {cursor:pointer;}
+div {-moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
+table {border-collapse:collapse;}
+table,td {padding:0px;}
+#menu {position:absolute; z-index:-1; left:0px; top:0px; width:0px; height:0%; margin:0px; overflow:auto; background-color:#E1E1D2; border-right:1px solid #000000;}
+div.navcat {padding:10px 0px 5px 12px; font-size:18px; font-weight:bold; font-style:italic;}
+div.navdiv {height:2px; padding:0px; margin:18px 10px 13px 10px; background-color:#000000;}
+a.nav {display:inline-block; padding:0px; margin:10px 0px 10px 10px; text-decoration:underline; color:#000000;}
+#bodypadding {padding:10px 10px 0px 10px;}
+#footer {padding:0px 0px 4px 0px;}
+</style>
+<style type="text/css">#wrdfrq {position:absolute; z-index:-1; left:0px; top:0px; width:0px; height:0%; margin:0px; overflow:auto; line-height:1.7; background-color:#E1E1D2; border-right:1px solid #000000;}
+#countdisplay td {padding:5px 10px 5px 10px; border:1px solid #000000; background-color:#FFFFFF;}
+#conbtn {position:absolute; z-index:4; top:0px; left:0px;}
+tr.wfctr {background-color:#FFFFFF;}
+td.wfctdhl {background-color:#FFFFCC;}
+td.wfctd {padding:5px; border:1px solid #000000;}
+</style>
+<script type="text/javascript">
+var firstload = 'yes';
+var windo = '<a target="_self" class="nav" href="';
+var windochk = '';
+
+function windotargt(){
+if(document.getElementById('newwin').checked == true){
+windo = '<a target="_blank" class="nav" href="';
+windochk = 'CHECKED';
+} else {
+windo = '<a target="_self" class="nav" href="';
+windochk = '';}}
+
+function loadmenu(menuf){
+var tlespn = '">';
+var endspn = '</a>';
+if(firstload == 'no'){
+if(menuf == 'open'){
+document.getElementById('menu').style.zIndex = '2';
+document.getElementById('menu').style.width = '280px';
+document.getElementById('menu').style.height = '100%';
+document.getElementById('menu').innerHTML =
+'<div style="padding:10px 0px 11px 10px;"><input type="button" style="margin-top:0px;" value="Close Tool Index" onClick="loadmenu(\'close\');" /></div>'+
+'<div class="navdiv"></div>'+
+'<div style="padding:15px 0px 12px 12px;"><input type="checkbox" id="newwin" onClick="windotargt(); setTimeout(\'loadmenu(&#092;&#039;open&#092;&#039;)\',100);" ' + windochk + ' /> Open tools in new window.</div>'+
+'<div class="navdiv"></div>'+
+windo + '/' + tlespn + 'Homepage | Descriptive Index' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Basic Text Tools:</div>'+
+windo + 'Add-Prefix-Suffix-to-Text.html' + tlespn + 'Add Prefix/Suffix into Line' + endspn +
+windo + 'Add-Remove-Line-Breaks.html' + tlespn + 'Add/Remove Line Breaks' + endspn +
+windo + 'Count-Text.html' + tlespn + 'Count Characters, Words...Lines' + endspn +
+windo + 'Delimited-Column-Extractor.html' + tlespn + 'Delimited Column Extractor' + endspn +
+windo + 'Find-and-Replace-Text.html' + tlespn + 'Find and Replace Text' + endspn +
+windo + 'Letter-Case-Converter.html' + tlespn + 'Letter Case Converter' + endspn +
+windo + 'Merge-Text-Line-by-Line.html' + tlespn + 'Merge Text (Line by Line)' + endspn +
+windo + 'Remove-Duplicate-Lines.html' + tlespn + 'Remove Duplicate Lines' + endspn +
+windo + 'Remove-Empty-Lines.html' + tlespn + 'Remove Empty Lines' + endspn +
+windo + 'Remove-Extra-Spaces.html' + tlespn + 'Remove Extra Spaces' + endspn +
+windo + 'Remove-Letter-Accents.html' + tlespn + 'Remove Letter Accents' + endspn +
+windo + 'Remove-Lines-Containing.html' + tlespn + 'Remove Lines Containing...' + endspn +
+windo + 'Sort-Text-Lines.html' + tlespn + 'Sort Text Lines' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Format Tools:</div>'+
+windo + 'ASCII-to-Unicode-Converter.html' + tlespn + 'ASCII to Unicode Converter' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Obfuscation Tools:</div>'+
+windo + 'Binary-Code-Translator.html' + tlespn + 'Binary Code Translator' + endspn +
+windo + 'Disemvowel-Tool.html' + tlespn + 'Disemvowel Tool' + endspn +
+windo + 'Encryption-Generator.html' + tlespn + 'Encryption Generator' + endspn +
+windo + 'Reverse-Text-Generator.html' + tlespn + 'Reverse Text Generator' + endspn +
+windo + 'ROT13-Caesar-Cipher.html' + tlespn + 'ROT13 Caesar Cipher' + endspn +
+windo + 'Word-Scrambler.html' + tlespn + 'Word Scrambler/Descrambler' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Randomization Tools:</div>'+
+windo + 'Random-Line-Picker.html' + tlespn + 'Random Line Picker' + endspn +
+windo + 'Random-Number-Generator.html' + tlespn + 'Random Number Generator' + endspn +
+windo + 'Random-String-Generator.html' + tlespn + 'Random String Generator' + endspn +
+windo + 'String-Randomizer.html' + tlespn + 'String Randomizer' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Combination / Permutation:</div>'+
+windo + 'Combination-Generator.html' + tlespn + 'Combination Generator' + endspn +
+windo + 'Line-Combination-Generator.html' + tlespn + 'Line Combination Generator' + endspn +
+windo + 'Permutation-Generator.html' + tlespn + 'Permutation Generator' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">Numeration Tools:</div>'+
+windo + 'Generate-List-of-Numbers.html' + tlespn + 'Generate List of Numbers' + endspn +
+windo + 'Number-Each-Line.html' + tlespn + 'Number Each Line' + endspn +
+windo + 'Online-Tally-Counter.html' + tlespn + 'Online Tally Counter' + endspn +
+'<div class="navdiv"></div>'+
+'<div class="navcat">All-in-One Tool:</div>'+
+windo + 'Text-Manipulation-Notepad.html' + tlespn + 'Text Manipulation Notepad' + endspn +
+'<div class="navdiv"></div>'+
+'<div style="padding:19px 0px 7px 10px;"><input type="button" style="margin-top:0px;" value="Close Tool Index" onClick="loadmenu(\'close\');" /></div>';
+resizepage();
+} else {
+document.getElementById('menu').style.zIndex = '-1';
+document.getElementById('menu').style.width = '0px';
+document.getElementById('menu').style.height = '0%';
+document.getElementById('menu').innerHTML = '';}}
+if(firstload == 'yes'){
+firstload = 'no';
+resizepage();}}
+
+window.onresize = resizepage;
+
+var adjeleheight_cache = 0;
+
+function resizepage(){
+var adj_ele = 'input';
+var client_width = document.body.parentNode.clientWidth;
+var client_height = document.body.parentNode.clientHeight;
+var footer_bottom = document.getElementById('footer').getBoundingClientRect().bottom;
+var adjele_height = document.getElementById(adj_ele).offsetHeight;
+if(adjeleheight_cache == 0) adjeleheight_cache = adjele_height;
+var adj_height = (client_height - footer_bottom) + adjele_height;
+if(adj_height >= adjeleheight_cache){
+document.getElementById(adj_ele).style.height = adj_height + 'px';
+} else {
+document.getElementById(adj_ele).style.height = adjeleheight_cache + 'px;';}}
+
+var sc_project = 10533904;
+var sc_invisible = 1;
+var sc_security = "1bf36e4a";
+var iamcounted = 'no';
+
+
+function privacy_policy(){
+var text =
+'~ Textmekanik.com Privacy Policy ~\n\n'+
+'Log Files: The Textmekanik.com webserver records log files as required by United States law. The information inside the log files includes: ip address, date/time stamp, referring page and user agent.\n\n'+
+'Cookies: Textmekanik.com use cookies to store information about visitors preferences, record user-specific information on which pages the user access or visit, customize Web page content based on visitors browser type or other information that the visitor sends via their browser.\n\n'+
+'Tools: All tool are built-with and functions-in Client Side JavaScripting, so only your computer will see or process your data input/output. Input/processing/output data is never transmitted over the internet and always resides within your computer. However, cloud operating systems could transmit your data into the cloud\'s system for processing but this has nothing to do with the Textmekanik.com webserver.\n\n'+
+'Sensitive Data Disclaimer: Don\'t trust any website with sensitive data, not even Textmekanik.com. Keep your sensitive data secure by keeping it to yourself.\n\n';
+alert(text);}
+</script>
+<script type="text/javascript">
+function loadfile(fileid,loadid){
+document.getElementById(loadid).value = 'Loading...';
+setTimeout(function(){loadfile2(fileid,loadid)},1000);}
+
+function loadfile2(fileid,loadid){
+if(!window.FileReader){
+document.getElementById(loadid).value = 'Your browser does not support HTML5 "FileReader" function required to open a file.';
+} else {
+fileis = document.getElementById(fileid).files[0];
+var fileredr = new FileReader();
+fileredr.onload = function(fle){
+var filecont = fle.target.result;
+document.getElementById(loadid).value = filecont;
+document.getElementById(loadid).onload = totalcount('yes');}
+fileredr.readAsText(fileis);}}
+
+function savefile(saveasid,saveid){
+if(!window.Blob){alert('Your browser does not support HTML5 "Blob" function required to save a file.');
+} else {
+var txtwrt = document.getElementById(saveid).value;
+if(document.getElementById('dos').checked == true) txtwrt = txtwrt.replace(/\n/g,'\r\n');
+var textblob = new Blob([txtwrt],{type:'text/plain'});
+var saveas =  document.getElementById(saveasid).value;
+var dwnlnk = document.createElement('a');
+dwnlnk.download = saveas;
+dwnlnk.innerHTML = "Download File";
+if (window.webkitURL != null){
+dwnlnk.href = window.webkitURL.createObjectURL(textblob);
+} else {
+dwnlnk.href = window.URL.createObjectURL(textblob);
+dwnlnk.onclick = destce;
+dwnlnk.style.display = 'none';
+document.body.appendChild(dwnlnk);}
+dwnlnk.click();}}
+function destce(event){document.body.removeChild(event.target);}
+
+function cleartext(){
+document.getElementById('input').value = '';
+document.getElementById('cur_pos').innerHTML = '0';
+document.getElementById('cur_word').innerHTML = '0';
+document.getElementById('cur_sent').innerHTML = '0';
+document.getElementById('cur_line').innerHTML = '0';
+document.getElementById('char_count').innerHTML = '0';
+document.getElementById('word_count').innerHTML = '0';
+document.getElementById('sent_count').innerHTML = '0';
+document.getElementById('line_count').innerHTML = '0';
+document.getElementById('sel_char_count').innerHTML = '0';
+document.getElementById('sel_word_count').innerHTML = '0';
+document.getElementById('sel_sent_count').innerHTML = '0';
+document.getElementById('sel_line_count').innerHTML = '0';
+document.getElementById('custom_count_query').value = '';
+document.getElementById('custom_count').value = '0';
+totalcount();}
+
+function SelectAll(id){
+document.getElementById(id).focus();
+document.getElementById(id).select();}
+
+function monofnt(){
+if(document.getElementById('monospc').checked == true){
+document.getElementById('input').style.fontFamily = 'lucida console, courier new, courier, monospace';
+} else {
+document.getElementById('input').style.fontFamily = 'arial';}}
+
+function wrdwrpis(wrapis){
+if(wrapis == 'on'){
+document.getElementById('input').setAttribute('wrap','soft');
+} else {
+document.getElementById('input').setAttribute('wrap','off');}}
+
+function sentcnt(text){
+var sentcont = text.replace(/\r/g,'').replace(/ \n/g,'\n') + '\n';
+var sentcont1 = sentcont.split('. ').length -1;
+var sentcont1b = sentcont.split('.\n').length -1;
+var sentcont2 = sentcont.split('! ').length -1;
+var sentcont2b = sentcont.split('!\n').length -1;
+var sentcont3 = sentcont.split('? ').length -1;
+var sentcont3b = sentcont.split('?\n').length -1;
+var countout = sentcont1 + sentcont1b + sentcont2 + sentcont2b + sentcont3 + sentcont3b;
+return countout;}
+
+function textcount(filecont){
+if(document.getElementById('skip_html').checked == true) filecont = filecont.replace(/<\S[^><]*>/gi,'');
+if(document.getElementById('linebreak_as_space').checked == false && document.getElementById('no_spaces').checked == false) chr_cnt = filecont.replace(/[\r\n]/g,'').length;
+if(document.getElementById('no_spaces').checked == true) chr_cnt = filecont.replace(/[\r\n\s]/g,'').length;
+if(document.getElementById('linebreak_as_space').checked == true) chr_cnt = filecont.replace(/\r/g,'').replace(/\n/g,' ').length;
+var wrdc = filecont.match(/\w+/g);
+if(wrdc != null) wrd_cnt = wrdc.length; else wrd_cnt = '0';
+snt_cnt = sentcnt(filecont);
+var linec = filecont.match(/\n/g);
+if(filecont != ''){
+if(linec != null) lne_cnt = linec.length + 1; else lne_cnt = '1';
+} else {lne_cnt = '0';}}
+
+function customcount(){
+var filecont = document.getElementById('input').value;
+if(document.getElementById('skip_html').checked == true) filecont = filecont.replace(/<\S[^><]*>/gi,'');
+var cst_cnt = 0;
+var customcntflags = 'gi';
+if(document.getElementById('case_sen').checked == true) customcntflags = 'g';
+var regxin = document.getElementById('custom_count_query').value.replace(/([.*+?^=!:${}()|\[\]\/\\])/g,'\\$1');
+if(regxin != ''){
+var customcnt = new RegExp(regxin,customcntflags);
+var custc = filecont.replace(/\r/g,'').match(customcnt);
+if(custc != null) cst_cnt = custc.length; else cst_cnt = '0';} else cst_cnt = '0';
+document.getElementById('custom_count').value = cst_cnt;}
+
+function totalcount(){
+var filecont = document.getElementById('input').value;
+textcount(filecont);
+document.getElementById('char_count').innerHTML = chr_cnt;
+document.getElementById('word_count').innerHTML = wrd_cnt;
+document.getElementById('sent_count').innerHTML = snt_cnt;
+document.getElementById('line_count').innerHTML = lne_cnt;
+if(firstload == 'no') count_me();}
+
+function cpcount(blr){
+var textbox = document.getElementById('input');
+var tocarpos = '';
+if(blr != 'blur'){
+tocarpos = textbox.value.substring(0,textbox.selectionStart);}
+cntonsel('stop');
+textcount(tocarpos);
+document.getElementById('cur_pos').innerHTML = chr_cnt;
+document.getElementById('cur_word').innerHTML = wrd_cnt;
+document.getElementById('cur_sent').innerHTML = snt_cnt;
+document.getElementById('cur_line').innerHTML = lne_cnt;
+column_count();}
+
+function column_count(){
+var textbox = document.getElementById('input');
+var textboxlen = textbox.value.length;
+var textboxarr = textbox.value.split('\n');
+var linecnt = textboxarr.length;
+var linecnt = textboxarr.length;
+var selection_start = textbox.selectionEnd;
+var tocarpos = textbox.value.substring(0,selection_start);
+var tocurline = tocarpos.split('\n');
+tocurline.pop();
+var tocurlinelen = tocurline.join('\n').length;
+if(tocurline.length > 0) tocurlinelen = tocurlinelen + 1;
+tocarpos = textbox.value.substring(tocurlinelen,selection_start);
+if(document.activeElement.id != 'input') tocarpos = '';
+document.getElementById('colm_count').innerHTML = tocarpos.length;}
+
+var mouseblock = 'no';
+
+function cntonsel(fun){
+if(mouseblock == 'no'){
+var textbox = document.getElementById('input');
+if(fun == 'start') textbox.onmousemove = cntseled;
+if(fun == 'stop') textbox.onmousemove = null;
+} else mouseblock = 'no';}
+
+function cntseled(){
+var textbox = document.getElementById('input');
+var countselectedtext = '';
+countselectedtext = textbox.value.substring(textbox.selectionStart,textbox.selectionEnd);
+textcount(countselectedtext);
+document.getElementById('sel_char_count').innerHTML = chr_cnt;
+document.getElementById('sel_word_count').innerHTML = wrd_cnt;
+document.getElementById('sel_sent_count').innerHTML = snt_cnt;
+document.getElementById('sel_line_count').innerHTML = lne_cnt;}
+
+function displayoptions(diste){
+if(diste == 'cp'){
+if(document.getElementById('dis_cp').checked == false){
+document.getElementById('curpos').style.display = 'none';
+} else {
+document.getElementById('curpos').style.display = 'table-row';}
+resizepage();}
+if(diste == 'sc'){
+if(document.getElementById('dis_sc').checked == false){
+document.getElementById('scnts').style.display = 'none';
+} else {
+document.getElementById('scnts').style.display = 'table-row';}
+resizepage();}
+if(diste == 'cc'){
+if(document.getElementById('dis_cc').checked == false){
+document.getElementById('cc_display').style.display = 'none';
+} else {
+document.getElementById('cc_display').style.display = 'block';}
+resizepage();}}
+
+function wrdfrq(fun){
+if(fun == 'open'){
+var textin = document.getElementById('input').value.toLowerCase();
+if(document.getElementById('skip_html').checked == true) textin = textin.replace(/<\S[^><]*>/gi,'');
+var wrdarr = textin.match(/\b(\w|')+\b/g);
+var wrdarrlen = wrdarr.length;
+var dupsremarr = new Array();
+var dupsremarrcnt = 0;
+var hash = {};
+var xkey = '';
+var hkey = '';
+var wrdcht = 0;
+var wrdcntpct = 0;
+for(var x=0;x<wrdarrlen;x++){
+xkey = wrdarr[x];
+hkey = ' ' + xkey;
+if(hash[hkey] == null || xkey == '') {hash[hkey] = x+1; dupsremarr[dupsremarrcnt] = xkey; dupsremarrcnt++;}}
+wrdarr = ' ' + wrdarr.join(' ') + ' ';
+var word_list = dupsremarr.sort().join('\n');
+for(var x=0;x<dupsremarrcnt;x++){
+wrdcht = (wrdarr.split(' ' + dupsremarr[x] + ' ').length) - 1;
+wrdcntpct = (wrdcht / wrdarrlen) * 100;
+wrdcntpct = parseFloat(wrdcntpct).toFixed(2);
+dupsremarr[x] = '<tr class="wfctr" id="find_' + dupsremarr[x] + '"><td class="wfctd">' + dupsremarr[x] + '</td><td class="wfctd">' + wrdcht + '</td><td class="wfctd">' + wrdcntpct + '%</td></tr>';}
+dupsremarr = dupsremarr.sort().sort(function(a,b) {a = ((a.split('</td><td class="wfctd">'))[1])*1; b = ((b.split('</td><td class="wfctd">'))[1])*1; return b-a});
+document.getElementById('wrdfrq').style.zIndex = '2';
+document.getElementById('wrdfrq').style.width = '350px';
+document.getElementById('wrdfrq').style.height = '100%';
+document.getElementById('wrdfrq').style.overflow = 'scroll';
+document.getElementById('wrdfrq').innerHTML =
+'<input type="button" value="Close" onClick="wrdfrq(\'close\');" style="margin:10px 0px 0px 10px;" />'+
+'<div style="margin:10px 0px 0px 10px;"><input type="text" id="wordtofind" placeholder="Enter word." value="" size="15" style="margin:0px;" /> <input type="button" value="Find" onClick="findword();" style="margin:0px;" /></div>'+
+'<div style="margin:10px 10px 0px 10px;">'+
+'<table>\n'+
+'<tr class="wfctr"><td class="wfctd">word</td><td class="wfctd">count</td><td class="wfctd">percent</td></tr>\n'+
+dupsremarr.join('\n') +
+'</table>\n'+
+'<div style="padding:3px 0px 0px 0px;">\n'+
+'List of\n'+
+dupsremarrcnt +
+'\nunique words:\n'+
+'<textarea id="word_list" style="width:100%; margin:3px 0px 7px 0px;" rows="10" wrap="off">'+
+word_list +
+'</textarea>\n'+
+'<input type="button" value="Select All" onclick="SelectAll(\'word_list\');" />\n'+
+'<div style="padding:4px 0px 0px 0px;" >\n'+
+'<input type="button" value="Close" onClick="wrdfrq(\'close\');"/>'+
+'</div>\n'+
+'</div>\n'+
+'</div>';}
+if(fun == 'close'){
+document.getElementById('wrdfrq').style.zIndex = '-1';
+document.getElementById('wrdfrq').style.width = '0px';
+document.getElementById('wrdfrq').style.height = '0px';
+document.getElementById('wrdfrq').style.overflow = 'hidden';
+document.getElementById('wrdfrq').innerHTML = '';}}
+
+var lastfind = '';
+
+function findword(){
+var wordtf = document.getElementById('wordtofind').value.toLowerCase();
+if(document.getElementById('find_' + wordtf)){
+if(lastfind != '') document.getElementById('find_' + lastfind).style.backgroundColor = '#FFFFFF';
+document.getElementById('find_' + wordtf).scrollIntoView();
+document.getElementById('find_' + wordtf).style.backgroundColor = '#FFFF99';
+lastfind = wordtf;}}
+</script>
+</head>
+<body spellcheck="false">
+<div id="conbtn"></div>
+<div id="menu"></div>
+<div id="wrdfrq"></div>
+<div id="bodypadding">
+<h1><input type="button" style="margin-top:0px;" value="Open Tool Index" onClick="loadmenu('open');" /> Tool: Count Characters, Words, Sentences, Lines</h1>
+<div style="padding:2px 0px 0px 0px;">
+Display:
+<input type="checkbox" id="dis_cp" onclick="setTimeout('displayoptions(\'cp\')',100);" />Cursor position.
+<input type="checkbox" id="dis_sc" onclick="setTimeout('displayoptions(\'sc\')',100);" />Selected count.
+<input type="checkbox" id="dis_cc" onclick="setTimeout('displayoptions(\'cc\')',100);" />Custom count.
+</div>
+<div style="padding:8px 0px 7px 0px;">
+<table id="countdisplay">
+<tr>
+<td></td>
+<td style="width:65px;">Character</td>
+<td style="width:65px;">Word</td>
+<td style="width:65px;">Sentence</td>
+<td style="width:65px;">Line</td>
+<td style="width:65px;">Column</td>
+</tr><tr id="curpos" style="display:none;">
+<td>Cursor position:</td>
+<td><span id="cur_pos">0</span></td>
+<td><span id="cur_word">0</span></td>
+<td><span id="cur_sent">0</span></td>
+<td><span id="cur_line">0</span></td>
+<td><span id="colm_count">0</span></td>
+</tr><tr id="tcnts" style="display:table-row;">
+<td>Total count is:</td>
+<td><span id="char_count">0</span></td>
+<td><span id="word_count">0</span></td>
+<td><span id="sent_count">0</span></td>
+<td><span id="line_count">0</span></td>
+<td></td>
+</tr><tr id="scnts" style="display:none;">
+<td>Selected count is:</td>
+<td><span id="sel_char_count">0</span></td>
+<td><span id="sel_word_count">0</span></td>
+<td><span id="sel_sent_count">0</span></td>
+<td><span id="sel_line_count">0</span></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div id="cc_display" style="display:none; padding:0px 0px 4px 0px;">
+<input type="text" id="custom_count_query" placeholder="Enter custom count item here." value="" style="width:400px;" onkeyup="if(document.getElementById('inst').checked==true){customcount();}" onpaste="if(document.getElementById('inst').checked==true){setTimeout('customcount()',100);}" />
+<input type="text" id="custom_count" value="1" style="width:85px;" READONLY />&nbsp;
+<input type="checkbox" title="Make custom count case sensitive." onclick="customcount();" id="case_sen" />Case sensitive.
+</div>
+<div style="padding:0px 0px 7px 0px;">
+<input type="button" value="Count Text" onClick="totalcount('yes');" />&nbsp;
+<input type="checkbox" title="" id="inst" onClick="totalcount('yes');" CHECKED />Instant.
+<span style="display:inline-block; padding:3px 3px 3px 3px; background-color:#FDCDCD;">Do not count
+<input type="checkbox" title="Do not count spaces." id="no_spaces" onclick="totalcount();">spaces
+<input type="checkbox" title="Do not count HTML tags." id="skip_html" onclick="totalcount();">HTML tags.</span>
+<input type="checkbox" title="Count line breaks as spaces." id="linebreak_as_space" onclick="totalcount();">Count line breaks as spaces.
+<input type="button" title="Word frequency analysis." value="Word Frequency" onClick="if(document.getElementById('input').value != '') wrdfrq('open');" />
+<input type="button" title="Select All Text" value="S" onClick="SelectAll('input');" />
+<input type="button" title="Clear All Text" value="C" onClick="cleartext();" />
+</div>
+<textarea id="input" wrap="off" style="width:100%" rows="4" onclick="if(document.getElementById('dis_cp').checked==true) cpcount('');" onkeyup="if(document.getElementById('inst').checked==true) {if(document.getElementById('dis_cp').checked == true) cpcount(''); totalcount();}" onpaste="if(document.getElementById('inst').checked==true) mouseblock = 'yes'; setTimeout('totalcount(\'\')',250);" oncut="if(document.getElementById('inst').checked==true) setTimeout('totalcount(\'\')',250);" onmousedown="if(document.getElementById('dis_sc').checked==true) cntonsel('start');" onmouseup="if(document.getElementById('dis_sc').checked==true) cntonsel('stop');" onblur="if(document.getElementById('inst').checked==true && document.getElementById('dis_cp').checked==true) cpcount('blur');">
+Enter text to be counted here. Check "Instant" to enable counting as you type.
+Check "Cursor position." to instantly count to your cursor's position. Results will display in the "Cursor position" field.
+Check "Selected count." to instantly count Select/highlight text. Results will display in the "Selected count is" field.
+Check "Custom count." to instantly count any text entered into the "Enter custom count item here." field.
+Click "Word Frequency" for word frequency analysis containing each word, it's count, frequency percentage and a list of all unique words.
+Line break formatting \r and/or \n will not be counted as characters but can be counted as a space by checking "Count line breaks as spaces."
+Privacy of Data: This tool is built-with and functions-in Client Side JavaScripting, so only your computer will see or process your data input/output.</textarea>
+<div style="padding:7px 0px 0px 0px;">
+<input type="button" value="Load File" /><input type="file" id="file" onChange="setTimeout('loadfile(\'file\',\'input\')',100);" />
+<input type="button" value="Save As" onClick="savefile('saveas','input');" />
+<input type="text" id="saveas" value="output.txt" style="width:90px;" />&nbsp;
+<input type="radio" name="sfrmt" id="unix" CHECKED />Unix
+<input type="radio" name="sfrmt" id="dos" />Dos.
+Wrap is <input type="radio" name="radbtn" id="wrapbtnl" onClick="wrdwrpis('on');" />on
+<input type="radio" name="radbtn" id="wrapbtnr" onClick="wrdwrpis('off');" CHECKED />off.
+<input type="checkbox" id="monospc" onClick="monofnt();" />Monospace font.
+</div>
+<div id="footer">
+Tools provided as-is, without warranty of any kind and used at your own risk. &copy;2016 <a href="index.html" style="color:#0000FF;">Textmekanik.com</a> |
+<span style="color:#0000FF; text-decoration:underline; cursor:pointer;" onclick="privacy_policy();">Privacy</span>
+</div>
+</div>
+<script type="text/javascript">totalcount(); loadmenu('close');</script>
+<script type="text/javascript" id="count_me"></script>
+<!-- GoStats JavaScript Based Code -->
+<script type="text/javascript" src="http://gostats.com/js/counter.js"></script>
+<script type="text/javascript">_gos='c4.gostats.com';_goa=411053;
+_got=6;_goi=1;_gol='Get a free invisible counter from GoStats';_GoStatsRun();</script>
+<noscript><a target="_blank" title="Get a free invisible counter from GoStats" 
+href="http://gostats.com"><img alt="Get a free invisible counter from GoStats" 
+src="http://c4.gostats.com/bin/count/a_411053/t_6/i_1/counter.png" 
+style="border-width:0" /></a></noscript>
+<!-- End GoStats JavaScript Based Code -->
+</body>
+</html>

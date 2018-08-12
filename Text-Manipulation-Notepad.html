@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- "Text Manipulation Notepad" is Copyright 2016 Textmekanik.com -->
+<title>Text Manipulation Notepad - Online Plain Text Editor</title>
+<meta charset="UTF-8" />
+<link rel="canonical" href="Text-Manipulation-Notepad.html" />
+<style type="text/css">html {height:100%;}
+body {height:100%; margin:0px; padding:0px; font-family:arial; font-size:16px; line-height:1; background-color:#E1E1D2;}
+h1 {display:block; font-size:16px; font-weight:bold; margin:0px; padding:0px;}
+textarea {display:block; width:96%; margin:0px; padding:6px; overflow:scroll; font-family:arial; font-size:16px; line-height:1.2; color:#000000; background-color:#FFFFFF; border:1px solid #000000; outline:none; resize:none; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; border-radius:12px 4px 4px 4px;}
+input {outline:none; resize:none;}
+input[type='text'] {width:auto; height:auto; margin:0px 0px 3px 0px; padding:6px; font-family:arial; font-size:16px; color:#000000; background-color:#FFFFFF; border:1px solid #000000; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; border-radius:12px;}
+input[type='radio'] {margin:0px; padding:0px; font-size:16px;}
+input[type='checkbox'] {margin:0px; padding:0px; font-size:16px;}
+input[type='button']::-moz-focus-inner {border:0;}
+input[type='button'] {width:auto; height:auto; margin:3px 0px 3px 0px; padding:6px 8px 6px 8px; font-family:arial; font-size:16px; font-weight:bold; color:#000000; border:1px solid #000000; background-color:#FFFFFF; cursor:pointer; border-radius:16px; box-shadow:inset 0 0 6px #0000FF;}
+input[type='button']:hover {box-shadow:inset 0 0 6px #00CC00;}
+input[type='file'] {display:inline-block; width:86px; height:30px; vertical-align:middle; border-radius:12px; overflow:hidden; padding:0px; margin:0px 0px 0px -86px; -moz-opacity:0; opacity:0; cursor:pointer;}
+input[type='file']::-webkit-file-upload-button {cursor:pointer;}
+div {-moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
+#controls {position:absolute; top:0px; left:0px; width:100%; line-height:1.2; font-size:16px; background-color:#E1E1D2;}
+#control_box {padding:8px 10px 8px 10px; -webkit-touch-callout:none; -webkit-user-select:none; -khtml-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;}
+#nav_functions {position:absolute; top:0px; left:0px; width:350px; overflow:auto; background-color:#E1E1D2;}
+#nav_functions_box {padding:6px 6px 6px 6px;}
+#functions {position:absolute; top:50%; left:0px; width:350px; height:70%; overflow:auto; background-color:#E1E1D2;}
+#functions_box {padding:0px 6px 6px 6px;}
+#line_box_div {position:absolute; top:0px; left:0px; display:block; width:56px; margin:0px; padding:0px 0px 0px 0px; overflow:hidden; overflow-x:scroll; white-space:pre; text-align:right; font-family:arial; font-size:16px; letter-spacing:0px; line-height:1.5; color:#777777; border:0px; background-color:#D8D8D8;}
+#text_box {position:absolute; top:0px; left:56px; display:block; width:96%; margin:0px; padding:0px 0px 0px 3px; overflow:scroll; font-family:arial; font-size:16px; letter-spacing:0px; line-height:1.5; border:0px; background-color:transparent;}
+#text_box_div {position:absolute; top:0px; left:56px; z-index:-1; display:block; width:96%; margin:0px; padding:0px 0px 0px 3px; overflow:scroll; white-space:pre-wrap; word-wrap:break-word; font-family:arial; font-size:16px; letter-spacing:0px; line-height:1.5; border:0px; color:transparent; background-color:#FFFFFF;}
+#line_dummy_txt {position:absolute; top:0px; left:0px; z-index:-10; display:block; width:10px; margin:0px; padding:0px; overflow:hidden; overflow-x:scroll; font-family:arial; font-size:16px; letter-spacing:0px; line-height:1.5; border:0px; color:transparent; background-color:#FFFFFF;}
+#line_dummy_div {position:absolute; top:0px; left:0px; z-index:-10; display:block; margin:0px; padding:0px; overflow:hidden; white-space:pre-wrap; font-family:arial; font-size:16px; letter-spacing:0px; line-height:1.5; border:0px; color:transparent; background-color:#FFFFFF;}
+#text_box_dummy {position:absolute; top:0px; left:0px; z-index:-10; display:block; width:96%; height:100px; margin:0px; padding:0px 0px 0px 3px; overflow:scroll; font-family:arial; font-size:16px; letter-spacing:0px; line-height:150px; border:0px; color:transparent; background-color:transparent;}
+#text_box_div_dummy {position:absolute; top:0px; left:0px; z-index:-10; display:block; width:96%; height:100px; margin:0px; padding:0px 0px 0px 3px; overflow:scroll; white-space:pre-wrap; word-wrap:break-word; font-family:arial; font-size:16px; letter-spacing:0px; line-height:150px; border:0px; color:transparent; background-color:transparent;}
+a.control_text_link {cursor:pointer; color:#0000FF; text-decoration:none;}
+a.control_text_link:hover {text-decoration:underline;}
+span.control_text {cursor:pointer; color:#0000FF;}
+span.control_text:hover {text-decoration:underline;}
+span.hlct {display:inline-block; width:65px; margin:2px 0px 2px 0px; padding:1px 6px 1px 6px; background-color:#FFFFFF; border:1px solid #000000; border-radius:10px;}
+div.hr {width:100%; height:2px; margin:10px 0px 10px 0px; background-color:#000000;}
+div.subtool {width:100%; margin:10px 0px 0px 0px; padding:3px; font-style:italic; color:#FFFFFF; background-color:#505050; border-radius:6px;}
+div.tptp_5 {padding:5px 0px 0px 0px;}
+span.cd {cursor:default;}
+span.spcar {display:inline-block; padding:5px 10px 5px 10px; font-size:18px; cursor:default;}
+span.spcar:hover {background-color:#FFFF66;}
+#wrdfrq {position:absolute; z-index:-6; left:0px; top:0px; width:0px; width:0px; height:0px; overflow:auto; background-color:#E1E1D2; border-right:2px solid #000000;}
+table {border-collapse:collapse;}
+table,td {padding:0px;}
+tr.wfctr {background-color:#FFFFFF;}
+td.wfctdhl {background-color:#FFFF00;}
+td.wfctd {padding:5px; border:1px solid #000000;}
+#jtbox {display:inline-block; margin:5px 0px 0px 0px; padding:2px 6px 2px 6px; font-family:arial; font-size:16px; background-color:#FFFFFF; border:1px solid #000000; outline:none; border-radius:12px 4px 4px 4px;}
+option.padng {padding:2px 8px 2px 8px;}
+</style>
+<script type="text/javascript">
+firstload = 'yes';
+var mouseblock = 'no';
+function contentsizer(){
+if(firstload == 'yes'){
+settbopts();}
+var functions_width = 350;
+var client_width = document.body.parentNode.clientWidth - functions_width;
+var client_height = document.body.parentNode.clientHeight;
+var controls_height = document.getElementById('controls').offsetHeight;
+var nav_functions_height = document.getElementById('nav_functions').offsetHeight;
+var line_dummy_div_width = document.getElementById('line_dummy_div').offsetWidth;
+document.getElementById('controls').style.width = client_width + 'px';
+document.getElementById('nav_functions').style.left = client_width + 'px';
+document.getElementById('functions').style.left = client_width + 'px';
+document.getElementById('functions').style.height = (client_height - nav_functions_height) + 'px';
+document.getElementById('functions').style.top = nav_functions_height + 'px';
+document.getElementById('line_box_div').style.width = line_dummy_div_width + 'px';
+document.getElementById('line_box_div').style.height = (client_height - controls_height) + 'px';
+document.getElementById('line_box_div').style.top = controls_height + 'px';
+document.getElementById('text_box').style.left = line_dummy_div_width + 'px';
+document.getElementById('text_box').style.width = (client_width - line_dummy_div_width) + 'px';
+document.getElementById('text_box_dummy').style.width = (client_width - line_dummy_div_width) + 'px';
+document.getElementById('text_box').style.height = (client_height - controls_height) + 'px';
+document.getElementById('text_box').style.top = controls_height + 'px';
+document.getElementById('text_box_div').style.left = line_dummy_div_width + 'px';
+document.getElementById('text_box_div').style.width = (client_width - line_dummy_div_width) + 'px';
+document.getElementById('text_box_div_dummy').style.width = (client_width - line_dummy_div_width) + 'px';
+document.getElementById('text_box_div').style.height = (client_height - controls_height) + 'px';
+document.getElementById('text_box_div').style.top = controls_height + 'px';
+if(firstload == 'yes'){
+var moz_adj = document.getElementById('line_dummy_txt').scrollWidth - document.getElementById('line_dummy_div').offsetWidth;
+document.getElementById('text_box_div').style.padding = '0px ' + moz_adj + 'px 0px ' + (moz_adj + 3) + 'px';
+document.getElementById('text_box_div_dummy').style.padding = '0px ' + moz_adj + 'px 0px ' + (moz_adj + 3) + 'px';
+firstload = 'no';}}
+</script>
+<script type="text/javascript">
+function readCookie(name){
+var nameEQ = name + "=";
+var ca = document.cookie.split(';');
+for(var i=0;i < ca.length;i++){
+var c = ca[i];
+while(c.charAt(0)==' ') c = c.substring(1,c.length);
+if(c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);}
+return 0;}
+
+function createCookie(name,value,days){
+if(days){
+var date = new Date();
+date.setTime(date.getTime()+(days*24*60*60*1000));
+var expires = ';expires=' + date.toGMTString();}
+else var expires = '';
+document.cookie = name + '=' + value + expires + ';path=/';}
+
+var tocarposcnt = 'no';
+var lhcolr = '#FFFFCC';
+
+//Sideline Count
+
+var lne_cnt_cache = 0;
+var lne_cnt_cache_override = 'no';
+
+function load_textbox_div(){
+var textin = document.getElementById('text_box').value.replace(/\r/g,'').replace(/&/g,'&#38;').replace(/</g,'&#60;').replace(/>/g,'&#62;');
+if(document.getElementById('high_this').value != '') textin = high_text(textin);
+var textinarr = textin.split('\n');
+var textinarrlen = textinarr.length;
+var textoutarr = new Array();
+var linecont = '';
+for(var x=0;x<textinarrlen;x++){
+linecont = textinarr[x];
+if(linecont == '') linecont = ' ';
+textoutarr[x] = '<div class="tbd">' + linecont + '</div>';}
+document.getElementById('text_box_div_dummy').innerHTML = textoutarr[textinarrlen - 1];
+var textout = textoutarr.join('');
+document.getElementById('text_box_div').innerHTML = textout;
+if(lne_cnt_cache != lne_cnt || lne_cnt_cache_override == 'yes') document.getElementById('text_box_div').onload = side_line_count();
+lne_cnt_cache_override = 'no';
+lne_cnt_cache = lne_cnt;}
+
+function scroll_textbox(){
+var scroll_top = document.getElementById('text_box').scrollTop;
+document.getElementById('line_box_div').scrollTop = scroll_top;
+document.getElementById('text_box_div').scrollTop = scroll_top;
+if(wrap_is == 'off'){
+var scroll_left = document.getElementById('text_box').scrollLeft;
+document.getElementById('text_box_div').scrollLeft = scroll_left;}}
+
+function side_line_count(){
+var line_count = document.getElementById('text_box').value.split('\n').length;
+var total_height = document.getElementById('text_box_div').offsetHeight;
+var line_height = document.getElementById('line_dummy_div').offsetHeight;
+var line_count_arr = new Array();
+var offset_top = 0;
+var count_fill_cnt = 0;
+var count_fill = '';
+var offset_top_cache = 0;
+var line_val = 'zlgrkggbbyf';
+for(var x=0;x<=line_count;x++){
+count_fill = '';
+if(x < line_count) offset_top = document.getElementsByClassName('tbd')[x].offsetTop;
+if(x == line_count){
+count_fill_cnt = Math.round(document.getElementById('text_box_div_dummy').scrollHeight / line_height);
+} else {
+count_fill_cnt = Math.round((offset_top - offset_top_cache) / line_height);}
+for(var y=0;y<count_fill_cnt;y++){
+count_fill = count_fill + '\n';}
+if(x == 0) line_count_arr[x] = '1 ';
+if(x > 0 && x < line_count) line_count_arr[x] = count_fill + (x + 1) + ' ';
+if(x == line_count) line_count_arr[x] = count_fill;
+offset_top_cache = offset_top;}
+document.getElementById('line_box_div').innerHTML = line_count_arr.join('');
+scroll_textbox();}
+
+var tbd_num = 0;
+
+function line_highlight(fun){
+var bbc = 'no';
+if(fun) bbc = fun;
+var textbox = document.getElementById('text_box');
+var tocarpos = '';
+if(document.activeElement.id == 'text_box'){
+tocarpos = textbox.value.substring(0,textbox.selectionStart);
+cntonsel('stop');
+tocarposcnt = tocarpos.split('\n').length - 1;} else tocarposcnt = 'no';
+if(!document.getElementsByClassName('tbd')[tbd_num]) tbd_num = 'no';
+if(tbd_num != 'no') document.getElementsByClassName('tbd')[tbd_num].style.backgroundColor = document.getElementById('text_box_div').style.backgroundColor;
+tbd_num = tocarposcnt;
+if(!document.getElementsByClassName('tbd')[tbd_num]) tbd_num = 'no';
+if(tbd_num != 'no') document.getElementsByClassName('tbd')[tbd_num].style.backgroundColor = lhcolr;
+if(bbc == 'no') column_count();}
+
+var tbdheight_cache = 'start';
+var textboxlen_cache = 'start';
+var linecnt_cache = 'start';
+
+function column_count(){
+var textbox = document.getElementById('text_box');
+var textboxlen = textbox.value.length;
+var textboxarr = textbox.value.split('\n');
+var linecnt = textboxarr.length;
+var selection_start = textbox.selectionEnd;
+var tocarpos = textbox.value.substring(0,selection_start);
+var tocurline = tocarpos.split('\n');
+tocurline.pop();
+var tocurlinelen = tocurline.join('\n').length;
+if(tocurline.length > 0) tocurlinelen = tocurlinelen + 1;
+tocarpos = textbox.value.substring(tocurlinelen,selection_start);
+if(document.activeElement.id != 'text_box') tocarpos = '';
+document.getElementById('col_cnt').value = tocarpos.length;
+document.getElementById('text_box_dummy').value = textboxarr[tocurline.length];
+var tbdheight = document.getElementById('text_box_dummy').scrollHeight;
+if(tbdheight_cache != tbdheight) lne_cnt_cache_override = 'yes';
+if(lne_cnt_cache != lne_cnt) lne_cnt_cache_override = 'yes';
+if(textboxlen_cache != 'start' && linecnt_cache != 'start' && textboxlen_cache == textboxlen && linecnt_cache == linecnt) lne_cnt_cache_override = 'no';
+if(document.getElementById('high_this').value != '') lne_cnt_cache_override = 'yes';
+if(lne_cnt_cache_override == 'yes'){
+load_textbox_div();
+line_highlight('yes');}
+tbdheight_cache = tbdheight;
+textboxlen_cache = textboxlen;
+linecnt_cache = linecnt;}
+
+var fhcolr = '#FFFF00';
+var nhcolr = '#AAFF99';
+
+function high_text(text){
+var highthis = document.getElementById('high_this').value.replace(/\r/g,'').replace(/&/g,'&#38;').replace(/</g,'&#60;').replace(/>/g,'&#62;');
+if(document.getElementById('high_regexp').checked == false) highthis = highthis.replace(/([.*+?^=!:${}()|\[\]\/\\])/g,'\\$1');
+var flags = 'gi';
+if(document.getElementById('high_case_sen').checked == true) flags = 'g';
+var killfun = 'no';
+try{var regx = new RegExp('(' + highthis + ')',flags);}
+catch(err){
+alert('Something is incorrect (' + err + ') within your regular expression.\nBe sure special characters .*+?^=!:${}()|\\ used as literals have been escaped with a backslash.');
+killfun = 'yes';}
+if(killfun == 'no'){
+var hcount = text.match(regx);
+if(hcount != null && highthis != '') hcount = hcount.length; else hcount = '0';
+document.getElementById('high_found').value = hcount;
+text = text.replace(regx,'<span class="highlighted" style="background-color:' + fhcolr + '">' + '$1' + '</span>');
+return text;}}
+
+var foundcnt = 0;
+var foundcnt_cache = 'start';
+
+function find_next(){
+var found = document.getElementById('high_found').value*1;
+if(found > 0){
+if(foundcnt_cache != 'start') document.getElementsByClassName('highlighted')[foundcnt_cache].style.backgroundColor = fhcolr;
+if(foundcnt == found){
+foundcnt = 0;
+foundcnt_cache = 'start';}
+document.getElementsByClassName('highlighted')[foundcnt].style.backgroundColor = nhcolr;
+document.getElementsByClassName('highlighted')[foundcnt].scrollIntoView();
+scroll_to_textbox_div();
+document.getElementById('next_cnt').value = foundcnt + 1;
+foundcnt_cache = foundcnt;
+foundcnt++;}}
+
+function scroll_to_textbox_div(){
+var scroll_top = document.getElementById('text_box_div').scrollTop;
+document.getElementById('line_box_div').scrollTop = scroll_top;
+document.getElementById('text_box').scrollTop = scroll_top;
+if(wrap_is == 'off'){
+var scroll_left = document.getElementById('text_box_div').scrollLeft;
+document.getElementById('text_box').scrollLeft = scroll_left;}}
+
+//Undo
+
+var undoarr = new Array();
+var undoarrcnt = 0;
+
+function saveundo(){
+var undoin = document.getElementById('text_box').value;
+if(undoarrcnt < 21){
+undoarr[undoarrcnt] = undoin;
+undoarrcnt++;
+} else {
+undoarr = undoarr.concat(new Array(undoin)); undoarr.shift();}}
+
+function undo(){
+lne_cnt_cache_override = 'yes';
+var undoarrlen = undoarr.length;
+if(undoarrlen > 0){
+if(undoarrlen > 1){
+document.getElementById('text_box').value = undoarr[undoarrlen - 1];
+undoarr.pop();
+undoarrcnt--;
+} else {
+document.getElementById('text_box').value = undoarr[0];
+alert('No more undos.');}
+setTimeout('totalcount(\'no\');',250);}
+foundcnt = 0;
+foundcnt_cache = 'start';
+document.getElementById('next_cnt').value = '0';}
+
+//Load-Save File
+
+function loadfile(loadid){
+saveundo();
+if(!window.FileReader){alert('Your browser does not support HTML5 "FileReader" function required to open a file.');
+document.getElementById('loadingmessage').innerHTML = '';
+} else {
+fileis = document.getElementById('file').files[0];
+var fileredr = new FileReader();
+fileredr.onload = function(fle){
+var filecont = fle.target.result;
+document.getElementById(loadid).value = filecont;
+document.getElementById(loadid).onload = fileloaded();}
+fileredr.readAsText(fileis);}}
+
+function fileloaded(){
+lne_cnt_cache_override = 'yes';
+document.getElementById('loadingmessage').innerHTML = '';
+totalcount();
+foundcnt = 0;
+foundcnt_cache = 'start';
+document.getElementById('next_cnt').value = '0';}
+
+function savefile(saveid){
+if(!window.Blob){alert('Your browser does not support HTML5 "Blob" function required to save a file.');
+} else {
+var txtwrt = document.getElementById(saveid).value;
+if(document.getElementById('dos').checked == true) txtwrt = txtwrt.replace(/\n/g,'\r\n');
+var textblob = new Blob([txtwrt],{type:'text/plain'});
+var saveas =  document.getElementById('saveas').value;
+var dwnlnk = document.createElement('a');
+dwnlnk.download = saveas;
+dwnlnk.innerHTML = "Download File";
+if (window.webkitURL != null){
+dwnlnk.href = window.webkitURL.createObjectURL(textblob);
+} else {
+dwnlnk.href = window.URL.createObjectURL(textblob);
+dwnlnk.onclick = destce;
+dwnlnk.style.display = 'none';
+document.body.appendChild(dwnlnk);}
+dwnlnk.click();}}
+function destce(event){document.body.removeChild(event.target);}
+
+//Textbox Settings
+
+function readCookie(name){
+var nameEQ = name + '=';
+var ca = document.cookie.split(';');
+for(var i=0;i < ca.length;i++){
+var c = ca[i];
+while(c.charAt(0) == ' ') c = c.substring(1,c.length);
+if(c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);}
+return null;}
+
+function createCookie(name,value,days){
+var date = new Date();
+date.setTime(date.getTime()+(days*24*60*60*1000));
+var expires = '; expires=' + date.toGMTString();
+document.cookie = name + '=' + value + expires + '; path=/';}
+
+function settbopts(){
+lne_cnt_cache_override = 'yes';
+var rsplchk = readCookie('spl_chk');
+var rwrapis = readCookie('wrap_is');
+var rfontsize = readCookie('font_size');
+var rletspcw = readCookie('letspcw');
+var rletspcd = readCookie('letspcd');
+var rlinspcw = readCookie('linspcw');
+var rlinspcd = readCookie('linspcd');
+var rfontcolor = readCookie('font_color');
+var rbackcolor = readCookie('back_color');
+var rlcfontcolor = readCookie('lc_font_color');
+var rlcbackcolor = readCookie('lc_back_color');
+var rlhcolor = readCookie('lh_color');
+var rfhcolor = readCookie('fh_color');
+var rnhcolor = readCookie('nh_color');
+var rmonofont = readCookie('mono_font');
+if(rsplchk != null){
+if(rsplchk == 'on'){
+document.getElementById('splcon').checked = true;
+document.getElementById('splcoff').checked = false;}
+if(rsplchk == 'off'){
+document.getElementById('splcon').checked = false;
+document.getElementById('splcoff').checked = true;}
+nspck(rsplchk,'no');}
+if(rwrapis != null){
+if(rwrapis == 'on'){
+document.getElementById('wrapbtnl').checked = true;
+document.getElementById('wrapbtnr').checked = false;}
+if(rwrapis == 'off'){
+document.getElementById('wrapbtnl').checked = false;
+document.getElementById('wrapbtnr').checked = true;}
+wrdwrpis(rwrapis,'no');}
+if(rfontsize != null){
+document.getElementById('font_size').value = rfontsize;
+fontsize('no');}
+if(rletspcw != null){
+document.getElementById('letspcw').value = rletspcw;
+document.getElementById('letspcd').value = rletspcd;
+letterspacing('no');}
+if(rlinspcw != null){
+document.getElementById('linspcw').value = rlinspcw;
+document.getElementById('linspcd').value = rlinspcd;
+linespacing('no');}
+if(rfontcolor != null){
+document.getElementById('font_color').value = rfontcolor;
+fontcolor('no');}
+if(rbackcolor != null){
+document.getElementById('back_color').value = rbackcolor;
+backcolor('no');}
+if(rlcfontcolor != null){
+document.getElementById('lc_font_color').value = rlcfontcolor;
+lcfontcolor('no');}
+if(rlcbackcolor != null){
+document.getElementById('lc_back_color').value = rlcbackcolor;
+lcbackcolor('no');}
+if(rlhcolor != null){
+document.getElementById('lh_color').value = rlhcolor;
+linehighlight('no');}
+if(rfhcolor != null){
+document.getElementById('fh_color').value = rfhcolor;
+findhighlight('no');}
+if(rnhcolor != null){
+document.getElementById('nh_color').value = rnhcolor;
+nexthighlight('no');}
+if(rmonofont != null){
+if(rmonofont == 'yes'){
+document.getElementById('monospc').checked = true;
+monofnt('no');}}
+setTimeout('totalcount(); contentsizer();',250);}
+
+function nspck(fun,cc){
+var area = document.getElementById('text_box');
+if(fun == 'on'){
+area.setAttribute('spellcheck','true');
+if(cc == 'yes') createCookie('spl_chk','on',364);}
+if(fun == 'off'){
+area.setAttribute('spellcheck','false');
+if(cc == 'yes') createCookie('spl_chk','off',364);}}
+
+var wrap_is = 'on';
+
+function wrdwrpis(wrapis,cc){
+if(wrapis == 'on'){
+wrap_is = 'on';
+document.getElementById('text_box').setAttribute('wrap','soft');
+document.getElementById('text_box_dummy').setAttribute('wrap','soft');
+document.getElementById('text_box_div').style.whiteSpace = 'pre-wrap';
+if(cc == 'yes'){
+createCookie('wrap_is','on',364);
+lne_cnt_cache_override = 'yes';
+setTimeout('load_textbox_div()',250);}
+} else {
+wrap_is = 'off';
+document.getElementById('text_box').setAttribute('wrap','off');
+document.getElementById('text_box_dummy').setAttribute('wrap','off');
+document.getElementById('text_box_div').style.whiteSpace = 'pre';
+if(cc == 'yes'){
+createCookie('wrap_is','off',364);
+lne_cnt_cache_override = 'yes';
+setTimeout('load_textbox_div()',250);}}}
+
+function fontsize(cc,bk){
+var blk = 'no';
+if(bk) blk = bk;
+var fontsize = document.getElementById('font_size').value;
+if(document.getElementById('font_size').value.length > 1){
+document.getElementById('line_box_div').style.fontSize = fontsize + 'px';
+document.getElementById('text_box').style.fontSize = fontsize + 'px';
+document.getElementById('text_box_dummy').style.fontSize = fontsize + 'px';
+document.getElementById('text_box_div').style.fontSize = fontsize + 'px';
+document.getElementById('text_box_div_dummy').style.fontSize = fontsize + 'px';
+document.getElementById('line_dummy_txt').style.fontSize = fontsize + 'px';
+document.getElementById('line_dummy_div').style.fontSize = fontsize + 'px';
+if(cc == 'yes'){
+createCookie('font_size',fontsize,364);
+if(blk == 'no'){
+contentsizer();
+lne_cnt_cache_override = 'yes';
+setTimeout('load_textbox_div()',250);}}}}
+
+function letterspacing(cc,bk){
+var blk = 'no';
+if(bk) blk = bk;
+var letspcw = document.getElementById('letspcw').value;
+var letspcd = document.getElementById('letspcd').value;
+document.getElementById('text_box').style.letterSpacing = letspcw + '.' + letspcd + 'px';
+document.getElementById('text_box_dummy').style.letterSpacing = letspcw + '.' + letspcd + 'px';
+document.getElementById('text_box_div').style.letterSpacing = letspcw + '.' + letspcd + 'px';
+document.getElementById('text_box_div_dummy').style.letterSpacing = letspcw + '.' + letspcd + 'px';
+if(cc == 'yes'){
+createCookie('letspcw',letspcw,364);
+createCookie('letspcd',letspcd,364);
+if(blk == 'no'){
+contentsizer();
+lne_cnt_cache_override = 'yes';
+setTimeout('load_textbox_div()',250);}}}
+
+function linespacing(cc,bk){
+var blk = 'no';
+if(bk) blk = bk;
+var linspcw = document.getElementById('linspcw').value;
+var linspcd = document.getElementById('linspcd').value;
+document.getElementById('line_box_div').style.lineHeight = linspcw + '.' + linspcd + '';
+document.getElementById('text_box').style.lineHeight = linspcw + '.' + linspcd + '';
+document.getElementById('text_box_div').style.lineHeight = linspcw + '.' + linspcd + '';
+document.getElementById('line_dummy_txt').style.lineHeight = linspcw + '.' + linspcd + '';
+document.getElementById('line_dummy_div').style.lineHeight = linspcw + '.' + linspcd + '';
+if(cc == 'yes'){
+createCookie('linspcw',linspcw,364);
+createCookie('linspcd',linspcd,364);
+if(blk == 'no'){
+contentsizer();
+lne_cnt_cache_override = 'yes';
+setTimeout('load_textbox_div()',250);}}}
+
+function fontcolor(cc){
+var fontcolor = document.getElementById('font_color').value.toUpperCase();
+if(document.getElementById('font_color').value.length == 6){
+document.getElementById('text_box').style.color = '#' + fontcolor;
+if(cc == 'yes') createCookie('font_color',fontcolor,364);}}
+
+function backcolor(cc){
+var backcolor = document.getElementById('back_color').value.toUpperCase();
+if(document.getElementById('back_color').value.length == 6){
+document.getElementById('text_box_div').style.backgroundColor = '#' + backcolor;
+if(cc == 'yes') createCookie('back_color',backcolor,364);}}
+
+function lcfontcolor(cc){
+var fontcolor = document.getElementById('lc_font_color').value.toUpperCase();
+if(document.getElementById('lc_font_color').value.length == 6){
+document.getElementById('line_box_div').style.color = '#' + fontcolor;
+if(cc == 'yes') createCookie('lc_font_color',fontcolor,364);}}
+
+function lcbackcolor(cc){
+var backcolor = document.getElementById('lc_back_color').value.toUpperCase();
+if(document.getElementById('lc_back_color').value.length == 6){
+document.getElementById('line_box_div').style.backgroundColor = '#' + backcolor;
+if(cc == 'yes') createCookie('lc_back_color',backcolor,364);}}
+
+function linehighlight(cc){
+var lhcolor = document.getElementById('lh_color').value.toUpperCase();
+if(document.getElementById('lh_color').value.length == 6){
+lhcolr = '#' + lhcolor;
+if(cc == 'yes') createCookie('lh_color',lhcolor,364);}}
+
+function findhighlight(cc){
+var fhcolor = document.getElementById('fh_color').value.toUpperCase();
+if(document.getElementById('fh_color').value.length == 6){
+fhcolr = '#' + fhcolor;
+if(cc == 'yes') createCookie('fh_color',fhcolor,364);}}
+
+function nexthighlight(cc){
+var nhcolor = document.getElementById('nh_color').value.toUpperCase();
+if(document.getElementById('nh_color').value.length == 6){
+nhcolr = '#' + nhcolor;
+if(cc == 'yes') createCookie('nh_color',nhcolor,364);}}
+
+function monofnt(cc,bk){
+var blk = 'no';
+if(bk) blk = bk;
+if(document.getElementById('monospc').checked == true){
+document.getElementById('line_box_div').style.fontFamily = 'lucida console, courier new, courier, monospace';
+document.getElementById('text_box').style.fontFamily = 'lucida console, courier new, courier, monospace';
+document.getElementById('text_box_dummy').style.fontFamily = 'lucida console, courier new, courier, monospace';
+document.getElementById('text_box_div').style.fontFamily = 'lucida console, courier new, courier, monospace';
+document.getElementById('line_dummy_txt').style.fontFamily = 'lucida console, courier new, courier, monospace';
+document.getElementById('line_dummy_div').style.fontFamily = 'lucida console, courier new, courier, monospace';
+if(cc == 'yes'){
+createCookie('mono_font','yes',364);
+if(blk == 'no'){
+contentsizer();
+lne_cnt_cache_override = 'yes';
+setTimeout('load_textbox_div()',250);}}
+} else {
+document.getElementById('line_box_div').style.fontFamily = 'arial';
+document.getElementById('text_box').style.fontFamily = 'arial';
+document.getElementById('text_box_dummy').style.fontFamily = 'arial';
+document.getElementById('text_box_div').style.fontFamily = 'arial';
+document.getElementById('line_dummy_txt').style.fontFamily = 'arial';
+document.getElementById('line_dummy_div').style.fontFamily = 'arial';
+if(cc == 'yes'){
+createCookie('mono_font','no',364);
+if(blk == 'no'){
+contentsizer();
+lne_cnt_cache_override = 'yes';
+setTimeout('load_textbox_div()',250);}}}}
+
+function themes(theme){
+lne_cnt_cache_override = 'yes';
+var set_fontsize = '';
+var set_monofnt = '';
+var set_letterspacingw = '';
+var set_letterspacingd = '';
+var set_linespacingw = '';
+var set_linespacingd = '';
+var set_fontcolor = '';
+var set_backcolor = '';
+var set_lcfontcolor = '';
+var set_lcbackcolor = '';
+var set_linehighlight = '';
+var set_findhighlight = '';
+var set_nexthighlight = '';
+if(theme == 'Default'){
+set_fontsize = '16';
+set_monofnt = false;
+set_letterspacingw = '0';
+set_letterspacingd = '0';
+set_linespacingw = '1';
+set_linespacingd = '5';
+set_fontcolor = '000000';
+set_backcolor = 'FFFFFF';
+set_lcfontcolor = '777777';
+set_lcbackcolor = 'D8D8D8';
+set_linehighlight = 'FFFFCC';
+set_findhighlight = 'FFFF00';
+set_nexthighlight = 'AAFF99';}
+if(theme == 'Big_Text'){
+set_fontsize = '24';
+set_letterspacingw = '1';
+set_letterspacingd = '5';
+set_linespacingw = '1';
+set_linespacingd = '8';}
+if(theme == 'Black'){
+var set_fontcolor = 'FFFFFF';
+var set_backcolor = '000000';
+var set_lcfontcolor = '999999';
+var set_lcbackcolor = '444444';
+var set_linehighlight = '000066';
+var set_findhighlight = '0066FF';
+var set_nexthighlight = 'FF0000';}
+if(theme == 'Gray'){
+var set_fontcolor = '000000';
+var set_backcolor = 'CCCCCC';
+var set_lcfontcolor = '666666';
+var set_lcbackcolor = 'aaaaaa';
+var set_linehighlight = 'E8E8E8';
+var set_findhighlight = 'FFFF00';
+var set_nexthighlight = '99FFFF';}
+if(set_fontsize != ''){
+document.getElementById('font_size').value = set_fontsize;
+fontsize('yes','yes');}
+if(set_monofnt != ''){
+document.getElementById('monospc').checked = set_monofnt;
+monofnt('yes','yes');}
+if(set_letterspacingw != ''){
+document.getElementById('letspcw').value = set_letterspacingw;
+letterspacing('yes','yes');}
+if(set_letterspacingd != ''){
+document.getElementById('letspcd').value = set_letterspacingd;
+letterspacing('yes','yes');}
+if(set_linespacingw != ''){
+document.getElementById('linspcw').value = set_linespacingw;
+linespacing('yes','yes');}
+if(set_linespacingd != ''){
+document.getElementById('linspcd').value = set_linespacingd;
+linespacing('yes','yes');}
+if(set_fontcolor != ''){
+document.getElementById('font_color').value = set_fontcolor;
+fontcolor('yes');}
+if(set_backcolor != ''){
+document.getElementById('back_color').value = set_backcolor;
+backcolor('yes');}
+if(set_lcfontcolor != ''){
+document.getElementById('lc_font_color').value = set_lcfontcolor;
+lcfontcolor('yes');}
+if(set_lcbackcolor != ''){
+document.getElementById('lc_back_color').value = set_lcbackcolor;
+lcbackcolor('yes');}
+if(set_linehighlight != ''){
+document.getElementById('lh_color').value = set_linehighlight;
+linehighlight('yes');}
+if(set_findhighlight != ''){
+document.getElementById('fh_color').value = set_findhighlight;
+findhighlight('yes');}
+if(set_nexthighlight != ''){
+document.getElementById('nh_color').value = set_nexthighlight;
+nexthighlight('yes');}
+setTimeout('load_textbox_div()',250);}
+
+//Jump to
+
+function jmpto(jmpto){
+document.getElementById(jmpto).scrollIntoView();}
+
+//Pasted
+
+function pasted(){
+if(document.getElementById('CACP_count').checked == false) totalcount();
+if(document.getElementById('CACP_count').checked == true) cpcount('');}
+
+//Select Text
+
+function select_all(id){
+document.getElementById(id).focus();
+document.getElementById(id).select();}
+
+//Select HTML Text
+
+function selectText(containerid){
+var node = document.getElementById(containerid);
+var range = document.createRange();
+range.selectNode(node);
+window.getSelection().removeAllRanges();
+window.getSelection().addRange(range);}
+
+//Clear Text
+
+function clear_all(){
+saveundo();
+document.getElementById('text_box').value = '';
+foundcnt = 0;
+foundcnt_cache = 'start';
+document.getElementById('next_cnt').value = '0';
+resetcpos = '0';
+resetscrolltop = '0';
+setTimeout('totalcount(); column_count();',250);}
+
+//Count Text
+
+var chr_cnt = 0;
+var wrd_cnt = 0;
+var snt_cnt = 0;
+var lne_cnt = 0;
+
+function sentcnt(text){
+var sentcont = text.replace(/\r/g,'').replace(/ \n/g,'\n') + '\n';
+var sentcont1 = sentcont.split('. ').length -1;
+var sentcont1b = sentcont.split('.\n').length -1;
+var sentcont2 = sentcont.split('! ').length -1;
+var sentcont2b = sentcont.split('!\n').length -1;
+var sentcont3 = sentcont.split('? ').length -1;
+var sentcont3b = sentcont.split('?\n').length -1;
+var countout = sentcont1 + sentcont1b + sentcont2 + sentcont2b + sentcont3 + sentcont3b;
+return countout;}
+
+function textcount(filecont){
+if(document.getElementById('skip_html').checked == true) filecont = filecont.replace(/<\S[^><]*>/gi,'');
+if(document.getElementById('linebreak_as_space').checked == false && document.getElementById('no_spaces').checked == false) chr_cnt = filecont.replace(/[\r\n]/g,'').length;
+if(document.getElementById('no_spaces').checked == true) chr_cnt = filecont.replace(/[\r\n\s]/g,'').length;
+if(document.getElementById('linebreak_as_space').checked == true) chr_cnt = filecont.replace(/\r/g,'').replace(/\n/g,' ').length;
+var wrdc = filecont.match(/\w+/g);
+if(wrdc != null) wrd_cnt = wrdc.length; else wrd_cnt = '0';
+snt_cnt = sentcnt(filecont);
+var linec = filecont.match(/\n/g);
+if(filecont != ''){
+if(linec != null) lne_cnt = linec.length + 1; else lne_cnt = '1';
+} else {lne_cnt = '0';}
+document.getElementById('text_count').innerHTML =
+'Char: <input type="text" id="char_cnt" value="'+ chr_cnt +'" style="width:85px;" READONLY />'+
+' Word: <input type="text" id="word_cnt" value="'+ wrd_cnt +'" style="width:75px;" READONLY />'+
+' Sent: <input type="text" id="sent_cnt" value="'+ snt_cnt +'" style="width:75px;" READONLY />'+
+' Line: <input type="text" id="line_cnt" value="'+ lne_cnt +'" style="width:75px;" READONLY />';
+textcountalert();}
+
+function totalcount(fun){
+var btd = 'yes';
+if(typeof fun != 'undefined') btd = fun;
+var filecont = document.getElementById('text_box').value;
+textcount(filecont);
+if(btd == 'no'){
+load_textbox_div();
+} else {
+line_highlight();}}
+
+function cpcount(){
+document.getElementById('text_box_dummy').value = document.getElementById('text_box').value;
+var textbox = document.getElementById('text_box');
+var tocarpos = '';
+tocarpos = textbox.value.substring(0,textbox.selectionStart);
+cntonsel('stop');
+textcount(tocarpos);
+line_highlight();}
+
+function cntonsel(fun){
+if(mouseblock == 'no'){
+var textbox = document.getElementById('text_box');
+if(fun == 'start') textbox.onmousemove = cntseled;
+if(fun == 'stop') textbox.onmousemove = null;
+} else mouseblock = 'no';}
+
+function cntseled(){
+var textbox = document.getElementById('text_box');
+var countselectedtext = '';
+countselectedtext = textbox.value.substring(textbox.selectionStart,textbox.selectionEnd);
+textcount(countselectedtext);}
+
+function textcountalert(){
+var carcnt = chr_cnt;
+var caralrt = document.getElementById('char_alert').value*1;
+if(caralrt != ''){
+if(document.getElementById('alertmeifover').checked == true){
+if(carcnt > caralrt){
+document.getElementById('char_cnt').style.backgroundColor = '#FF0000';
+document.getElementById('char_cnt').style.color = '#FFFFFF';}
+if(carcnt <= caralrt){
+document.getElementById('char_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('char_cnt').style.color = '#000000';}}
+if(document.getElementById('alertmeifunder').checked == true){
+if(carcnt >= caralrt){
+document.getElementById('char_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('char_cnt').style.color = '#000000';}
+if(carcnt < caralrt){
+document.getElementById('char_cnt').style.backgroundColor = '#FF0000';
+document.getElementById('char_cnt').style.color = '#FFFFFF';}}
+} else {document.getElementById('char_cnt').style.backgroundColor = '#FFFFFF'; document.getElementById('char_cnt').style.color = '#000000';}
+var wrdcnt = wrd_cnt;
+var wrdalrt = document.getElementById('word_alert').value*1;
+if(wrdalrt != ''){
+if(document.getElementById('alertmeifover').checked == true){
+if(wrdcnt > wrdalrt){
+document.getElementById('word_cnt').style.backgroundColor = '#FF0000';
+document.getElementById('word_cnt').style.color = '#FFFFFF';}
+if(wrdcnt <= wrdalrt){
+document.getElementById('word_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('word_cnt').style.color = '#000000';}}
+if(document.getElementById('alertmeifunder').checked == true){
+if(wrdcnt >= wrdalrt){
+document.getElementById('word_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('word_cnt').style.color = '#000000';}
+if(wrdcnt < wrdalrt){
+document.getElementById('word_cnt').style.backgroundColor = '#FF0000';
+document.getElementById('word_cnt').style.color = '#FFFFFF';}}
+} else {
+document.getElementById('word_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('word_cnt').style.color = '#000000';}
+var sntcnt = snt_cnt;
+var sntalrt = document.getElementById('sent_alert').value*1;
+if(sntalrt != ''){
+if(document.getElementById('alertmeifover').checked == true){
+if(sntcnt > sntalrt){
+document.getElementById('sent_cnt').style.backgroundColor = '#FF0000';
+document.getElementById('sent_cnt').style.color = '#FFFFFF';}
+if(sntcnt <= sntalrt){
+document.getElementById('sent_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('sent_cnt').style.color = '#000000';}}
+if(document.getElementById('alertmeifunder').checked == true){
+if(sntcnt >= sntalrt){
+document.getElementById('sent_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('sent_cnt').style.color = '#000000';}
+if(sntcnt < sntalrt){
+document.getElementById('sent_cnt').style.backgroundColor = '#FF0000';
+document.getElementById('sent_cnt').style.color = '#FFFFFF';}}
+} else {
+document.getElementById('sent_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('sent_cnt').style.color = '#000000';}
+var lnecnt = lne_cnt;
+var lnealrt = document.getElementById('line_alert').value*1;
+if(lnealrt != ''){
+if(document.getElementById('alertmeifover').checked == true){
+if(lnecnt > lnealrt){
+document.getElementById('line_cnt').style.backgroundColor = '#FF0000';
+document.getElementById('line_cnt').style.color = '#FFFFFF';}
+if(lnecnt <= lnealrt){
+document.getElementById('line_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('line_cnt').style.color = '#000000';}}
+if(document.getElementById('alertmeifunder').checked == true){
+if(lnecnt >= lnealrt){
+document.getElementById('line_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('line_cnt').style.color = '#000000';}
+if(lnecnt < lnealrt){
+document.getElementById('line_cnt').style.backgroundColor = '#FF0000';
+document.getElementById('line_cnt').style.color = '#FFFFFF';}}
+} else {
+document.getElementById('line_cnt').style.backgroundColor = '#FFFFFF';
+document.getElementById('line_cnt').style.color = '#000000';}}
+
+function customcount(){
+var filecont = document.getElementById('text_box').value;
+if(document.getElementById('skip_html').checked == true) filecont = filecont.replace(/<\S[^><]*>/gi,'');
+var cst_cnt = 0;
+var customcntflags = 'gi';
+if(document.getElementById('cc_case_sen').checked == true) customcntflags = 'g';
+var regxin = document.getElementById('count_this').value.replace(/([.*+?^=!:${}()|\[\]\/\\])/g,'\\$1');
+if(regxin != ''){
+var customcnt = new RegExp(regxin,customcntflags);
+var custc = filecont.replace(/\r/g,'').match(customcnt);
+if(custc != null) cst_cnt = custc.length; else cst_cnt = '0';} else cst_cnt = '0';
+document.getElementById('cc_count').value = cst_cnt;}
+
+//Find and Replace Text
+
+function replacetext(){
+saveundo();
+var searchfor = document.getElementById('far_find').value.replace(/\r/gi,'').replace(/([.*+?^=!:${}()|\[\]\/\\])/g,'\\$1');
+if(document.getElementById('far_regexp').checked == true) searchfor = document.getElementById('far_find_regexp').value;
+var replacewith = document.getElementById('far_replace').value.replace(/\r/gi,'');
+var text = document.getElementById('text_box').value.replace(/\r/gi,'');
+var flags = 'gi';
+if(document.getElementById('far_case_sen').checked == true) flags = 'g';
+var killfun = 'no';
+try{var searchexp = new RegExp(searchfor,flags);}
+catch(err){
+alert('Something is incorrect (' + err + ') within your regular expression.\nBe sure special characters .*+?^=!:${}()|\\ used as literals have been escaped with a backslash.');
+killfun = 'yes';}
+if(killfun == 'no'){
+text = text.replace(searchexp,replacewith);
+document.getElementById('text_box').value = text;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}}
+
+function far_regexp_switch(){
+if(document.getElementById('far_regexp').checked == true){
+document.getElementById('far_find_regexp').style.display = 'block';
+document.getElementById('far_find').style.display = 'none';
+document.getElementById('far_find').value = '';}
+if(document.getElementById('far_regexp').checked == false){
+document.getElementById('far_find_regexp').style.display = 'none';
+document.getElementById('far_find').style.display = 'block';
+document.getElementById('far_find_regexp').value = '';}}
+
+//Find and Affix Text
+
+function affixtext(){
+saveundo();
+var searchfor = document.getElementById('faat_find').value;
+if(document.getElementById('faat_regexp').checked == false) searchfor = searchfor.replace(/([.*+?^=!:${}()|\[\]\/\\])/g,'\\$1');
+var prefixwith = document.getElementById('faat_prefix').value;
+var suffixwith = document.getElementById('faat_suffix').value;
+var text = document.getElementById('text_box').value.replace(/\r/gi,'')
+var flags = 'gi';
+if(document.getElementById('faat_case_sen').checked == true) flags = 'g';
+var killfun = 'no';
+try{var searchexp = new RegExp('(' + searchfor + ')',flags);}
+catch(err){
+alert('Something is incorrect (' + err + ') within your regular expression.\nBe sure special characters .*+?^=!:${}()|\\ used as literals have been escaped with a backslash.');
+killfun = 'yes';}
+if(killfun == 'no'){
+text = text.replace(searchexp,prefixwith + '$1' + suffixwith);
+document.getElementById('text_box').value = text;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}}
+
+//Sort Lines
+
+// Natural Sort algorithm for Javascript - Version 0.7 - Released under MIT license
+//Author: Jim Palmer (based on chunking idea from Dave Koelle)
+
+var delimiter = '';
+var snum = 0;
+
+function naturalSort(a,b){
+var re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi,
+sre = /(^[ ]*|[ ]*$)/g,
+dre = /(^([\w ]+,?[\w ]+)?[\w ]+,?[\w ]+\d+:\d+(:\d+)?[\w ]?|^\d{1,4}[\/\-]\d{1,4}[\/\-]\d{1,4}|^\w+, \w+ \d+, \d{4})/,
+hre = /^0x[0-9a-f]+$/i,
+ore = /^0/,
+i = function(s) { return naturalSort.insensitive && (''+s).toLowerCase() || ''+s },
+x = i(a.toString().split(delimiter).slice(snum).join(delimiter)).replace(sre, '') || '',
+y = i(b.toString().split(delimiter).slice(snum).join(delimiter)).replace(sre, '') || '',
+xN = x.replace(re, '\0$1\0').replace(/\0$/,'').replace(/^\0/,'').split('\0'),
+yN = y.replace(re, '\0$1\0').replace(/\0$/,'').replace(/^\0/,'').split('\0'),
+xD = parseInt(x.match(hre)) || (xN.length != 1 && x.match(dre) && Date.parse(x)),
+yD = parseInt(y.match(hre)) || xD && y.match(dre) && Date.parse(y) || null,
+oFxNcL, oFyNcL;
+if (yD)
+if ( xD < yD ) return -1;
+else if ( xD > yD ) return 1;
+for(var cLoc=0, numS=Math.max(xN.length, yN.length); cLoc < numS; cLoc++) {
+oFxNcL = !(xN[cLoc] || '').match(ore) && parseFloat(xN[cLoc]) || xN[cLoc] || 0;
+oFyNcL = !(yN[cLoc] || '').match(ore) && parseFloat(yN[cLoc]) || yN[cLoc] || 0;
+if (isNaN(oFxNcL) !== isNaN(oFyNcL)) { return (isNaN(oFxNcL)) ? 1 : -1; }
+else if (typeof oFxNcL !== typeof oFyNcL) {
+oFxNcL += '';
+oFyNcL += '';
+}
+if (oFxNcL < oFyNcL) return -1;
+if (oFxNcL > oFyNcL) return 1;
+}
+return 0;
+}
+
+//End of Natural Sort algorithm.
+
+function complengths(a,b){
+x = a.toString().length;
+y = b.toString().length;
+if(x < y) return -1;
+if(x > y) return 1;
+return 0;}
+
+Array.prototype.shuffle = function(){
+var x = this.length;
+if(x == 0) return false;
+var y = 0;
+var temp_x = '';
+var temp_y = '';
+while(--x){
+y = Math.floor(Math.random()*(x + 1));
+temp_x = this[x];
+temp_y = this[y];
+this[x] = temp_y;
+this[y] = temp_x;}
+return this;}
+
+function sort_lines(fun){
+saveundo();
+var filecont = document.getElementById('text_box').value.replace(/\r/gi,'');
+delimiter = document.getElementById('sort_delimiter').value;
+snum = document.getElementById('sort_num').value - 1;
+if(document.getElementById('sort_casesen').checked == true) naturalSort.insensitive = false; else naturalSort.insensitive = true;
+if(fun == 'sla') document.getElementById('text_box').value = filecont.split('\n').sort(naturalSort).join('\n');
+if(fun == 'slbl') document.getElementById('text_box').value = filecont.split('\n').sort(complengths).join('\n');
+if(fun == 'rlo') document.getElementById('text_box').value = filecont.split('\n').reverse().join('\n');
+if(fun == 'rad') document.getElementById('text_box').value = filecont.split('\n').shuffle().join('\n');
+lne_cnt_cache_override = 'yes';
+setTimeout('load_textbox_div()',250);}
+
+//Prefix/Suffix Lines
+
+function apsl(){
+saveundo();
+var prfx = document.getElementById('prefix').value;
+var sufx = document.getElementById('suffix').value;
+var textarr = document.getElementById('text_box').value.replace(/\r/g,'').split(/\n/);
+var textlen = textarr.length;
+for(var x=0;x<textlen;x++){
+textarr[x] = prfx + textarr[x] + sufx;}
+document.getElementById('text_box').value = textarr.join('\n');
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Merge Text Line by Line
+
+function mtlbl(){
+saveundo();
+var mergtextarr = document.getElementById('mtlbl_text').value.replace(/\r/g,'').split(/\n/);
+var textboxarr = document.getElementById('text_box').value.replace(/\r/g,'').split(/\n/);
+var delimiter = document.getElementById('mtlbl_delimiter').value;
+var mergtextarrlen = mergtextarr.length;
+var textboxarrlen = textboxarr.length;
+var joinedarrlen = Math.max(mergtextarrlen,textboxarrlen);
+var joinedarr = new Array();
+var mergtext = '';
+var textbox = '';
+if(document.getElementById('mtlbl_left').checked == true){
+for(var x=0;x<joinedarrlen;x++){
+if(mergtextarr[x]) mergtext = mergtextarr[x]; else mergtext = '';
+if(textboxarr[x]) textbox = textboxarr[x]; else textbox = '';
+if(mergtext == '' || textbox == '') delimiter = '';
+joinedarr[x] = mergtext + delimiter + textbox;}}
+if(document.getElementById('mtlbl_right').checked == true){
+for(var x=0;x<joinedarrlen;x++){
+if(mergtextarr[x]) mergtext = mergtextarr[x]; else mergtext = '';
+if(textboxarr[x]) textbox = textboxarr[x]; else textbox = '';
+if(mergtext == '' || textbox == '') delimiter = '';
+joinedarr[x] = textbox + delimiter + mergtext;}}
+document.getElementById('text_box').value = joinedarr.join('\n');
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Generate a List of Numbers
+
+function gln(){
+saveundo();
+var prex = document.getElementById('gln_prefix').value;
+var sufx = document.getElementById('gln_suffix').value;
+var low = document.getElementById('low_num').value.replace(/\-/g,'')*1;
+var high = document.getElementById('high_num').value.replace(/\-/g,'')*1;
+var textout = new Array();
+var len = (high - low) + 1;
+var sca = low;
+var padnum = 0;
+var padnumto = high.toString().length;
+var padnumlen = 0;
+if(document.getElementById('pad_num').checked == true && document.getElementById('no_num').checked == false){
+for(var x=0;x<len;x++){
+padnum = x+sca;
+padnumlen = padnum.toString().length;
+for(var y=padnumlen;y<padnumto;y++){padnum = '0' + padnum;}
+textout[x] = prex + padnum + sufx;}}
+if(document.getElementById('pad_num').checked == false && document.getElementById('no_num').checked == false){
+for(var x=0;x<len;x++){
+textout[x] = prex + (x+sca) + sufx;}}
+if(document.getElementById('no_num').checked == true){
+for(var x=0;x<len;x++){
+textout[x] = prex + sufx;}}
+textout = textout.join('\n');
+document.getElementById('text_box').value = textout;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Number Exisiting Line
+
+function nel(){
+saveundo();
+var text = document.getElementById('text_box').value.replace(/\r/g,'').split('\n');
+var prex = document.getElementById('gln_prefix').value;
+var sufx = document.getElementById('gln_suffix').value;
+var sca = document.getElementById('low_num').value*1;
+var textout = new Array();
+var len = text.length;
+var padnum = len;
+var padnum = 0;
+var padnumto = len.toString().length;
+var padnumlen = 0;
+if(document.getElementById('pad_num').checked == true){
+for (var x=0;x<len;x++){
+padnum = x+sca;
+padnumlen = padnum.toString().length;
+for(var y=padnumlen;y<padnumto;y++){padnum = '0' + padnum;}
+textout[x] = prex + padnum + sufx + text[x];}
+} else {
+for(var x=0;x<len;x++){
+textout[x] = prex + (x+sca) + sufx + text[x];}}
+textout = textout.join('\n');
+document.getElementById('text_box').value = textout;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Remove Empty Lines
+
+function rel(){
+saveundo();
+var filecontarr = document.getElementById('text_box').value.replace(/\r/g,'').split('\n');
+var filecontarrcnt = filecontarr.length;
+var newfilecontarr = new Array();
+var newfilecontarrcnt = 0;
+var testx = new RegExp(/\S/)
+for(var x=0;x<filecontarrcnt;x++){
+if(testx.test(filecontarr[x]) == true){
+newfilecontarr[newfilecontarrcnt] = filecontarr[x];
+newfilecontarrcnt++;}}
+document.getElementById('text_box').value = newfilecontarr.join('\n');
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Remove Duplicate Lines
+
+function rdl(){
+saveundo();
+var textinarr = document.getElementById('text_box').value.replace(/\r/g,'').split('\n');
+var len = textinarr.length;
+var hash = {};
+var hkey = '';
+var textoutarr = new Array();
+var textoutarrcnt = 0;
+if(document.getElementById('rdl_case_sen').checked == true){
+for(var x=0;x<len;x++){
+hkey = textinarr[x];
+if(hash[hkey] == null) {hash[hkey] = ''; textoutarr[textoutarrcnt] = hkey; textoutarrcnt++;}}
+} else {
+for(var x=0;x<len;x++){
+hkey = textinarr[x];
+if(hash[hkey.toLowerCase()] == null) {hash[hkey.toLowerCase()] = ''; textoutarr[textoutarrcnt] = hkey; textoutarrcnt++;}}}
+document.getElementById('text_box').value = textoutarr.join('\n');
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Remove Letter Accents
+
+var sec = ['193','225','192','224','194','226','461','462','258','259','195','227','7842','7843','7840','7841','196','228','197','229','256','257','260','261','7844','7845','7846','7847','7850','7851','7848','7849','7852','7853','7854','7855','7856','7857','7860','7861','7858','7859','7862','7863','506','507','262','263','264','265','268','269','266','267','199','231','270','271','272','273','201','233','200','232','202','234','282','283','276','277','7868','7869','7866','7867','278','279','203','235','274','275','280','281','7870','7871','7872','7873','7876','7877','7874','7875','7864','7865','7878','7879','286','287','284','285','288','289','290','291','292','293','294','295','205','237','204','236','300','301','206','238','463','464','207','239','296','297','302','303','298','299','7880','7881','7882','7883','308','309','310','311','313','314','317','318','315','316','321','322','319','320','323','324','327','328','209','241','325','326','211','243','210','242','334','335','212','244','7888','7889','7890','7891','7894','7895','7892','7893','465','466','214','246','336','337','213','245','216','248','510','511','332','333','7886','7887','416','417','7898','7899','7900','7901','7904','7905','7902','7903','7906','7907','7884','7885','7896','7897','7764','7765','7766','7767','340','341','344','345','342','343','346','347','348','349','352','353','350','351','356','357','354','355','358','359','218','250','217','249','364','365','219','251','467','468','366','367','220','252','471','472','475','476','473','474','469','470','368','369','360','361','370','371','362','363','7910','7911','431','432','7912','7913','7914','7915','7918','7919','7916','7917','7920','7921','7908','7909','7810','7811','7808','7809','372','373','7812','7813','221','253','7922','7923','374','375','376','255','7928','7929','7926','7927','7924','7925','377','378','381','382','379','380','208'];
+var rep = ['A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','A','a','C','c','C','c','C','c','C','c','C','c','D','d','D','d','E','e','E','e','E','e','E','e','E','e','E','e','E','e','E','e','E','e','E','e','E','e','E','e','E','e','E','e','E','e','E','e','E','e','G','g','G','g','G','g','G','g','H','h','H','h','I','i','I','i','I','i','I','i','I','i','I','i','I','i','I','i','I','i','I','i','I','i','J','j','K','k','L','l','L','l','L','l','L','l','L','l','N','n','N','n','N','n','N','n','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','O','o','P','p','P','p','R','r','R','r','R','r','S','s','S','s','S','s','S','s','T','t','T','t','T','t','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','U','u','W','w','W','w','W','w','W','w','Y','y','Y','y','Y','y','Y','y','Y','y','Y','y','Y','y','Z','z','Z','z','Z','z','D'];
+
+function rla(){
+saveundo();
+var seclen = sec.length;
+var repwith = -1;
+var text = document.getElementById('text_box').value.replace(/\r/g,'').split('\n');
+var textout = new Array();
+var linecnt = text.length;
+var toremout = '';
+var chcoat = '';
+for(var x=0;x<linecnt;x++){
+torem = text[x].split('');
+toremout = new Array();
+toremlen = torem.length;
+for(var y=0;y<toremlen;y++){
+chcoat = torem[y].charCodeAt(0);
+if(chcoat > 124) {for(var z=0;z<seclen;z++){if(chcoat == sec[z]) {repwith = rep[z]; z = seclen;}}}
+if(repwith != -1) {toremout[y] = repwith; repwith = -1;} else toremout[y] = torem[y];}
+textout[x] = toremout.join('');}
+textout = textout.join('\n');
+document.getElementById('text_box').value = textout;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Remove Unwanted Whitespace
+
+function ruws(){
+saveundo();
+var filecont = document.getElementById('text_box').value.replace(/\r/gi,'');
+var filecontarr = filecont.split('\n');
+var filecontarrlen = filecontarr.length;
+var rfun = /\s+/g;
+var repw = ' ';
+var rfun2 = /^\s+|\s+$/g;
+var repw2 = '';
+for(x=0;x<filecontarrlen;x++){
+filecontarr[x] = filecontarr[x].replace(rfun,repw).replace(rfun2,repw2);}
+var filecontout = filecontarr.join('\n');
+document.getElementById('text_box').value = filecontout;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Remove Lines Containing
+
+function rlc(fun){
+saveundo();
+var filecontarr = document.getElementById('text_box').value.replace(/\r/g,'').split('\n');
+var schfor = document.getElementById('rlc_text').value;
+var findthis = document.getElementById('rlc_findthis').value.replace(/([.*+?^=!:${}()|\[\]\/\\])/g,'\\$1');
+var replacewith = document.getElementById('rlc_replacewith').value.replace(/\r/g,'');
+var flags = 'gi';
+if(document.getElementById('rlc_frt_case_sen').checked == true) flags = 'g';
+var searchexp = new RegExp(findthis,flags);
+if(document.getElementById('rlc_regexp').checked == false) schfor = schfor.replace(/([.*+?^=!:${}()|\[\]\/\\])/g,'\\$1');
+var filecontarrcnt = filecontarr.length;
+var newfilecontarr = new Array();
+var newfilecontarrcnt = 0;
+var casen = 'i';
+if(document.getElementById('rlc_case_sen').checked == true) casen = '';
+var killfun = 'no';
+try{var schforregx = new RegExp(schfor,casen);}
+catch(err){
+alert('Something is incorrect (' + err + ') within your regular expression.\nBe sure special characters .*+?^=!:${}()|\\ used as literals have been escaped with a backslash.');
+killfun = 'yes';}
+if(killfun == 'no'){
+if(document.getElementById('rlc_frt').checked == false){
+if(fun == 'cont'){
+for(var x=0;x<filecontarrcnt;x++){
+if(schforregx.test(filecontarr[x]) == false){
+newfilecontarr[newfilecontarrcnt] = filecontarr[x];
+newfilecontarrcnt++;}}}
+if(fun == 'notcont'){
+for(var x=0;x<filecontarrcnt;x++){
+if(schforregx.test(filecontarr[x]) == true){
+newfilecontarr[newfilecontarrcnt] = filecontarr[x];
+newfilecontarrcnt++;}}}
+} else {
+if(fun == 'cont'){
+for(var x=0;x<filecontarrcnt;x++){
+if(schforregx.test(filecontarr[x]) == true){
+newfilecontarr[newfilecontarrcnt] = filecontarr[x].replace(searchexp,replacewith);
+} else {
+newfilecontarr[newfilecontarrcnt] = filecontarr[x];}
+newfilecontarrcnt++;}}
+if(fun == 'notcont'){
+for(var x=0;x<filecontarrcnt;x++){
+if(schforregx.test(filecontarr[x]) == false){
+newfilecontarr[newfilecontarrcnt] = filecontarr[x].replace(searchexp,replacewith);
+} else {
+newfilecontarr[newfilecontarrcnt] = filecontarr[x];}
+newfilecontarrcnt++;}}}
+document.getElementById('text_box').value = newfilecontarr.join('\n');
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}}
+
+//Letter Case Conversion
+
+function letcase(fun){
+saveundo();
+var text = document.getElementById('text_box').value;
+if(fun == 'lower') text = text.toLowerCase();
+if(fun == 'upper') text = text.toUpperCase();
+document.getElementById('text_box').value = text;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+function capwrd(str){
+return str.replace(/\w+/g,function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);});}
+
+function letcaseflew(){
+saveundo();
+var text = document.getElementById('text_box').value.replace(/\r/g,'');
+document.getElementById('text_box').value = capwrd(text);
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+function capsent(str){
+return str.replace(/[^.!?\s][^.!?]*(?:[.!?](?!['"]?\s|$)[^.!?]*)*[.!?]?['"]?(?=\s|$)/g,function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);});}
+
+function letcasefles(){
+saveundo();
+var text = document.getElementById('text_box').value.replace(/\r/g,'');
+document.getElementById('text_box').value = capsent(text);
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Add Remove Line Breaks
+
+function arlb(fun){
+saveundo();
+var rlb_replace = document.getElementById('mlb_text').value;
+var arlb_thistext = rlb_replace;
+var arlb_thistext_regexp = arlb_thistext.replace(/([.*+?^=!:${}()|\[\]\/\\])/g,'\\$1')
+var rlb_flag = 'gi';
+if(document.getElementById('arlb_case_sen').checked == true) rlb_flag = 'g';
+var text = document.getElementById('text_box').value.replace(/\r/g,'');
+if(document.getElementById('arlb_relb').checked == true) text = text.replace(/\n/g,'');
+if(fun == 'rlb'){
+text = text.replace(/\n/g,rlb_replace);}
+if(fun == 'alb'){
+if(document.getElementById('arlb_before').checked == true){
+text = text.replace(new RegExp('(' + arlb_thistext_regexp + ')',rlb_flag),'\n$1');}
+if(document.getElementById('arlb_after').checked == true){
+text = text.replace(new RegExp('(' + arlb_thistext_regexp + ')',rlb_flag),'$1\n');}}
+document.getElementById('text_box').value = text;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Wrap Text
+
+String.prototype.chunk = function(n){
+if (typeof n=='undefined') n=2;
+return this.match(RegExp('.{1,'+n+'}','g'));};
+
+function wraptext(){
+saveundo();
+var text = document.getElementById('text_box').value.replace(/\r/g,'');
+var nlnum = document.getElementById('wrap_num').value;
+text = text.chunk(nlnum);
+text = text.join('\n');
+text = text.replace(/\n /g,'\n');
+document.getElementById('text_box').value = text;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+String.prototype.wordWrap = function(m, b, c){
+var i, j, s, r = this.split('\n');
+if(m > 0) for(i in r){
+for(s = r[i], r[i] = ''; s.length > m;
+j = c ? m : (j = s.substr(0, m).match(/\S*$/)).input.length - j[0].length
+|| m, r[i] += s.substr(0, j) + ((s = s.substr(j)).length ? b : ''));
+r[i] += s;}
+return r.join('\n');};
+
+function wordwraptext(){
+saveundo();
+var text = document.getElementById('text_box').value.replace(/\r/g,'');
+var wwnum = document.getElementById('wrap_num').value;
+text = text.wordWrap(wwnum,'\n',0);
+document.getElementById('text_box').value = text;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//Encrypt Text
+
+var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+function escCtrlCh(str){
+return str.replace(/[\0\t\n\v\f\r\xa0'"!]/g, function(c) { return '!' + c.charCodeAt(0) + '!'; });}
+function unescCtrlCh(str){
+return str.replace(/!\d\d?\d?!/g, function(c) { return String.fromCharCode(c.slice(1,-1)); });}
+function code(v,k){
+var y = v[0];
+z = v[1];
+var delta = 0x9E3779B9;
+var limit = delta*32;
+var sum = 0;
+while(sum != limit){
+y += (z<<4 ^ z>>>5)+z ^ sum+k[sum & 3];
+sum += delta;
+z += (y<<4 ^ y>>>5)+y ^ sum+k[sum>>>11 & 3];}
+v[0] = y; v[1] = z;}
+function decode(v,k){
+var y = v[0];
+z = v[1];
+var delta = 0x9E3779B9;
+var sum = delta*32;
+while(sum != 0){
+z -= (y<<4 ^ y>>>5)+y ^ sum+k[sum>>>11 & 3];
+sum -= delta;
+y -= (z<<4 ^ z>>>5)+z ^ sum+k[sum & 3];}
+v[0] = y; v[1] = z;}
+
+function Str4ToLong(s){
+var v = 0;
+for(var i=0; i<4; i++) v |= s.charCodeAt(i) << i*8;
+return isNaN(v) ? 0 : v;}
+
+function LongToStr4(v){
+var s = String.fromCharCode(v & 0xFF, v>>8 & 0xFF, v>>16 & 0xFF, v>>24 & 0xFF);
+return s;}
+
+function encrypt(){
+saveundo();
+var v = new Array(2);
+var k = new Array(4);
+var s = '';
+var i = '';
+var plaintext = escape(document.getElementById('text_box').value);
+var password = document.getElementById('password').value;
+for(var i=0;i<4;i++) k[i] = Str4ToLong(password.slice(i*4,(i+1)*4));
+for(i=0; i<plaintext.length; i+=8){
+v[0] = Str4ToLong(plaintext.slice(i,i+4));
+v[1] = Str4ToLong(plaintext.slice(i+4,i+8));
+code(v, k);
+s += LongToStr4(v[0]) + LongToStr4(v[1]);}
+var input = escCtrlCh(s);
+var output = "";
+var chr1, chr2, chr3;
+var enc1, enc2, enc3, enc4;
+var i = 0;
+while (i < input.length){
+chr1 = input.charCodeAt(i++);
+chr2 = input.charCodeAt(i++);
+chr3 = input.charCodeAt(i++);
+enc1 = chr1 >> 2;
+enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+enc4 = chr3 & 63;
+if (isNaN(chr2)) {enc3 = enc4 = 64;}
+else if (isNaN(chr3)) {enc4 = 64;}
+output+=keyStr.charAt(enc1) + keyStr.charAt(enc2) + keyStr.charAt(enc3) + keyStr.charAt(enc4);}
+document.getElementById('text_box').value = output;
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+function decrypt(){
+saveundo();
+var input = document.getElementById('text_box').value;
+var output = '';
+var chr1, chr2, chr3;
+var enc1, enc2, enc3, enc4;
+var i = 0;
+input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+while (i < input.length) {
+enc1 = keyStr.indexOf(input.charAt(i++));
+enc2 = keyStr.indexOf(input.charAt(i++));
+enc3 = keyStr.indexOf(input.charAt(i++));
+enc4 = keyStr.indexOf(input.charAt(i++));
+chr1 = (enc1 << 2) | (enc2 >> 4);
+chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+chr3 = ((enc3 & 3) << 6) | enc4;
+output+=String.fromCharCode(chr1);
+if (enc3 != 64) {output+=String.fromCharCode(chr2);}
+if (enc4 != 64) {output+=String.fromCharCode(chr3);}}
+output = output.toString();
+var v = new Array(2);
+var k = new Array(4);
+var s = '';
+var i = '';
+var ciphertext = unescCtrlCh(output);
+var password = document.getElementById('password').value;
+for(var i=0;i<4;i++) k[i] = Str4ToLong(password.slice(i*4,(i+1)*4));
+for(i=0; i<ciphertext.length; i+=8) {
+v[0] = Str4ToLong(ciphertext.slice(i,i+4));
+v[1] = Str4ToLong(ciphertext.slice(i+4,i+8));
+decode(v, k);
+s += LongToStr4(v[0]) + LongToStr4(v[1]);}
+s = s.replace(/\0+$/, '');
+document.getElementById('text_box').value = unescape(s);
+lne_cnt_cache_override = 'yes';
+setTimeout('totalcount(\'no\');',250);}
+
+//onSelect Functions
+
+var starttoselected = '';
+var selectedtext = '';
+var selectedtoend = '';
+
+function resetcursor(){
+document.getElementById('text_box').focus();
+var stslen = starttoselected.length;
+document.getElementById('text_box').setSelectionRange(stslen,stslen);
+setTimeout('totalcount(\'yes\')',250);}
+
+function make_unicode(textin){
+var textinarr = textin.replace(/\r/g,'').split('\n');
+var textoutarr = new Array();
+var textinarrlen = textinarr.length;
+var textinarrx = '';
+var textarrxlen = 0;
+var buildoutarr = new Array();
+for(var x=0;x<textinarrlen;x++){
+textinarrx = textinarr[x];
+textinarrxlen = textinarrx.length;
+buildoutarr = new Array();
+for(var y=0;y<textinarrxlen;y++){
+buildoutarr[y] = '&#' + textinarrx[y].charCodeAt(0) + ';';}
+textoutarr[x] = buildoutarr.join('');}
+var linebreak = '\n';
+linebreak = '&#10;';
+return textoutarr.join(linebreak);}
+
+function unicode_os(){
+document.getElementById('text_box').value = starttoselected + make_unicode(selectedtext) + selectedtoend;
+resetcursor();}
+
+function lowercase_os(){
+document.getElementById('text_box').value = starttoselected + selectedtext.toLowerCase() + selectedtoend;
+resetcursor();}
+
+function uppercase_os(){
+document.getElementById('text_box').value = starttoselected + selectedtext.toUpperCase() + selectedtoend;
+resetcursor();}
+
+function delete_os(){
+document.getElementById('text_box').value = starttoselected + selectedtoend;
+resetcursor();}
+
+function presuf_os(){
+document.getElementById('text_box').value = starttoselected + document.getElementById('osf_prefix').value + selectedtext + document.getElementById('osf_suffix').value + selectedtoend;
+resetcursor();}
+
+function replace_os(){
+document.getElementById('text_box').value = starttoselected + document.getElementById('osf_replacewith').value + selectedtoend;
+resetcursor();}
+
+function findandreplace_os(){
+document.getElementById('text_box').value = starttoselected + selectedtext.replace(new RegExp(document.getElementById('osf_findthis').value.replace(/([.*+?^=!:${}()|\[\]\/\\])/g,'\\$1'),'gi'),document.getElementById('osf_andreplacewith').value) + selectedtoend;
+resetcursor();}
+
+function resetonselect(){
+document.getElementById('text_box').setAttribute('onselect','if(document.getElementById(\'osf_off\').checked == false) osf();');}
+
+function osf(){
+document.getElementById('text_box').removeAttribute('onselect');
+saveundo();
+var textarea = document.getElementById('text_box');
+var textbox = document.getElementById('text_box');
+starttoselected = textbox.value.substring(0,textbox.selectionStart);
+selectedtext = textarea.value.substring(textarea.selectionStart,textarea.selectionEnd);
+selectedtoend = textbox.value.substring((starttoselected.length + selectedtext.length),textbox.length);
+if(document.getElementById('osf_unicode').checked == true) unicode_os();
+if(document.getElementById('osf_lowercase').checked == true) lowercase_os();
+if(document.getElementById('osf_uppercase').checked == true) uppercase_os();
+if(document.getElementById('osf_delete').checked == true) delete_os();
+if(document.getElementById('osf_presuf').checked == true) presuf_os();
+if(document.getElementById('osf_replace').checked == true) replace_os();
+if(document.getElementById('osf_findandreplace').checked == true) findandreplace_os();
+setTimeout('resetonselect()',100);}
+
+//Delete Line OnClick
+
+function dloc(){
+saveundo();
+var textbox = document.getElementById('text_box');
+var tocarpos = '';
+tocarpos = textbox.value.substring(0,textbox.selectionStart);
+var linenumbr = tocarpos.split('\n').length - 1;
+var linearr = textbox.value.split('\n');
+linearr.splice(linenumbr,1);
+document.getElementById('text_box').value = linearr.join('\n');
+textbox.focus();
+var resetcur = tocarpos.length;
+textbox.setSelectionRange(resetcur,resetcur);
+setTimeout('totalcount(\'no\')',250);}
+
+//Insert Text OnClick
+
+var itoc_counter = 0;
+
+function itoc(sc){
+saveundo();
+var inst = document.getElementById('itoc_this').value;
+if(typeof sc != 'undefined'){
+inst = sc;}
+var textarea = document.getElementById('text_box');
+starttoselected = textarea.value.substring(0,textarea.selectionStart);
+selectedtext = textarea.value.substring(textarea.selectionStart,textarea.selectionEnd);
+selectedtoend = textarea.value.substring((starttoselected.length + selectedtext.length),textarea.length);
+var stslen = starttoselected.length + inst.length;
+document.getElementById('text_box').value = starttoselected + inst + selectedtoend;
+textarea.focus();
+textarea.setSelectionRange(stslen,stslen);
+setTimeout('totalcount(\'yes\')',250);}
+
+//Insert Special Character into Text
+
+function iscit(sc){
+itoc(sc);}
+
+//Open HTML Window
+
+function htmlwindow(){
+var data = document.getElementById('text_box').value;
+var client_width = document.body.parentNode.clientWidth;
+var client_height = document.body.parentNode.clientHeight;
+var winop = window.open('about:blank','','width=' + (client_width/2) + ',height=' + (client_height/2) + ',scrollbars=yes,fullscreen=no');
+winop.document.write(data);}
+
+function text2html(){
+saveundo();
+var t2h = document.getElementById('text_box').value;
+var tlnk = new Array;
+var hlnk = new Array;
+t2h = spchrs2html(t2h);
+var i = 0;
+for(i=0;i<4;i++){
+t2h = t2h.replace(/(\S+\.\S+)/,"<"+i+">");
+tlnk[i] = RegExp.$1;}
+ac = i;
+for(i=0;i<ac;i++){
+if(tlnk[i].search(/\d\.\d/)>-1 || tlnk[i].length <5){
+t2h = t2h.replace("<"+i+">", tlnk[i]);
+} else {
+htm = makelink(tlnk[i]);
+t2h = t2h.replace("<"+i+">", htm);}}
+t2h = t2h.replace(/\n/g,"<br />\n");
+t2h = t2h.replace(/\ \ /g," &nbsp;");
+t2h = t2h.replace(/"/g,"&quot;");
+t2h = t2h.replace(/\$/g,"&#36;");
+t2h = t2h.replace(/\t/g,"&nbsp;&nbsp;&nbsp;&nbsp;");
+if(document.getElementById('t2h_complete').checked == true){
+t2h =
+'<!DOCTYPE html>\n'+
+'<html>\n'+
+'<title>My Title</title>\n'+
+'<body>\n'+
+t2h+
+'\n<body>\n'+
+'<html>';}
+document.getElementById('text_box').value = t2h;
+setTimeout('totalcount(\'no\')',250);}
+     
+function makelink(txt){
+txt = html2spchrs(txt);
+var i = 0;
+pN = txt.length-1;
+for(i=0;i<pN;i++){
+ch = txt.substr(i,1);
+if(ch.search(/\w/)>-1) break;}
+prea = txt.substring(0,i);
+prea = spchrs2html(prea)
+txt = txt.substr(i);
+for(i=pN;i>0;i--){
+ch = txt.substr(i,1);
+if(ch.search(/\w|_|-|\//)>-1) break;}
+posta = txt.substring(i+1);
+posta = spchrs2html(posta)
+turl = txt.substring(0,i+1);
+if(turl.search(/@/)>0){
+tlnk = '<a href=\'mailto:' + turl + '\'>' + turl + '</a>';
+return prea + tlnk + posta;}
+hurl = '';
+if(turl.search(/\w+:\/\//)<0) hurl = 'http://';
+tlnk = '<a href=\'' + hurl + turl + '\'>' + turl + '</a>';
+return prea + tlnk + posta;}
+     
+function spchrs2html(str){
+str = str.replace (/&/g,'&amp;');
+str = str.replace (/</g,'&lt;');
+str = str.replace (/>/g,'&gt;');
+return str;}
+     
+function html2spchrs(str){
+str = str.replace (/&lt;/g,'<');
+str = str.replace (/&gt;/g,'>');
+str = str.replace (/&amp;/g,'&');
+return str;}
+
+//Word Frequency Counter
+
+function wrdfrq(fun){
+if(fun == 'open'){
+var textin = document.getElementById('text_box').value.toLowerCase();
+if(document.getElementById('skip_html').checked == true) textin = textin.replace(/<\S[^><]*>/gi,'');
+var wrdarr = new Array();
+var wrdarrlen = 0;
+var wrdarrmatch = textin.match(/\b(\w|')+\b/g);
+if(wrdarrmatch != null){
+wrdarr = wrdarrmatch;
+wrdarrlen = wrdarr.length;}
+var dupsremarr = new Array();
+var dupsremarrcnt = 0;
+var hash = {};
+var xkey = '';
+var hkey = '';
+var wrdcht = 0;
+var wrdcntpct = 0;
+for(var x=0;x<wrdarrlen;x++){
+xkey = wrdarr[x];
+hkey = ' ' + xkey;
+if(hash[hkey] == null || xkey == '') {hash[hkey] = x+1; dupsremarr[dupsremarrcnt] = xkey; dupsremarrcnt++;}}
+wrdarr = ' ' + wrdarr.join(' ') + ' ';
+for(var x=0;x<dupsremarrcnt;x++){
+wrdcht = (wrdarr.split(' ' + dupsremarr[x] + ' ').length) - 1;
+wrdcntpct = (wrdcht / wrdarrlen) * 100;
+wrdcntpct = parseFloat(wrdcntpct).toFixed(2);
+dupsremarr[x] = '<tr class="wfctr" id="find_' + dupsremarr[x] + '"><td class="wfctd">' + dupsremarr[x] + '</td><td class="wfctd">' + wrdcht + '</td><td class="wfctd">' + wrdcntpct + '%</td></tr>';}
+dupsremarr = dupsremarr.sort().sort(function(a,b) {a = ((a.split('</td><td class="wfctd">'))[1])*1; b = ((b.split('</td><td class="wfctd">'))[1])*1; return b-a});
+document.getElementById('wrdfrq').style.zIndex = '6';
+document.getElementById('wrdfrq').style.width = '275px';
+document.getElementById('wrdfrq').style.height = '100%';
+document.getElementById('wrdfrq').style.overflow = 'scroll';
+document.getElementById('wrdfrq').innerHTML =
+'<input type="button" value="Close" onClick="wrdfrq(\'close\');" style="margin:6px 0px 0px 6px;" />'+
+'<div style="margin:6px 0px 0px 6px;"><input type="text" id="wordtofind" value="Enter word." size="15" style="margin:0px;" /> <input type="button" value="Find" onClick="findword();" style="margin:0px;" /></div>'+
+'<div style="margin:6px 10px 0px 6px;">'+
+'<table>\n'+
+'<tr class="wfctr"><td class="wfctd">word</td><td class="wfctd">count</td><td class="wfctd">percent</td></tr>\n'+
+dupsremarr.join('\n') +
+'</table>\n'+
+'<div>&nbsp;</div>'+
+'</div>';}
+if(fun == 'close'){
+document.getElementById('wrdfrq').style.zIndex = '-6';
+document.getElementById('wrdfrq').style.width = '0px';
+document.getElementById('wrdfrq').style.height = '0px';
+document.getElementById('wrdfrq').style.overflow = 'hidden';
+document.getElementById('wrdfrq').innerHTML = '';}}
+
+var lastfind = '';
+
+function findword(){
+var wordtf = document.getElementById('wordtofind').value.toLowerCase();
+if(document.getElementById('find_' + wordtf)){
+if(lastfind != '') document.getElementById('find_' + lastfind).style.backgroundColor = '#FFFFFF';
+document.getElementById('find_' + wordtf).scrollIntoView();
+document.getElementById('find_' + wordtf).style.backgroundColor = '#FFFF00';
+lastfind = wordtf;}}
+</script>
+</head>
+<body spellcheck="false" onload="contentsizer();" onresize="contentsizer(); setTimeout('side_line_count()',250);">
+<!-- Controls -->
+<div id="controls">
+<div id="control_box">
+<span id="text_count"></span>
+Col: <input type="text" id="col_cnt" value="0" style="width:75px;" READONLY />
+<input type="radio" name="cntbtn" id="CAT_count" title="Count all text." onClick="totalcount();" CHECKED /><span class="cd" title="Count all text." style="">CAT</span>
+<input type="radio" name="cntbtn" id="CACP_count" title="Count at cursor position." onClick="cpcount();" /><span class="cd" title="Count at cursor position.">CACP</span>
+<input type="radio" name="cntbtn" id="COS_count" title="Count on select." /><span class="cd" title="Count on select.">COS</span>
+<input type="button" value="S" title="Select all." onClick="select_all('text_box');" />
+<input type="button" value="C" title="Clear all." onClick="clear_all();" />
+<input type="button" value="Undo" onClick="undo();" />
+</div>
+</div>
+<!-- Functions -->
+<div id="nav_functions">
+<div id="nav_functions_box">
+<select id="jtbox" onchange="jmpto(this.value);" onblur="this.value='';" size="1" style="margin:0px;">
+<option class="padng" value="" selected="selected" disabled='disabled' style="display:none;">Jump to:</option>
+<option class="padng" value="Add_Remove_Line_Breaks" style="margin-top:3px;">Add / Remove Line Breaks</option>
+<option class="padng" value="Change_Letter_Case">Change Letter Case</option>
+<option class="padng" value="Custom_Count">Custom Count</option>
+<option class="padng" value="Delete_Line_onClick">Delete Line onClick</option>
+<option class="padng" value="Encrypt_Decrypt_Text">Encrypt / Decrypt Text</option>
+<option class="padng" value="Generate_List_of_Numbers">Enumerate Exisiting Lines</option>
+<option class="padng" value="Find_Replace_Text">Find and Replace Text</option>
+<option class="padng" value="Find_Affix_Text">Find and Affix Text</option>
+<option class="padng" value="Generate_List_of_Numbers">Generate List of Numbers</option>
+<option class="padng" value="Highlight_Text">Highlight / Find Text</option>
+<option class="padng" value="Insert_Special_Characters">Insert Special Characters</option>
+<option class="padng" value="Insert_Text_onClick">Insert Text onClick</option>
+<option class="padng" value="Load_Save_File">Load / Save File</option>
+<option class="padng" value="Merge_Text_Line_by_Line">Merge Text Line by Line</option>
+<option class="padng" value="onSelect_Functions">onSelect Functions</option>
+<option class="padng" value="Prefix_Suffix_Lines">Prefix / Suffix Lines</option>
+<option class="padng" value="Remove_Duplicate_Lines">Remove Duplicate Lines</option>
+<option class="padng" value="Remove_Empty_Line">Remove Empty Line</option>
+<option class="padng" value="Remove_Letter_Accents">Remove Letter Accents</option>
+<option class="padng" value="Remove_Lines_Containing">Remove Lines Containing</option>
+<option class="padng" value="Remove_Unwanted_Whitepace">Remove Whitepace</option>
+<option class="padng" value="Settings">Settings</option>
+<option class="padng" value="Sort_Lines">Sort Lines</option>
+<option class="padng" value="Text_into_HTML">Text into HTML</option>
+<option class="padng" value="Wrap_Text" style="margin-bottom:3px;">Wrap Text</option>
+</select>
+&nbsp;<a href="index.html" style="color:#0000FF;">Home</a>
+</div>
+</div>
+<div id="functions">
+<div id="functions_box">
+<div id="Load_Save_File" class="hr" style="margin-top:0px;"></div>
+<!-- Load / Save File -->
+<h1>Load / Save File</h1>
+<div class="tptp_5"><input type="button" value="Load File" /><input type="file" id="file" onChange="setTimeout('loadfile(\'text_box\')',100); document.getElementById('loadingmessage').innerHTML = '&nbsp;Loading...&nbsp;';" /><span>&nbsp;</span><span id="loadingmessage" style="font-weight:bold; color:#FF0000;"></span></div>
+<div class="tptp_5"><input type="button" value="Save As" onClick="savefile('text_box');" /> <input type="text" id="saveas" value="output.txt" style="width:80px;" /> Unix<input type="radio" name="sfrmt" id="unix" CHECKED /><input type="radio" name="sfrmt" id="dos" />Dos</div>
+<div id="Highlight_Text" class="hr"></div>
+<!-- Highlight / Find Text -->
+<h1>Highlight / Find Text</h1>
+<div class="tptp_5"><input type="checkbox" id="high_case_sen" title="Case sensitive." />Case sensitive.</div>
+<div class="tptp_5"><input type="text" id="high_this" value="" style="width:96%;" /></div>
+<div class="tptp_5"><input type="checkbox" id="high_regexp" title="Enable regular expression search." />Enable regular expression* search.</div>
+<div class="tptp_5">*Use <span id="fhcatordog" style="color:#990000;" onclick="selectText(this.id)">dog|cat</span> for dog OR cat.</div>
+<div class="tptp_5"><input type="button" value="Highlight text." onClick="if(document.getElementById('high_this').value != '') {load_textbox_div(); foundcnt = 0; foundcnt_cache = 'start'; document.getElementById('next_cnt').innerHTML = '0'; setTimeout('find_next()',250);}" /> <input type="text" id="high_found" value="0" size="7" READONLY /> found.</div>
+<div class="tptp_5"><input type="button" value="Jump to next highlight." onClick="find_next();" /> <input type="text" id="next_cnt" value="0" size="7" READONLY /></div>
+<div class="tptp_5"><input type="button" value="Clear highlight." onClick="document.getElementById('high_this').value = ''; foundcnt = 0; foundcnt_cache = 'start'; document.getElementById('high_found').value = ''; document.getElementById('next_cnt').value = '0'; load_textbox_div();" /></div>
+<div id="Custom_Count" class="hr"></div>
+<!-- Custom Count -->
+<h1>Custom Count</h1>
+<div class="tptp_5">Enter text to be counted:</div>
+<div class="tptp_5"><textarea id="count_this" rows="5" wrap="off" spellcheck="false" onkeyup="customcount();" onpaste="setTimeout('customcount()',100);"></textarea></div>
+<div class="tptp_5">Count: <input type="text" id="cc_count" value="" size="7" READONLY /> <input type="checkbox" id="cc_case_sen" title="Case sensitive." onclick="customcount();" />Case sensitive.</div>
+<div class="tptp_5"><input type="button" value="Word frequency count." onClick="if(document.getElementById('text_box').value != '') wrdfrq('open');" /> Will open far left.</div>
+<div id="Find_Replace_Text" class="hr"></div>
+<!-- Find and Replace Text -->
+<h1>Find and Replace Text</h1>
+<div class="tptp_5">Find this:</div>
+<div class="tptp_5">
+<textarea id="far_find" rows="5" wrap="off" spellcheck="false" style="display:block;"></textarea>
+<input type="text" id="far_find_regexp" value="" style="display:none; width:96%;" /></div>
+<div class="tptp_5"><input type="checkbox" id="far_regexp" title="Enable regular expression search." onclick="far_regexp_switch();" />Enable regular expression* search.</div>
+<div class="tptp_5">*Use <span id="far_catordog" style="color:#990000;" onclick="selectText(this.id)">dog|cat</span> for dog OR cat.</div>
+<div class="tptp_5">Replace with:</div>
+<div class="tptp_5"><textarea id="far_replace" rows="5" wrap="off" spellcheck="false"></textarea></div>
+<div class="tptp_5"><input type="button" value="Replace text." onClick="replacetext();" /> <input type="checkbox" id="far_case_sen" title="Case sensitive." />Case sensitive.</div>
+<div id="Find_Affix_Text" class="hr"></div>
+<!-- Find and Affix Text -->
+<h1>Find and Affix Text</h1>
+<div class="tptp_5">Find this:</div>
+<div class="tptp_5"><input type="text" id="faat_find" value="" style="width:96%;" /></div>
+<div class="tptp_5"><input type="checkbox" id="faat_regexp" title="Enable regular expression search." />Enable regular expression* search.</div>
+<div class="tptp_5">*Use <span id="faat_catordog" style="color:#990000;" onclick="selectText(this.id)">dog|cat</span> for dog OR cat.</div>
+<div class="tptp_5">Affix with this prefix:</div>
+<div class="tptp_5"><input type="text" id="faat_prefix" value="" style="width:96%;" /></div>
+<div class="tptp_5">Affix with this suffix:</div>
+<div class="tptp_5"><input type="text" id="faat_suffix" value="" style="width:96%;" /></div>
+<div class="tptp_5"><input type="button" value="Affix text." onClick="affixtext();" /> <input type="checkbox" id="faat_case_sen" title="Case sensitive." />Case sensitive.</div>
+<div id="Sort_Lines" class="hr"></div>
+<!-- Sort Lines -->
+<h1>Sort Lines</h1>
+<div class="tptp_5" style="line-height:1.2;">Sort by delimiter* <input type="text" id="sort_delimiter" style="width:70px;" value=""> at column number <input type="text" id="sort_num" style="width:53px;" maxlength="7" value="1"> *Blank for characters / letters, space for words, etc. Applies to alphabetically sort only.</div>
+<div class="tptp_5"><input type="button" value="Sort lines alphabetically." onClick="sort_lines('sla');" /> <input type="checkbox" id="sort_casesen" title="Case sensitive." /><span title="Case sensitive.">Case sensitive.</span></div>
+<div class="tptp_5"><input type="button" value="Sort lines by length." onClick="sort_lines('slbl');" /></div>
+<div class="tptp_5"><input type="button" value="Reverse line order." onClick="sort_lines('rlo');" /></div>
+<div class="tptp_5"><input type="button" value="Randomize line order." onClick="sort_lines('rad');" /></div>
+<div id="Remove_Duplicate_Lines" class="hr"></div>
+<!-- Remove Duplicate Lines -->
+<h1>Remove Duplicate Lines</h1>
+<div class="tptp_5"><input type="button" value="Remove duplicate lines." onClick="rdl();" /> <input type="checkbox" id="rdl_case_sen" title="Case sensitive." />Case sensitive.</div>
+<div id="Remove_Empty_Line" class="hr"></div>
+<!-- Remove Empty Line -->
+<h1>Remove Empty Line</h1>
+<div class="tptp_5"><input type="button" value="Remove empty lines." onClick="rel();" /></div>
+<div id="Remove_Lines_Containing" class="hr"></div>
+<!-- Remove Lines Containing... -->
+<h1>Remove Lines Containing...</h1>
+<div class="tptp_5"><input type="button" value="Remove lines containing" onClick="rlc('cont');" /></div>
+<div class="tptp_5"><input type="button" value="not containing" onClick="rlc('notcont');" /> this text:</div>
+<div class="tptp_5"><input type="text" id="rlc_text" value="" style="width:96%;" /></div>
+<div class="tptp_5"><input type="checkbox" id="rlc_case_sen" title="Case sensitive." />Case sensitive.</div>
+<div class="tptp_5"><input type="checkbox" id="rlc_regexp" title="Enable regular expression search." />Enable regular expression* search.</div>
+<div class="tptp_5">*Use <span id="rlc_catordog" style="color:#990000;" onclick="selectText(this.id)">dog|cat</span> for dog OR cat.</div>
+<div class="tptp_5"><span id="catanddog" style="color:#990000;" onclick="selectText(this.id)">(?=.*dog)(?=.*cat).*</span> for dog AND cat.</div>
+<div class="subtool"><div style="padding:2px;">Sub-tool options:</div></div>
+<div class="tptp_5" style="line-height:1.2;"><input type="checkbox" id="rlc_frt" />Do not remove lines but "find and replace" text within each qualifying line.</div>
+<div class="tptp_5"><input type="checkbox" id="rlc_frt_case_sen" title="Case sensitive." />Case sensitive.</div>
+<div class="tptp_5">Find this:</div>
+<div class="tptp_5"><input type="text" id="rlc_findthis" value="" style="width:96%;" /></div>
+<div class="tptp_5">Replace with:</div>
+<div class="tptp_5"><textarea id="rlc_replacewith" rows="5" wrap="off" spellcheck="false"></textarea></div>
+<div id="Prefix_Suffix_Lines" class="hr"></div>
+<!-- Prefix / Suffix Lines -->
+<h1>Prefix / Suffix Lines</h1>
+<div class="tptp_5">Prefix with:</div>
+<div class="tptp_5"><input type="text" id="prefix" value="" style="width:96%;" /></div>
+<div class="tptp_5">Suffix with:</div>
+<div class="tptp_5"><input type="text" id="suffix" value="" style="width:96%;" /></div>
+<div class="tptp_5"><input type="button" value="Add prefix/suffix to each line." onClick="apsl();" /></div>
+<div id="Merge_Text_Line_by_Line" class="hr"></div>
+<!-- Merge Text Line by Line -->
+<h1>Merge Text <u>Line</u> by <u>Line</u></h1>
+<div class="tptp_5">Merge left<input type="radio" name="mtlblbtn" id="mtlbl_left" CHECKED /><input type="radio" name="mtlblbtn" id="mtlbl_right" />right of textbox text.</div>
+<div class="tptp_5"><textarea id="mtlbl_text" rows="5" wrap="off" spellcheck="false">Enter text for merging.</textarea></div>
+<div class="tptp_5">Divide merged text with:</div>
+<div class="tptp_5"><input type="text" id="mtlbl_delimiter" value="" style="width:96%;" /></div>
+<div class="tptp_5"><input type="button" value="Merge text line by line." onClick="mtlbl();" /></div>
+<div id="Generate_List_of_Numbers" class="hr"></div>
+<!-- Generate List of Numbers -->
+<h1>Generate List of Numbers</h1>
+<h1 style="margin-top:2px;">or Enumerate Exisiting Lines</h1>
+<div class="tptp_5">Generate a list of numbers starting at:</div>
+<div class="tptp_5"><input type="text" id="low_num" value="1" size="8" maxlength="7" /> ending at: <input type="text" id="high_num" value="100" size="8" maxlength="7" /></div>
+<div class="tptp_5"><input type="checkbox" id="pad_num" />Pad numbers. i.e. 001...010...100</div>
+<div class="tptp_5">Prefix number with:</div>
+<div class="tptp_5"><input type="text" id="gln_prefix" value="" style="width:96%;" /></div>
+<div class="tptp_5">Suffix number with:</div>
+<div class="tptp_5"><input type="text" id="gln_suffix" value="" style="width:96%;" /></div>
+<div class="tptp_5"><input type="button" value="Generate list of numbers*" onClick="gln();" /></div>
+<div class="tptp_5">or <input type="button" value="enumerate exisiting lines." onClick="nel();" /></div>
+<div class="tptp_5" style="line-height:1.2;"><input type="checkbox" id="no_num" />*No numbers. Generate a repetitive, non-numbered list via the prefix/suffix fields above.</div>
+<div id="Remove_Letter_Accents" class="hr"></div>
+<!-- Remove Letter Accents -->
+<h1>Remove Letter Accents</h1>
+<div class="tptp_5"><input type="button" value="Remove letter accents." onClick="rla();" /></div>
+<div id="Remove_Unwanted_Whitepace" class="hr"></div>
+<!-- Remove Unwanted Whitepace -->
+<h1>Remove Unwanted Whitepace</h1>
+<div class="tptp_5"><input type="button" value="Remove unwanted whitepace." onClick="ruws();" /></div>
+<div id="Change_Letter_Case" class="hr"></div>
+<!-- Change Letter Case -->
+<h1>Change Letter Case</h1>
+<div class="tptp_5"><input type="button" value="All lower case." onClick="letcase('lower');" /> <input type="button" value="All upper case." onClick="letcase('upper');" /></div>
+<div class="tptp_5"><input type="button" value="First letter of each word uppercase." onClick="letcaseflew();" /></div>
+<div class="tptp_5"><input type="button" value="First letter of each sent uppercase." onClick="letcasefles();" /></div>
+<div id="Add_Remove_Line_Breaks" class="hr"></div>
+<!-- Add / Remove Line Breaks -->
+<h1>Add / Remove Line Breaks</h1>
+<div class="tptp_5"><input type="button" value="Replace line breaks with" onclick="arlb('rlb');" /> or</div>
+<div class="tptp_5"><input type="button" value="make line breaks*" onclick="arlb('alb');" /> before<input type="radio" name="arlbbtn" id="arlb_before" /><input type="radio" name="arlbbtn" id="arlb_after" CHECKED />after</div>
+<div class="tptp_5">this text: (Blank to remove breaks.)</div>
+<div class="tptp_5"><input type="text" id="mlb_text" value="" style="width:96%;" /></div>
+<div class="tptp_5"><input type="checkbox" id="arlb_case_sen" title="Case sensitive." />*Case sensitive.</div>
+<div class="tptp_5"><input type="checkbox" id="arlb_relb" title="Remove exisiting line breaks." />*Remove exisiting line breaks.</div>
+<div id="Wrap_Text" class="hr"></div>
+<!-- Wrap Text -->
+<h1>Wrap Text</h1>
+<div class="tptp_5"><input type="button" value="Wrap" onClick="wraptext();" /> or <input type="button" value="word-wrap" onClick="wordwraptext();" /> every <input type="text" id="wrap_num" value="" maxlength="4" style="width:55px;" /> characters.</div>
+<div id="Encrypt_Decrypt_Text" class="hr"></div>
+<!-- Encrypt / Decrypt Text -->
+<h1>Encrypt / Decrypt Text</h1>
+<div class="tptp_5">Password:</div>
+<div class="tptp_5"><input type="text" id="password" value="" maxlength="16" style="width:96%;" /></div>
+<div class="tptp_5"><input type="button" value="Encrypt" onclick="encrypt();" /> <input type="button" value="Decrypt" onclick="decrypt();" /> text using <a rel="nofollow" target="_blank" href="http://en.wikipedia.org/wiki/Tiny_Encryption_Algorithm" style="color:#0000FF;">TEA</a> algorithm.</div>
+<div id="onSelect_Functions" class="hr"></div>
+<!-- onSelect Functions -->
+<h1>onSelect Functions</h1>
+<div class="tptp_5"><input type="radio" name="onselectbtn" id="osf_off" CHECKED />onSelect is off.</div>
+<div class="tptp_5"><input type="radio" name="onselectbtn" id="osf_unicode" />Convert into HTML unicode.</div>
+<div class="tptp_5"><input type="radio" name="onselectbtn" id="osf_lowercase" />Convert into lowercase.</div>
+<div class="tptp_5"><input type="radio" name="onselectbtn" id="osf_uppercase" />Convert into uppercase.</div>
+<div class="tptp_5"><input type="radio" name="onselectbtn" id="osf_delete" />Delete selected text.</div>
+<div class="tptp_5" style="margin-top:5px; border-top:2px dashed #000000;"><input type="radio" name="onselectbtn" id="osf_presuf" />Prefix/suffix selected text.</div>
+<div class="tptp_5">Prefix with:</div>
+<div class="tptp_5"><input type="text" id="osf_prefix" value="" style="width:96%;" /></div>
+<div class="tptp_5">Suffix with:</div>
+<div class="tptp_5"><input type="text" id="osf_suffix" value="" style="width:96%;" /></div>
+<div class="tptp_5" style="margin-top:5px; border-top:2px dashed #000000;"><input type="radio" name="onselectbtn" id="osf_replace" />Replace selected text.</div>
+<div class="tptp_5">Replace with:</div>
+<div class="tptp_5"><input type="text" id="osf_replacewith" value="" style="width:96%;" /></div>
+<div class="tptp_5" style="margin-top:5px; border-top:2px dashed #000000;"><input type="radio" name="onselectbtn" id="osf_findandreplace" />Find and replace within selected text.</div>
+<div class="tptp_5">Find this:</div>
+<div class="tptp_5"><input type="text" id="osf_findthis" value="" style="width:96%;" /></div>
+<div class="tptp_5">Replace with:</div>
+<div class="tptp_5"><input type="text" id="osf_andreplacewith" value="" style="width:96%;" /></div>
+<div id="Delete_Line_onClick" class="hr"></div>
+<!-- Delete Line onClick -->
+<h1>Delete Line onClick</h1>
+<div class="tptp_5">Delete line onClick is <input type="radio" name="dlocbtn" id="dloc_off" CHECKED />off <input type="radio" name="dlocbtn" id="dloc_on" />on.</div>
+<div id="Insert_Text_onClick" class="hr"></div>
+<!-- Insert Text onClick -->
+<h1>Insert Text onClick</h1>
+<div class="tptp_5">Insert text onClick is <input type="radio" name="itocbtn" id="itoc_off" CHECKED />off <input type="radio" name="itocbtn" id="itoc_on" />on.</div>
+<div class="tptp_5">Insert this:</div>
+<div class="tptp_5"><textarea id="itoc_this" rows="5" wrap="off" spellcheck="false"></textarea></div>
+<div id="Insert_Special_Characters" class="hr"></div>
+<!-- Insert Special Characters -->
+<h1>Insert Special Characters</h1>
+<div class="tptp_5">Click character to insert into text at current cursor position.</div>
+<div class="tptp_5">
+<span class="spcar" id="sc9" onclick="selectText(this.id); iscit('&#9;');" title="Insert horizontal tab.">Tab</span>
+<span class="spcar" id="sc8482" onclick="selectText(this.id); iscit(this.innerHTML);">&#8482;</span>
+<span class="spcar" id="sc174" onclick="selectText(this.id); iscit(this.innerHTML);">&#174;</span>
+<span class="spcar" id="sc169" onclick="selectText(this.id); iscit(this.innerHTML);">&#169;</span>
+<span class="spcar" id="sc8212" onclick="selectText(this.id); iscit(this.innerHTML);">&#8212;</span>
+<span class="spcar" id="sc8220" onclick="selectText(this.id); iscit(this.innerHTML);">&#8220;</span>
+<span class="spcar" id="sc8221" onclick="selectText(this.id); iscit(this.innerHTML);">&#8221;</span>
+<span class="spcar" id="sc168" onclick="selectText(this.id); iscit(this.innerHTML);">&#168;</span>
+<span class="spcar" id="sc182" onclick="selectText(this.id); iscit(this.innerHTML);">&#182;</span>
+<span class="spcar" id="sc183" onclick="selectText(this.id); iscit(this.innerHTML);">&#183;</span>
+<span class="spcar" id="sc8226" onclick="selectText(this.id); iscit(this.innerHTML);">&#8226;</span>
+<span class="spcar" id="sc9679" onclick="selectText(this.id); iscit(this.innerHTML);">&#9679;</span>
+<span class="spcar" id="sc8230" onclick="selectText(this.id); iscit(this.innerHTML);">&#8230;</span>
+<span class="spcar" id="sc8249" onclick="selectText(this.id); iscit(this.innerHTML);">&#8249;</span>
+<span class="spcar" id="sc8250" onclick="selectText(this.id); iscit(this.innerHTML);">&#8250;</span>
+<span class="spcar" id="sc171" onclick="selectText(this.id); iscit(this.innerHTML);">&#171;</span>
+<span class="spcar" id="sc187" onclick="selectText(this.id); iscit(this.innerHTML);">&#187;</span>
+<span class="spcar" id="sc161" onclick="selectText(this.id); iscit(this.innerHTML);">&#161;</span>
+<span class="spcar" id="sc191" onclick="selectText(this.id); iscit(this.innerHTML);">&#191;</span>
+<span class="spcar" id="sc8224" onclick="selectText(this.id); iscit(this.innerHTML);">&#8224;</span>
+<span class="spcar" id="sc8225" onclick="selectText(this.id); iscit(this.innerHTML);">&#8225;</span>
+<span class="spcar" id="sc162" onclick="selectText(this.id); iscit(this.innerHTML);">&#162;</span>
+<span class="spcar" id="sc163" onclick="selectText(this.id); iscit(this.innerHTML);">&#163;</span>
+<span class="spcar" id="sc164" onclick="selectText(this.id); iscit(this.innerHTML);">&#164;</span>
+<span class="spcar" id="sc165" onclick="selectText(this.id); iscit(this.innerHTML);">&#165;</span>
+<span class="spcar" id="sc166" onclick="selectText(this.id); iscit(this.innerHTML);">&#166;</span>
+<span class="spcar" id="sc167" onclick="selectText(this.id); iscit(this.innerHTML);">&#167;</span>
+<span class="spcar" id="sc181" onclick="selectText(this.id); iscit(this.innerHTML);">&#181;</span>
+<span class="spcar" id="sc960" onclick="selectText(this.id); iscit(this.innerHTML);">&#960;</span>
+<span class="spcar" id="sc8734" onclick="selectText(this.id); iscit(this.innerHTML);">&#8734;</span>
+<span class="spcar" id="sc176" onclick="selectText(this.id); iscit(this.innerHTML);">&#176;</span>
+<span class="spcar" id="sc186" onclick="selectText(this.id); iscit(this.innerHTML);">&#186;</span>
+<span class="spcar" id="sc185" onclick="selectText(this.id); iscit(this.innerHTML);">&#185;</span>
+<span class="spcar" id="sc178" onclick="selectText(this.id); iscit(this.innerHTML);">&#178;</span>
+<span class="spcar" id="sc179" onclick="selectText(this.id); iscit(this.innerHTML);">&#179;</span>
+<span class="spcar" id="sc188" onclick="selectText(this.id); iscit(this.innerHTML);">&#188;</span>
+<span class="spcar" id="sc189" onclick="selectText(this.id); iscit(this.innerHTML);">&#189;</span>
+<span class="spcar" id="sc190" onclick="selectText(this.id); iscit(this.innerHTML);">&#190;</span>
+<span class="spcar" id="sc8240" onclick="selectText(this.id); iscit(this.innerHTML);">&#8240;</span>
+<span class="spcar" id="sc8722" onclick="selectText(this.id); iscit(this.innerHTML);" title="Minus sign.">&#8722;</span>
+<span class="spcar" id="sc215" onclick="selectText(this.id); iscit(this.innerHTML);">&#215;</span>
+<span class="spcar" id="sc247" onclick="selectText(this.id); iscit(this.innerHTML);">&#247;</span>
+<span class="spcar" id="sc177" onclick="selectText(this.id); iscit(this.innerHTML);">&#177;</span>
+<span class="spcar" id="sc8800" onclick="selectText(this.id); iscit(this.innerHTML);">&#8800;</span>
+<span class="spcar" id="sc8776" onclick="selectText(this.id); iscit(this.innerHTML);">&#8776;</span>
+<span class="spcar" id="sc8617" onclick="selectText(this.id); iscit(this.innerHTML);">&#8617;</span>
+<span class="spcar" id="sc8592" onclick="selectText(this.id); iscit(this.innerHTML);">&#8592;</span>
+<span class="spcar" id="sc8594" onclick="selectText(this.id); iscit(this.innerHTML);">&#8594;</span>
+<span class="spcar" id="sc8593" onclick="selectText(this.id); iscit(this.innerHTML);">&#8593;</span>
+<span class="spcar" id="sc8595" onclick="selectText(this.id); iscit(this.innerHTML);">&#8595;</span>
+<span class="spcar" id="sc9617" onclick="selectText(this.id); iscit(this.innerHTML);">&#9617;</span>
+<span class="spcar" id="sc9618" onclick="selectText(this.id); iscit(this.innerHTML);">&#9618;</span>
+<span class="spcar" id="sc9619" onclick="selectText(this.id); iscit(this.innerHTML);">&#9619;</span>
+<span class="spcar" id="sc9650" onclick="selectText(this.id); iscit(this.innerHTML);">&#9650;</span>
+<span class="spcar" id="sc9658" onclick="selectText(this.id); iscit(this.innerHTML);">&#9658;</span>
+<span class="spcar" id="sc9668" onclick="selectText(this.id); iscit(this.innerHTML);">&#9668;</span>
+<span class="spcar" id="sc9660" onclick="selectText(this.id); iscit(this.innerHTML);">&#9660;</span>
+<span class="spcar" id="sc9786" onclick="selectText(this.id); iscit(this.innerHTML);">&#9786;</span>
+<span class="spcar" id="sc9787" onclick="selectText(this.id); iscit(this.innerHTML);">&#9787;</span>
+<span class="spcar" id="sc9788" onclick="selectText(this.id); iscit(this.innerHTML);">&#9788;</span>
+<span class="spcar" id="sc9792" onclick="selectText(this.id); iscit(this.innerHTML);">&#9792;</span>
+<span class="spcar" id="sc9794" onclick="selectText(this.id); iscit(this.innerHTML);">&#9794;</span>
+<span class="spcar" id="sc9824" onclick="selectText(this.id); iscit(this.innerHTML);">&#9824;</span>
+<span class="spcar" id="sc9827" onclick="selectText(this.id); iscit(this.innerHTML);">&#9827;</span>
+<span class="spcar" id="sc9829" onclick="selectText(this.id); iscit(this.innerHTML);">&#9829;</span>
+<span class="spcar" id="sc9830" onclick="selectText(this.id); iscit(this.innerHTML);">&#9830;</span>
+<span class="spcar" id="sc9839" onclick="selectText(this.id); iscit(this.innerHTML);">&#9839;</span>
+<span class="spcar" id="sc9834" onclick="selectText(this.id); iscit(this.innerHTML);">&#9834;</span>
+<span class="spcar" id="sc9835" onclick="selectText(this.id); iscit(this.innerHTML);">&#9835;</span>
+</div>
+<div id="Text_into_HTML" class="hr"></div>
+<!-- Text into HTML -->
+<h1>Text into HTML</h1>
+<div class="tptp_5"><input type="button" value="Text into HTML" onClick="text2html();" /> <input type="button" value="Test in HTML window." onClick="htmlwindow();" /></div>
+<div class="tptp_5"><input type="checkbox" id="t2h_complete" CHECKED />Include doctype, html, title and body tags.</div>
+<div id="Settings" class="hr"></div>
+<!-- Settings -->
+<!-- Counter Settings -->
+<h1>Text Count Settings</h1>
+<div class="tptp_5"><input type="checkbox" title="Do not count spaces." id="no_spaces" onclick="totalcount();" />Do not count spaces.</div>
+<div class="tptp_5"><input type="checkbox" title="Do not count HTML tags." id="skip_html" onclick="totalcount();" />Do not count HTML tags.</div>
+<div class="tptp_5"><input type="checkbox" title="Count line breaks as spaces." id="linebreak_as_space" onclick="totalcount();" />Count line breaks as spaces.</div>
+<div class="tptp_5"><span style="font-weight:bold; color:#FF0000;">Alert</span> me if I am over<input type="radio" name="alertmeif" id="alertmeifover" onclick="totalcount();" CHECKED /><input type="radio" name="alertmeif" id="alertmeifunder" onclick="totalcount();" />under:</div>
+<div class="tptp_5"><input type="text" id="char_alert" value="" maxlength="6" onkeyup="textcountalert();" size="6" spellcheck="false" /> characters</div>
+<div class="tptp_5"><input type="text" id="word_alert" value="" maxlength="6" onkeyup="textcountalert();" size="6" spellcheck="false" /> words</div>
+<div class="tptp_5"><input type="text" id="sent_alert" value="" maxlength="6" onkeyup="textcountalert();" size="6" spellcheck="false" /> sentences</div>
+<div class="tptp_5"><input type="text" id="line_alert" value="" maxlength="6" onkeyup="textcountalert();" size="6" spellcheck="false" /> lines</div>
+<div class="hr"></div>
+<!-- Textbox Settings -->
+<h1>Textbox Settings</h1>
+<div class="tptp_5">Browser's spell-check* is on<input type="radio" name="splcbtn" id="splcon" onClick="nspck('on','yes');" /><input type="radio" name="splcbtn" id="splcoff" onClick="nspck('off','yes');" CHECKED />off.</div>
+<div class="tptp_5">Textbox word-wrap is on<input type="radio" name="wrpbtn" id="wrapbtnl" onClick="wrdwrpis('on','yes');" CHECKED /><input type="radio" name="wrpbtn" id="wrapbtnr" onClick="wrdwrpis('off','yes');" />off.</div>
+<div class="tptp_5">Font size <input type="text" id="font_size" maxlength="2" value="16" style="width:36px;" onKeyup="fontsize('yes');" spellcheck="false" /> px. <input type="checkbox" id="monospc" onClick="setTimeout('monofnt(\'yes\')',100);" />Monospace font.</div>
+<div class="tptp_5">Letter spacing <input type="text" id="letspcw" maxlength="1" value="0" style="width:26px;" onKeyup="letterspacing('yes');" spellcheck="false" /> <b>.</b> <input type="text" id="letspcd" maxlength="1" value="0" style="width:23px;" onKeyup="letterspacing('yes');" spellcheck="false" /> px.</div>
+<div class="tptp_5">Line spacing <input type="text" id="linspcw" maxlength="1" value="1" style="width:26px;" onKeyup="linespacing('yes');" spellcheck="false" /> <b>.</b> <input type="text" id="linspcd" maxlength="1" value="5" style="width:26px;" onKeyup="linespacing('yes');" spellcheck="false" /></div>
+<div class="tptp_5">Textbox font color is # <input type="text" id="font_color" value="000000" maxlength="6" style="width:75px;" onkeyup="fontcolor('yes');" /></div>
+<div class="tptp_5">Textbox background color is # <input type="text" id="back_color" value="FFFFFF" maxlength="6" style="width:78px;" onkeyup="backcolor('yes');" /></div>
+<div class="tptp_5">Line count font color is # <input type="text" id="lc_font_color" value="777777" maxlength="6" style="width:78px;" onkeyup="lcfontcolor('yes');" /></div>
+<div class="tptp_5">Line count background color is # <input type="text" id="lc_back_color" value="D8D8D8" maxlength="6" style="width:78px;" onkeyup="lcbackcolor('yes');" /></div>
+<div class="tptp_5">Current line highlight color is # <input type="text" id="lh_color" value="FFFFCC" maxlength="6" style="width:78px;" onkeyup="linehighlight('yes');" /></div>
+<div class="tptp_5">Found text highlight color is # <input type="text" id="fh_color" value="FFFF00" maxlength="6" style="width:78px;" onkeyup="findhighlight('yes');" /></div>
+<div class="tptp_5">Next found text highlight color is  # <input type="text" id="nh_color" value="AAFF99" maxlength="6" style="width:78px;" onkeyup="nexthighlight('yes');" /></div>
+<div class="tptp_5" style="line-height:1.2;">*Firefox native spell-check functions well but Chrome's will not activate until line focus.</div>
+<div class="hr"></div>
+<!-- Textbox Themes -->
+<h1>Textbox Themes</h1>
+<div class="tptp_5">
+<input type="button" style="margin:0px 0px 5px 0px;" value="Default" onClick="themes('Default');" />
+<input type="button" style="margin:0px 0px 5px 0px;" value="Big Text" onClick="themes('Big_Text');" />
+<input type="button" style="margin:0px 0px 5px 0px;" value="Gray" onClick="themes('Gray');" />
+<input type="button" style="margin:0px 0px 5px 0px;" value="Black" onClick="themes('Black');" />
+</div>
+<div class="hr"></div>
+</div>
+</div>
+<div id="line_box_div"></div>
+<textarea id="text_box" wrap="soft" spellcheck="false" autocomplete="off" onclick="line_highlight(); if(document.getElementById('CACP_count').checked == true) cpcount(''); if(document.getElementById('dloc_on').checked == true) dloc(); if(document.getElementById('itoc_on').checked == true) itoc();" onkeydown="saveundo();" onkeyup="if(document.getElementById('CAT_count').checked == true || document.getElementById('COS_count').checked == true) totalcount(); if(document.getElementById('CACP_count').checked == true) cpcount('');" onpaste="saveundo(); setTimeout('pasted()',250);" oncut="setTimeout('totalcount();',250);" onmousedown="if(document.getElementById('COS_count').checked==true) cntonsel('start');" onmouseup="if(document.getElementById('COS_count').checked==true) cntonsel('stop');" onselect="if(document.getElementById('osf_off').checked == false) osf();" onscroll="scroll_textbox();">
+Welcome to the Text Mechanic's all-in-one text manipulation notepad.
+Manipulate plain text without cutting-n-pasting between multiple tools!
+This area is the textbox where you enter your text for all tool functions.
+Most functions and settings are to the far right.
+Text counter is top left. Counter has three different display modes:
+"CAT" = Count All Text
+"CAPC" = Count At Cursor Position
+"COS" = Count On Select
+Click "S" to select all, "C" to clear all and "Undo" to undo last change.
+Note: This is a desktop tool. Most mobile devices will fail to display it's content.
+Privacy of Data: This tool is built-with and functions-in Client Side JavaScripting, so only your computer will see or process your data input/output.
+Sensitive Data Disclaimer: Don't trust any website with sensitive data, not even Textmekanik.com. Keep your sensitive data secure by keeping it to yourself.
+Tools provided as-is, without warranty of any kind, and used at your own risk.
+Textmekanik.com and it's webmaster offer no website/services other than the Textmekanik.com website. Any other website containing Textmekanik.com content or using the "Text Mechanic" brand are copyright and trademark violations.
+&copy;2016 Textmekanik.com - All rights reserved.</textarea>
+<div id="text_box_div"></div>
+<div id="wrdfrq"></div>
+<textarea id="text_box_dummy" wrap="soft" spellcheck="false" autocomplete="off"></textarea>
+<div id="text_box_div_dummy"></div>
+<textarea id="line_dummy_txt" wrap="off">_______</textarea>
+<div id="line_dummy_div">_______</div>
+<script type="text/javascript">
+var sc_project=10533904; 
+var sc_invisible=1; 
+var sc_security="1bf36e4a"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<!-- GoStats JavaScript Based Code -->
+<script type="text/javascript" src="http://gostats.com/js/counter.js"></script>
+<script type="text/javascript">_gos='c4.gostats.com';_goa=411053;
+_got=6;_goi=1;_gol='Get a free invisible counter from GoStats';_GoStatsRun();</script>
+<noscript><a target="_blank" title="Get a free invisible counter from GoStats" 
+href="http://gostats.com"><img alt="Get a free invisible counter from GoStats" 
+src="http://c4.gostats.com/bin/count/a_411053/t_6/i_1/counter.png" 
+style="border-width:0" /></a></noscript>
+<!-- End GoStats JavaScript Based Code -->
+</body>
+</html>
